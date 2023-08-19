@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
-const SiteMap = () => {
+const Footer = () => {
 	return (
 		<section className="container-md ">
 			<div className="grid grid-cols-1 md:grid-cols-4 p-10 md:mx-20 gap-5 md:my-10">
@@ -95,7 +96,7 @@ const SiteMap = () => {
 				</div>
 			</div>
 			<Separator className="bg-myBgBlue" />
-			<div className="flex my-3 md:items-center  max-md:text-center md:justify-between md:mx-20">
+			<div className="flex my-3 max-md:flex-col md:items-center max-md:text-center md:justify-between md:mx-20">
 				<p className="text-sm md:text-base max-md:mx-5">
 					&copy; {new Date().getFullYear()} Designed & Developed by{" "}
 					<Link
@@ -108,6 +109,32 @@ const SiteMap = () => {
 					</Link>
 					. All rights are reserved!
 				</p>
+				<div className="flex justify-center mt-4 mb-3 h-auto text-xl md:hidden">
+					<div className=" p-3 mx-2 rounded-full border border-myBgBlue dark:border-myBlue hover:bg-myBgBlue hover:dark:text-myBlue hover:border-white hover:animate-spin">
+						<Link
+							href="https://www.linkedin.com/in/iamjunaidjutt"
+							target="_blank"
+						>
+							<Linkedin />
+						</Link>
+					</div>
+					<div className=" p-3 mx-2 rounded-full border border-myBgBlue dark:border-myBlue hover:bg-myBgBlue hover:dark:text-myBlue hover:border-white hover:animate-spin">
+						<Link
+							href="https://www.github.com/iamjunaidjutt"
+							target="_blank"
+						>
+							<Github />
+						</Link>
+					</div>
+					<div className=" p-3 mx-2 rounded-full border border-myBgBlue dark:border-myBlue hover:bg-myBgBlue hover:dark:text-myBlue hover:border-white hover:animate-spin">
+						<Link
+							href="https://twitter.com/iamjunaidjutt_"
+							target="_blank"
+						>
+							<Twitter />
+						</Link>
+					</div>
+				</div>
 				<div className="flex items-center justify-center gap-3">
 					<p className="text-sm md:text-base max-md:hidden">
 						Owned by{" "}
@@ -125,4 +152,4 @@ const SiteMap = () => {
 	);
 };
 
-export default SiteMap;
+export default Footer;

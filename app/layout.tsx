@@ -7,8 +7,9 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { cn } from "@/lib/utils";
 import SocialMediaSideBar from "@/components/SocialMediaSideBar";
 import Navbar from "@/components/Navbar";
-import SiteMap from "@/components/SiteMap";
+import Footer from "@/components/Footer";
 import { Separator } from "@/components/ui/separator";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -46,10 +47,11 @@ export default function RootLayout({
 					<SocialMediaSideBar />
 					<div className="lg:pl-20">
 						<Navbar />
+						<ScrollToTop />
 						{children}
 						<Toaster />
 						<Separator className="bg-primary opacity-20" />
-						<SiteMap />
+						<Footer />
 					</div>
 				</ThemeProvider>
 			</body>

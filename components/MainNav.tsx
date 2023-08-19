@@ -44,7 +44,8 @@ const MainNav = () => {
 				<Button variant={"destructive"}>Resume</Button>
 				<ModeToggle />
 			</nav>
-			<nav className="md:hidden">
+			<nav className="md:hidden flex items-center gap-2">
+				<ModeToggle />
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button variant={"outline"} size="icon">
@@ -60,9 +61,6 @@ const MainNav = () => {
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
 							<Button variant={"destructive"}>Resume</Button>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							<ModeToggle />
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

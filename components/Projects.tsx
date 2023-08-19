@@ -38,24 +38,6 @@ const Projects = () => {
 			liveLink: "https://promptopia-chi-ten.vercel.app/",
 			codeLink: "https://github.com/iamjunaidjutt/promptopia",
 		},
-		{
-			id: 2,
-			name: "Promptopia",
-			description:
-				"Promptopia is an innovative AI prompt-creating and sharing website, that empowers users to explore prompts related to various tags and search for specific keywords within the shared prompts contributed by others on the platform. By signing in through Google authentication, users can create and share their prompts, with the added benefit of being able to edit or delete them. Non-authorized users can still browse through the shared prompts, search for any topic of their interest, and view the profiles of specific users by clicking on the prompt user details section.",
-			techStack: [
-				"React.js",
-				"Next.js",
-				"Redux.js",
-				"Tailwind CSS",
-				"MongoDB",
-				"Framer Motion",
-			],
-			image: "/projects/promptopia.png",
-			tag: "Personal - Development",
-			liveLink: "https://promptopia-chi-ten.vercel.app/",
-			codeLink: "https://github.com/iamjunaidjutt/promptopia",
-		},
 	];
 	return (
 		<div
