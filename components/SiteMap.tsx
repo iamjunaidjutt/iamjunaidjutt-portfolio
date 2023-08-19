@@ -101,7 +101,7 @@ const SiteMap = () => {
 					<Link
 						href={"mailto:info@iamjunaidjutt.tech"}
 						className={cn(
-							"hover:text-myBgBlue hover:dark:text-myBlue"
+							"text-myBgBlue dark:text-myBlue hover:border-b border-myBlue dark:border-myBlue"
 						)}
 					>
 						iamjunaidjutt

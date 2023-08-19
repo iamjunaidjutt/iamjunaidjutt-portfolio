@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 
@@ -42,13 +45,15 @@ const About = () => {
 					</Button>
 				</div>
 				<div className="flex flex-col items-center justify-center gap-10 py-10">
-					<Image
-						src={"/images/profile.jpg"}
-						width={250}
-						height={250}
-						alt="profile"
-						className="object-cover rounded-full"
-					/>
+					<motion.div whileHover={{ scale: 1.1 }}>
+						<Image
+							src={"/images/profile.jpg"}
+							width={250}
+							height={250}
+							alt="profile"
+							className="object-cover rounded-full"
+						/>
+					</motion.div>
 					<h2 className="text-2xl md:text-4xl text-myBlue font-bold font-poppins">
 						Muhammad Junaid
 					</h2>

@@ -1,6 +1,32 @@
+"use client";
+
 import React from "react";
 
 import Icon from "@/components/ui/Icon";
+import { motion } from "framer-motion";
+
+const variants = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.3,
+			delayChildren: 0.2,
+		},
+	},
+};
+
+const item = {
+	hidden: { opacity: 0, y: 30 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 1,
+			ease: "easeOut",
+		},
+	},
+};
 
 const Services = () => {
 	const services = [
@@ -49,11 +75,18 @@ const Services = () => {
 					<h2 className="mb-16 text-2xl md:text-4xl font-bold text-white font-poppins">
 						Services that I offers
 					</h2>
-					<div className="grid gap-x-6 gap-y-3 md:grid-cols-3 lg:gap-x-12 lg:gap-y-12">
+					<motion.div
+						className="grid gap-x-6 gap-y-3 md:grid-cols-3 lg:gap-x-12 lg:gap-y-12"
+						variants={variants}
+						initial="hidden"
+						animate="show"
+					>
 						{services.map((service, index) => (
-							<div
+							<motion.div
 								key={index}
-								className="mb-12 md:mb-0 border-2 border-white p-5 rounded-lg hover:bg-myRed hover:cursor-pointer text-white transition duration-300 ease-in-out shadow-lg"
+								className="mb-12 md:mb-0 border-2 border-white p-5 rounded-lg hover:bg-myRed hover:cursor-pointer text-white shadow-lg"
+								variants={item}
+								whileHover={{ scale: 1.1 }}
 							>
 								<div className="mb-4 inline-block rounded-md bg-primary-100 p-4 text-white">
 									<Icon name={service.icon} size={35} />
@@ -62,9 +95,9 @@ const Services = () => {
 									{service.title}
 								</h3>
 								<p>{service.description}</p>
-							</div>
+							</motion.div>
 						))}
-					</div>
+					</motion.div>
 				</section>
 			</div>
 		</div>

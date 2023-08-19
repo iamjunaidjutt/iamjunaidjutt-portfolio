@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,8 +14,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Menu } from "lucide-react";
+} from "@/components/ui/dropdown-menu";
 
 const MainNav = () => {
 	const pathname = usePathname();
@@ -26,18 +27,19 @@ const MainNav = () => {
 		<>
 			<nav className="hidden md:flex md:flex-row md:items-center md:justify-center space-y-4 md:space-y-0 md:space-x-10 text-sm md:text-base">
 				{routes.map((route) => (
-					<Link
-						key={route.path}
-						href={route.path}
-						className={cn(
-							"hover:text-gray-500",
-							pathname === route.path || route.isActive
-								? "text-myBgBlue dark:text-myBlue border-b border-dashed border-myBgBlue dark:border-myBlue"
-								: ""
-						)}
-					>
-						{route.label}
-					</Link>
+					<motion.div key={route.path} whileHover={{ scale: 1.1 }}>
+						<Link
+							href={route.path}
+							className={cn(
+								"hover:text-gray-500",
+								pathname === route.path || route.isActive
+									? "text-myBgBlue dark:text-myBlue border-b border-dashed border-myBgBlue dark:border-myBlue"
+									: ""
+							)}
+						>
+							{route.label}
+						</Link>
+					</motion.div>
 				))}
 				<Button variant={"destructive"}>Resume</Button>
 				<ModeToggle />
