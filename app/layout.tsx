@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto, Poppins } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-	title: "Muhammad Junaid - Home",
+	title: "Muhammad Junaid",
 	description: "Muhammad Junaid's personal website",
 };
 
@@ -46,6 +47,7 @@ export default function RootLayout({
 					<div className="lg:pl-20">
 						<Navbar />
 						{children}
+						<Toaster />
 						<Separator className="bg-primary opacity-20" />
 						<SiteMap />
 					</div>

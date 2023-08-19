@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +10,6 @@ import { motion } from "framer-motion";
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -23,6 +23,7 @@ import Meeting from "@/components/Meeting";
 import BottomWave from "@/components/ui/bottomWave1";
 import BottomWave2 from "@/components/ui/bottomWave2";
 import PageWrapper from "@/components/PageWrapper";
+import { toast } from "react-hot-toast";
 
 const formSchema = z.object({
 	name: z.string().min(3).max(50),
@@ -32,6 +33,7 @@ const formSchema = z.object({
 });
 
 export default function ContactPage() {
+	const [isLoading, setIsLoading] = useState(false);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -42,8 +44,24 @@ export default function ContactPage() {
 		},
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		try {
+			setIsLoading(true);
+			await fetch("/api/contact/", {
+				method: "POST",
+				body: JSON.stringify(values),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+			toast.success("Message sent successfully");
+		} catch (error) {
+			console.log(error);
+			setIsLoading(false);
+			toast.error("Something went wrong");
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -157,6 +175,7 @@ export default function ContactPage() {
 														rows={5}
 														placeholder="Message"
 														className="p-4 text-base"
+														{...field}
 													/>
 												</FormControl>
 												<FormMessage />
@@ -164,8 +183,12 @@ export default function ContactPage() {
 										)}
 									/>
 									<div className=" max-md:text-center">
-										<Button type="submit" size={"lg"}>
-											Submit
+										<Button
+											type="submit"
+											size={"lg"}
+											disabled={isLoading}
+										>
+											{isLoading ? "Loading..." : "Send"}
 										</Button>
 									</div>
 								</form>
