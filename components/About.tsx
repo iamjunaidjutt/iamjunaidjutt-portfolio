@@ -25,18 +25,19 @@ const About = () => {
 							</span>{" "}
 							Hello there! Welcome to my corner of the web!
 						</p>
+
 						<p>
-							I&lsquo;m Muhammad Junaid, a tech enthusiast with
+							I&apos; m Muhammad Junaid, a tech enthusiast with
 							expertise in web development using technologies like
 							Next.js and the MERN stack, complemented by my
 							skills in languages such as C++, Java, Spring Boot,
 							and OOP. I thrive on solving complex problems with
 							elegant solutions and aspire to contribute my skills
 							to innovative projects. Collaboration is key to my
-							work style, and I&lsquo;m excited to connect with
+							work style, and I&apos; ;m excited to connect with
 							professionals who share a passion for technology and
-							excellence. Let&lsquo;s embark on a journey of
-							growth and discovery together!
+							excellence. Let&apos;s embark on a journey of growth
+							and discovery together!
 						</p>
 					</div>
 					<Button variant={"destructive"} size={"lg"}>
