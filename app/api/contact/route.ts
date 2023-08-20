@@ -1,13 +1,15 @@
+import { NextResponse } from "next/server";
+
 import { mailOptions, transporter } from "@/config/nodemailer";
 
 
-export const POST = async (req: Response) => {
+export const POST = async (req: Request) => {
     try {
         const data = await req.json();
         const { name, email, subject, message } = data;
 
         if (!name || !email || !subject || !message) { 
-            return new Response('Missing required fields', {status: 400});
+            return new NextResponse('Missing required fields', {status: 400});
         }
 
         await transporter.sendMail({
@@ -76,9 +78,9 @@ export const POST = async (req: Response) => {
             `
         });
 
-        return new Response(data, {status: 200});
+        return new NextResponse(data, {status: 200});
     } catch (error) {
         console.log(error);
-        return new Response('Internal server error', {status: 500});        
+        return new NextResponse('Internal server error', {status: 500});        
     }
 }

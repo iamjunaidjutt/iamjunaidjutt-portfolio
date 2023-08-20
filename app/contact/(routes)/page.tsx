@@ -24,6 +24,7 @@ import BottomWave from "@/components/ui/bottomWave1";
 import BottomWave2 from "@/components/ui/bottomWave2";
 import PageWrapper from "@/components/PageWrapper";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
 	name: z.string().min(3).max(50),
@@ -33,6 +34,7 @@ const formSchema = z.object({
 });
 
 export default function ContactPage() {
+	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -55,6 +57,7 @@ export default function ContactPage() {
 				},
 			});
 			toast.success("Message sent successfully");
+			router.push("/");
 		} catch (error) {
 			console.log(error);
 			setIsLoading(false);
