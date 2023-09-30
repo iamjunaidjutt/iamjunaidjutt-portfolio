@@ -1,8 +1,9 @@
-#Muhammad Junaid
+
+# Muhammad Junaid
 
 Thank you for considering contributing to this project! We appreciate your efforts to make it better.
 
-To contribute to this project, please read guidelines first from CONTRIBUTING.MD file!
+To contribute to this project, please read the guidelines first from CONTRIBUTING.MD file!
 
 ### Setting up Locally
 
