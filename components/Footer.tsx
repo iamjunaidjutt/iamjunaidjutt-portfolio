@@ -85,12 +85,12 @@ const Footer = () => {
 							+92-307-4254648
 						</Link>
 						<Link
-							href={"mailto:info@iamjunaidjutt.tech"}
+							href={"mailto:info.iamjunaidjutt@gmail.com"}
 							className={cn(
 								"hover:dark:text-myBlue hover:text-myBgBlue"
 							)}
 						>
-							info@iamjunaidjutt.tech
+							info.iamjunaidjutt@gmail.com
 						</Link>
 					</div>
 				</div>
@@ -100,7 +100,7 @@ const Footer = () => {
 				<p className="text-sm md:text-base max-md:mx-5">
 					&copy; {new Date().getFullYear()} Designed & Developed by{" "}
 					<Link
-						href={"mailto:info@iamjunaidjutt.tech"}
+						href={"mailto:info.iamjunaidjutt@gmail.com"}
 						className={cn(
 							"text-myBgBlue dark:text-myBlue hover:border-b border-myBlue dark:border-myBlue"
 						)}

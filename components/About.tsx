@@ -34,7 +34,7 @@ const About = () => {
 							and OOP. I thrive on solving complex problems with
 							elegant solutions and aspire to contribute my skills
 							to innovative projects. Collaboration is key to my
-							work style, and I&apos; ;m excited to connect with
+							work style, and I&apos;m excited to connect with
 							professionals who share a passion for technology and
 							excellence. Let&apos;s embark on a journey of growth
 							and discovery together!

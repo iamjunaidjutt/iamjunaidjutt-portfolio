@@ -92,10 +92,10 @@ export default function ContactPage() {
 									+92-307-4254648
 								</Link>
 								<Link
-									href={"mailto:info@iamjunaidjutt.tech"}
+									href={"mailto:info.iamjunaidjutt@gmail.com"}
 									className={cn("hover:text-myBlue")}
 								>
-									info@iamjunaidjutt.tech
+									info.iamjunaidjutt@gmail.com
 								</Link>
 							</div>
 						</div>
