@@ -25,7 +25,7 @@ const Navbar = () => {
 
 	return (
 		<div
-			className={`fixed w-screen lg:w-[95.7%] top-0 right-0 lg:ml-20 z-40 ${
+			className={`fixed w-screen top-0 right-0 z-40 lg:pl-24 ${
 				scrolled
 					? "bg-blue-100 dark:bg-gray-900 dark:shadow-gray-800 shadow-gray-300 shadow "
 					: "bg-transparent"
