@@ -44,7 +44,7 @@ const MainNav = () => {
 				<Button variant={"destructive"}>Resume</Button>
 				<ModeToggle />
 			</nav>
-			<nav className="md:hidden flex items-center gap-2">
+			<nav className="flex md:hidden items-center gap-2">
 				<ModeToggle />
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>

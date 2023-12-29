@@ -81,22 +81,32 @@ export default function ContactPage() {
 									feel free to reach out!
 								</p>
 							</div>
-							<div className="flex flex-col gap-5">
+							<div className="flex flex-col gap-5 max-md:justify-center">
 								<p>Lahore, Pakistan</p>
-								<Link
-									href={
-										"https://api.whatsapp.com/send?phone=03074254648"
-									}
-									className={cn("hover:text-myBlue")}
-								>
-									+92-307-4254648
-								</Link>
-								<Link
-									href={"mailto:info.iamjunaidjutt@gmail.com"}
-									className={cn("hover:text-myBlue")}
-								>
-									info.iamjunaidjutt@gmail.com
-								</Link>
+								<div>
+									<Link
+										href={
+											"https://api.whatsapp.com/send?phone=03074254648"
+										}
+										className={cn(
+											"hover:text-myBlue w-max"
+										)}
+									>
+										+92-307-4254648
+									</Link>
+								</div>
+								<div>
+									<Link
+										href={
+											"mailto:info.iamjunaidjutt@gmail.com"
+										}
+										className={cn(
+											"hover:text-myBlue w-max"
+										)}
+									>
+										info.iamjunaidjutt@gmail.com
+									</Link>
+								</div>
 							</div>
 						</div>
 						<motion.div

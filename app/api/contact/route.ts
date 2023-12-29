@@ -2,21 +2,20 @@ import { NextResponse } from "next/server";
 
 import { mailOptions, transporter } from "@/config/nodemailer";
 
-
 export const POST = async (req: Request) => {
-    try {
-        const data = await req.json();
-        const { name, email, subject, message } = data;
+	try {
+		const data = await req.json();
+		const { name, email, subject, message } = data;
 
-        if (!name || !email || !subject || !message) { 
-            return new NextResponse('Missing required fields', {status: 400});
-        }
+		if (!name || !email || !subject || !message) {
+			return new NextResponse("Missing required fields", { status: 400 });
+		}
 
-        await transporter.sendMail({
-            ...mailOptions,
-            subject: `New message from ${name} - ${subject}`,
-            text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-            html: `<!DOCTYPE html>
+		await transporter.sendMail({
+			...mailOptions,
+			subject: `New message from ${name} - Subject: ${subject}`,
+			text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+			html: `<!DOCTYPE html>
             <html>
             <head>
               <style>
@@ -75,12 +74,12 @@ export const POST = async (req: Request) => {
               </div>
             </body>
             </html>
-            `
-        });
+            `,
+		});
 
-        return new NextResponse(data, {status: 200});
-    } catch (error) {
-        console.log(error);
-        return new NextResponse('Internal server error', {status: 500});        
-    }
-}
+		return new NextResponse(data, { status: 200 });
+	} catch (error) {
+		console.log(error);
+		return new NextResponse("Internal server error", { status: 500 });
+	}
+};

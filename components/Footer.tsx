@@ -18,7 +18,7 @@ const Footer = () => {
 						<Link
 							href={"/"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							Home
@@ -26,7 +26,7 @@ const Footer = () => {
 						<Link
 							href={"/#about"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							About
@@ -34,7 +34,7 @@ const Footer = () => {
 						<Link
 							href={"/contact"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							Contact
@@ -47,7 +47,7 @@ const Footer = () => {
 						<Link
 							href={"https://www.linkedin.com/in/iamjunaidjutt"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							LinkedIn
@@ -55,7 +55,7 @@ const Footer = () => {
 						<Link
 							href={"https://www.github.com/iamjunaidjutt"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							Github
@@ -63,7 +63,7 @@ const Footer = () => {
 						<Link
 							href={"https://twitter.com/iamjunaidjutt_"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							Twitter
@@ -79,7 +79,7 @@ const Footer = () => {
 								"https://api.whatsapp.com/send?phone=03074254648"
 							}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							+92-307-4254648
@@ -87,7 +87,7 @@ const Footer = () => {
 						<Link
 							href={"mailto:info.iamjunaidjutt@gmail.com"}
 							className={cn(
-								"hover:dark:text-myBlue hover:text-myBgBlue"
+								"hover:dark:text-myBlue hover:text-myBgBlue w-max"
 							)}
 						>
 							info.iamjunaidjutt@gmail.com

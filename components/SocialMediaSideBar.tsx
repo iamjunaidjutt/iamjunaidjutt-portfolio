@@ -16,7 +16,7 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({ link, icon }) => {
 
 const SocialMediaSideBar: React.FC = () => {
 	return (
-		<div className="w-20 h-screen fixed top-0 left-0 text-center dark:shadow-gray-800 shadow-gray-300 shadow hidden lg:block z-50 bg-blue-100 dark:bg-gray-900">
+		<div className="hidden lg:block w-20 h-screen fixed top-0 left-0 text-center dark:shadow-gray-800 shadow-gray-300 shadow z-50 bg-blue-100 dark:bg-gray-900">
 			<div className="flex flex-col items-center h-full">
 				<Waves className="text-3xl m-8" />
 				<div className="flex flex-col items-center justify-center h-full">
