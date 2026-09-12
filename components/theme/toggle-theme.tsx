@@ -15,17 +15,18 @@ export default function ModeToggle() {
 	return (
 		<div className="text-center my-2">
 			<button
+				aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
 				onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-				className="bg-gray-200  dark:bg-gray-800 rounded-md p-2 text-green-500 dark:text-red-500 mx-2"
+				className="theme-toggle rounded-md p-2 mx-2"
 			>
 				{theme === "light" ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
-						viewBox="0 0 24 24"
+						viewBox="0 0 23 23"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						className="w-6 h-6"
+						className="w-5 h-5"
 					>
 						<path
 							strokeLinecap="round"
@@ -40,7 +41,7 @@ export default function ModeToggle() {
 						viewBox="0 0 24 24"
 						strokeWidth={1.5}
 						stroke="currentColor"
-						className="w-6 h-6"
+						className="w-5 h-5"
 					>
 						<path
 							strokeLinecap="round"

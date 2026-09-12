@@ -18,10 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import Meeting from "@/components/Meeting";
-import BottomWave from "@/components/ui/bottomWave1";
-import BottomWave2 from "@/components/ui/bottomWave2";
 import PageWrapper from "@/components/PageWrapper";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -88,9 +85,7 @@ export default function ContactPage() {
 										href={
 											"https://api.whatsapp.com/send?phone=03074254648"
 										}
-										className={cn(
-											"hover:text-myBlue w-max"
-										)}
+										className="text-link w-max"
 									>
 										+92-307-4254648
 									</Link>
@@ -100,26 +95,27 @@ export default function ContactPage() {
 										href={
 											"mailto:info.iamjunaidjutt@gmail.com"
 										}
-										className={cn(
-											"hover:text-myBlue w-max"
-										)}
+										className="text-link w-max"
 									>
 										info.iamjunaidjutt@gmail.com
 									</Link>
 								</div>
 							</div>
 						</div>
-						<motion.div
-							className="border border-primary rounded-xl shadow-md p-5 md:p-10 text-start glassmorphism"
-							initial={{ opacity: 0, x: 100, y: 0 }}
-							animate={{ opacity: 1, x: 0, y: 0 }}
-							transition={{
-								delay: 0.5,
-								duration: 1,
-								type: "tween",
-							}}
-						>
-							<Form {...form}>
+						<div className="relative">
+							<div className="absolute -top-12 -right-12 w-64 h-64 bg-coral/15 rounded-full blur-3xl pointer-events-none" />
+							<div className="absolute -bottom-10 -left-10 w-48 h-48 bg-coral/10 rounded-full blur-3xl pointer-events-none" />
+							<motion.div
+								className="contact-form-panel rounded-2xl p-6 md:p-10 text-start"
+								initial={{ opacity: 0, x: 100, y: 0 }}
+								animate={{ opacity: 1, x: 0, y: 0 }}
+								transition={{
+									delay: 0.5,
+									duration: 1,
+									type: "tween",
+								}}
+							>
+								<Form {...form}>
 								<form
 									onSubmit={form.handleSubmit(onSubmit)}
 									className="space-y-8"
@@ -207,12 +203,10 @@ export default function ContactPage() {
 								</form>
 							</Form>
 						</motion.div>
+						</div>
 					</div>
 				</div>
-
-				<BottomWave />
 				<Meeting />
-				<BottomWave2 />
 			</PageWrapper>
 		</>
 	);

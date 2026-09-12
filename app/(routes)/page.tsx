@@ -1,29 +1,25 @@
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 import HeroSection from "@/components/HeroSection";
 import Meeting from "@/components/Meeting";
 import PageWrapper from "@/components/PageWrapper";
 import Projects from "@/components/Projects";
 import Services from "@/components/Services";
 import Skills from "@/components/Skills";
-import BottomWave from "@/components/ui/bottomWave1";
-import BottomWave2 from "@/components/ui/bottomWave2";
+import Training from "@/components/Training";
 
 export default function HomePage() {
 	return (
 		<>
 			<PageWrapper>
 				<HeroSection />
-				<BottomWave />
 				<About />
-				<BottomWave2 />
+				<Experience />
 				<Skills />
-				<BottomWave />
+				<Training />
 				<Services />
-				<BottomWave2 />
 				<Projects />
-				<BottomWave />
 				<Meeting />
-				<BottomWave2 />
 			</PageWrapper>
 		</>
 	);

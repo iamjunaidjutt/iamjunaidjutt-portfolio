@@ -1,66 +1,81 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { Briefcase } from "lucide-react";
+import { ArrowUpRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 
 const About = () => {
 	return (
-		<>
-			<section
-				className="bg-myBgBlue grid md:grid-cols-2 py-10"
-				id="about"
+		<section className="section-band section-cream" id="about">
+			<motion.div
+				className="page-width about-grid"
+				initial={{ opacity: 0, y: 28 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-80px" }}
+				transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
 			>
-				<div className="p-14 flex flex-col items-center md:items-start gap-y-10">
-					<h2 className="text-2xl md:text-4xl font-bold text-white font-poppins">
-						About Me
+				<div>
+					<p className="eyebrow">01 / About</p>
+					<h2>
+						Systems that solve real problems, with AI where it earns
+						its place.
 					</h2>
-					<div className="text-gray-200 max-md:text-center">
-						<p className="mb-4">
-							<span role="img" aria-label="Waving Hand">
-								👋&#39;
-							</span>{" "}
-							Hello there! Welcome to my corner of the web!
-						</p>
-
-						<p>
-							I&apos; m Muhammad Junaid, a tech enthusiast with
-							expertise in web development using technologies like
-							Next.js and the MERN stack, complemented by my
-							skills in languages such as C++, Java, Spring Boot,
-							and OOP. I thrive on solving complex problems with
-							elegant solutions and aspire to contribute my skills
-							to innovative projects. Collaboration is key to my
-							work style, and I&apos;m excited to connect with
-							professionals who share a passion for technology and
-							excellence. Let&apos;s embark on a journey of growth
-							and discovery together!
-						</p>
-					</div>
-					<Button variant={"destructive"} size={"lg"}>
-						<Briefcase className="mr-2 h-4 w-4" />
-						<Link href={"#projects"}>See My Projects</Link>
+				</div>
+				<div className="about-copy">
+					<p>
+						I work across the stack, with a current focus on
+						AI-enabled backend systems. At Devsinc, I develop legal
+						technology products with ASP.NET Core, LLMs, RAG,
+						Microsoft Azure, and CI/CD pipelines while staying close
+						to client needs and delivery outcomes.
+					</p>
+					<p>
+						Before that, I built responsive experiences and REST API
+						integrations at Kryptomind, led frontend work for a CRM,
+						and explored Web3 through blockchain, smart contracts,
+						and wallet integrations. I care about clear
+						requirements, useful abstractions, and software that
+						holds up after the demo.
+					</p>
+					<Button
+						asChild
+						variant="outline"
+						className="mt-5 border-ink/20"
+					>
+						<Link href="#experience">
+							Explore my experience{" "}
+							<ArrowUpRight className="ml-2 h-4 w-4" />
+						</Link>
 					</Button>
 				</div>
-				<div className="flex flex-col items-center justify-center gap-10 py-10">
-					<motion.div whileHover={{ scale: 1.1 }}>
-						<Image
-							src={"/images/profile.jpg"}
-							width={250}
-							height={250}
-							alt="profile"
-							className="object-cover rounded-full"
-						/>
-					</motion.div>
-					<h2 className="text-2xl md:text-4xl text-myBlue font-bold font-poppins">
-						Muhammad Junaid
-					</h2>
+			</motion.div>
+			<motion.div
+				className="page-width facts-grid"
+				initial={{ opacity: 0, y: 24 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true, margin: "-60px" }}
+				transition={{
+					duration: 0.6,
+					delay: 0.15,
+					ease: [0.22, 1, 0.36, 1],
+				}}
+			>
+				<div>
+					<MapPin className="h-5 w-5 text-coral" />
+					<span>Pakistan · Open to remote collaboration</span>
 				</div>
-			</section>
-		</>
+				<div>
+					<GraduationCap className="h-5 w-5 text-coral" />
+					<span>BS Software Engineering · FAST-NUCES</span>
+				</div>
+				<div>
+					<Sparkles className="h-5 w-5 text-coral" />
+					<span>AI/ML · Full-stack · Platform engineering</span>
+				</div>
+			</motion.div>
+		</section>
 	);
 };
 
