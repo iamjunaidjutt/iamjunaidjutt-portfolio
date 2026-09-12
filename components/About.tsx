@@ -27,7 +27,7 @@ const About = () => {
 					<p>
 						I work across the stack, with a current focus on
 						AI-enabled backend systems. At Devsinc, I develop legal
-						technology products with ASP.NET Core, LLMs, RAG,
+						technology products with ASP.NET Core, FastAPI, LLMs, RAG,
 						Microsoft Azure, and CI/CD pipelines while staying close
 						to client needs and delivery outcomes.
 					</p>
@@ -72,7 +72,7 @@ const About = () => {
 				</div>
 				<div>
 					<Sparkles className="h-5 w-5 text-coral" />
-					<span>AI/ML · Full-stack · Platform engineering</span>
+					<span>AI/ML · Full-Stack · Platform Engineering</span>
 				</div>
 			</motion.div>
 		</section>

@@ -33,6 +33,7 @@ const MainNav = () => {
 			"stack",
 			"training",
 			"projects",
+			"leadership",
 		];
 
 		const handleScroll = () => {
@@ -79,6 +80,7 @@ const MainNav = () => {
 		{ label: "Stack", path: "/#stack" },
 		{ label: "Training", path: "/#training" },
 		{ label: "Work", path: "/#projects" },
+		{ label: "Leadership", path: "/#leadership" },
 		{ label: "Contact", path: "/contact" },
 	];
 
@@ -116,9 +118,10 @@ const MainNav = () => {
 						className="border-border hover:text-coral hover:border-coral transition-colors"
 					>
 						<a
-							href="/resume.pdf"
+							href="/Junaid_CV.pdf"
 							target="_blank"
 							rel="noopener noreferrer"
+							download="Muhammad_Junaid_CV.pdf"
 						>
 							<Download className="mr-1.5 h-4 w-4" />
 							CV
@@ -135,9 +138,10 @@ const MainNav = () => {
 					className="h-9 px-2.5 text-xs border-border"
 				>
 					<a
-						href="/resume.pdf"
+						href="/Junaid_CV.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
+						download="Muhammad_Junaid_CV.pdf"
 					>
 						<Download className="mr-2 h-5 w-5" />
 						CV

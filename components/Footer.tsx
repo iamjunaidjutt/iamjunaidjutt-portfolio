@@ -7,6 +7,7 @@ const navigation = [
 	{ label: "Stack", href: "/#stack" },
 	{ label: "Training", href: "/#training" },
 	{ label: "Work", href: "/#projects" },
+	{ label: "Leadership", href: "/#leadership" },
 	{ label: "Contact", href: "/contact" },
 ];
 
@@ -64,7 +65,7 @@ const Footer = () => (
 					</a>
 				</div>
 				<p className="footer-location">
-					Open for work: Lahore &amp; Remote
+					Open to work: Lahore &amp; Remote
 				</p>
 			</div>
 		</div>

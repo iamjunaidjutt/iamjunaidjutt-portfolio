@@ -29,12 +29,12 @@ const HeroSection = () => {
 				<h1>
 					Muhammad Junaid
 					<span className="hero-title-accent">
-						AI/ML &amp; Full-stack Engineer
+						AI/ML &amp; Full-Stack Engineer
 					</span>
 				</h1>
 				<p className="hero-role">
-					Building <strong>AI-enabled backend systems</strong>, full-stack
-					products, and production-ready delivery workflows.
+					More than 1 year of building <strong>AI-enabled backend systems</strong>,
+					full-stack products, and production-ready delivery workflows.
 				</p>
 				<p className="hero-lede">
 					Associate Software Engineer (AI/ML) at <strong>Devsinc</strong>,
