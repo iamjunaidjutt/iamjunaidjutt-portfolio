@@ -704,6 +704,33 @@ html {
 	color: var(--coral);
 }
 
+/* Leadership & Volunteering section */
+.leadership-title-row {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.leadership-icon {
+	color: var(--coral);
+	height: 1.15rem;
+	width: 1.15rem;
+	flex-shrink: 0;
+	margin-top: 0.15rem;
+}
+
+.leadership-sub-label {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.leadership-sub-icon {
+	height: 0.9rem;
+	width: 0.9rem;
+}
+
 .stack-grid {
 	display: grid;
 	gap: 1px;
@@ -1041,7 +1068,8 @@ html {
 		gap: 2rem;
 		height: auto;
 		min-height: auto;
-		padding-block: 3rem 5rem;
+		padding-block: 6rem 5rem;
+		/* Increased top padding to avoid overlap with fixed navbar on mobile */
 	}
 
 	.hero-copy h1 {

@@ -14,7 +14,7 @@ const capabilities = [
 		icon: Code2,
 		title: "Full-stack products",
 		description:
-			"Fast, accessible interfaces and robust APIs across Next.js, React, Node.js, and ASP.NET Core.",
+			"Fast, accessible interfaces and robust APIs across Next.js, React, Node.js, Python, and ASP.NET Core.",
 	},
 	{
 		icon: DatabaseZap,

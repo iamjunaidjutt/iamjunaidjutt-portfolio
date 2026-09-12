@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight, CalendarDays } from "lucide-react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const roles = [
@@ -8,22 +9,28 @@ const roles = [
 		period: "Dec 2025 — Present",
 		title: "Associate Software Engineer (AI/ML)",
 		company: "Devsinc · Lahore, Pakistan",
-		copy: "Building AI-driven legal technology with ASP.NET Core, LLMs, RAG, and agentic workflows. I work directly with clients on requirements, scalable APIs, Azure delivery, and CI/CD pipelines that make releases more dependable.",
-		tags: ["ASP.NET Core", "LLMs", "RAG", "Azure", "Agentic AI"],
+		copy: "Building AI-driven legal technology solutions for LawPractice AI with ASP.NET Core, LLMs, RAG, and agentic workflows. I work directly with clients on requirements, scalable APIs, Azure delivery, and CI/CD pipelines that make releases more dependable.",
+		tags: ["ASP.NET Core", "FastAPI", "LLMs", "RAG", "Azure", "Agentic AI"],
+		link: "https://drive.google.com/file/d/155bk8op7Qvs3U1AmrA6ELnfrDXBdWmhB/view?usp=sharing",
+		linkLabel: "View offer letter",
 	},
 	{
 		period: "Oct 2025 — Dec 2025",
 		title: "Software Engineer Intern",
 		company: "Devsinc · Lahore, Pakistan",
-		copy: "Contributed to the engineering workflow that led into my current role, building a foundation across backend development, delivery practices, and AI-enabled product work.",
+		copy: "Contributed to the engineering workflow for LawPractice AI that led into my current role, building solutions across backend development, delivery practices, and AI-enabled product work.",
 		tags: ["Backend", "AI/ML", "Client collaboration"],
+		link: "https://drive.google.com/file/d/1kbY3Bnu1EXWsCYwJMx6Knzlx5xFwLyaX/view?usp=sharing",
+		linkLabel: "View offer letter",
 	},
 	{
 		period: "Aug 2024 — Nov 2024",
 		title: "Software Engineer Intern",
 		company: "Kryptomind LLC · Lahore, Pakistan",
-		copy: "Developed responsive React and Next.js interfaces, integrated REST APIs, and led frontend work for ResQ CRM. I also explored 3D experiences, blockchain, smart contracts, and wallet integrations for Web3 products.",
-		tags: ["Next.js", "TypeScript", "React", "Firebase", "Web3"],
+		copy: "Developed responsive React and Next.js interfaces, integrated REST APIs, and led frontend work for ResQ CRM. I also explored 3D animated experiences, blockchain, smart contracts, and wallet integrations for Web3 products.",
+		tags: ["Next.js", "TypeScript", "React", "GSAP", "Firebase", "Web3"],
+		link: "https://drive.google.com/file/d/1V97WzynXJDH4v_e7pidoIxPf9BKlb3Dk/view?usp=sharing",
+		linkLabel: "View experience letter",
 	},
 ];
 
@@ -77,6 +84,15 @@ const Experience = () => (
 									</span>
 								))}
 							</div>
+							<Link
+								href={role.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="training-certificate"
+							>
+								{role.linkLabel}
+								<ArrowUpRight className="h-4 w-4" />
+							</Link>
 						</div>
 					</motion.article>
 				))}
@@ -95,7 +111,7 @@ const Experience = () => (
 				</div>
 				<div>
 					<p className="eyebrow">Continuous learning</p>
-					<h3>AI, ML & delivery</h3>
+					<h3>AI, ML &amp; delivery</h3>
 					<p>
 						Focused training in Agentic AI, Generative AI, LLM
 						engineering, RAG, QLoRA, supervised machine learning,

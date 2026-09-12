@@ -36,6 +36,7 @@ const groups = [
 		"JavaScript",
 		"Tailwind CSS",
 		"Redux Toolkit",
+		"GSAP",
 	],
 	[
 		"Platforms & storage",

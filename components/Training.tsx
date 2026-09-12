@@ -34,6 +34,7 @@ const training = [
 		tags: [
 			"AWS",
 			"GCP",
+			"Docker",
 			"Kubernetes",
 			"Terraform",
 			"GitOps",

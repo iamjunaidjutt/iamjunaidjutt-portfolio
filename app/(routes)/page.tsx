@@ -1,6 +1,7 @@
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import HeroSection from "@/components/HeroSection";
+import Leadership from "@/components/Leadership";
 import Meeting from "@/components/Meeting";
 import PageWrapper from "@/components/PageWrapper";
 import Projects from "@/components/Projects";
@@ -19,8 +20,10 @@ export default function HomePage() {
 				<Training />
 				<Services />
 				<Projects />
+				<Leadership />
 				<Meeting />
 			</PageWrapper>
 		</>
 	);
 }
+
