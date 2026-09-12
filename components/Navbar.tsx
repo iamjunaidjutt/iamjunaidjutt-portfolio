@@ -25,19 +25,25 @@ const Navbar = () => {
 
 	return (
 		<div
-			className={`fixed w-screen top-0 right-0 z-40 lg:pl-24 ${
-				scrolled
-					? "bg-blue-100 dark:bg-gray-900 dark:shadow-gray-800 shadow-gray-300 shadow "
-					: "bg-transparent"
-			}`}
+			className={`site-nav fixed w-screen top-0 right-0 z-40 lg:pl-24 ${scrolled ? "is-scrolled" : ""}`}
 		>
 			<div className="flex items-center space-x-6 justify-between px-14 py-1">
 				<Link href="/">
 					<Image
-						src="/logos/logo-mini.png"
+						src="/logos/logo.png"
 						width={65}
 						height={65}
 						alt="logo"
+						priority
+						className="dark:hidden"
+					/>
+					<Image
+						src="/logos/logo_dark.png"
+						width={65}
+						height={65}
+						alt="logo"
+						priority
+						className="hidden dark:block"
 					/>
 				</Link>
 				<MainNav />

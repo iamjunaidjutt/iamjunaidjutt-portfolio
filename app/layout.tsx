@@ -23,8 +23,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-	title: "Muhammad Junaid",
-	description: "Muhammad Junaid's personal website",
+	title: "Muhammad Junaid | AI/ML & Full-stack Engineer",
+	description:
+		"Portfolio of Muhammad Junaid, an Associate Software Engineer focused on AI/ML, full-stack products, and scalable backend systems.",
 };
 
 export default function RootLayout({
@@ -40,7 +41,7 @@ export default function RootLayout({
 			<body
 				className={cn(
 					roboto.className,
-					`bg-blue-100 dark:bg-gray-900 text-black dark:text-white text-base lg:text-lg  relative circle-scatter circle-scatter-c`
+					"text-base lg:text-lg relative",
 				)}
 			>
 				<ThemeProvider attribute="class">
@@ -50,7 +51,7 @@ export default function RootLayout({
 						<ScrollToTop />
 						{children}
 						<Toaster />
-						<Separator className="bg-primary opacity-20" />
+						<Separator className="footer-separator" />
 						<Footer />
 					</div>
 				</ThemeProvider>

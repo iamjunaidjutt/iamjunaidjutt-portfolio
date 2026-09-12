@@ -25,51 +25,32 @@ export const POST = async (req: Request) => {
                   padding: 0;
                 }
             
-                /* Apply Tailwind-like classes */
-                .bg-blue-100 {
-                  background-color: #f0f4ff;
-                }
-            
-                .p-5 {
+                body {
+                  background: #f4f1eb;
+                  color: #20272c;
+                  font-family: Arial, sans-serif;
                   padding: 20px;
                 }
-            
-                .text-blue-700 {
-                  color: #3b82f6;
-                }
-            
-                .text-lg {
-                  font-size: 18px;
-                }
-            
-                .border {
-                  border: 1px solid #e2e8f0;
-                }
-            
-                .rounded-xl {
+                .panel {
+                  background: #fbfaf7;
+                  border: 1px solid #d8d4cb;
                   border-radius: 8px;
+                  padding: 20px;
                 }
-            
-                /* Button styles */
-                .button {
-                  display: inline-block;
-                  background-color: #3490dc;
-                  color: white;
-                  padding: 10px 20px;
-                  border-radius: 4px;
-                  text-decoration: none;
+                h1, strong {
+                  color: #3b6ea8;
+                }
+                h1 {
+                  font-size: 18px;
                 }
               </style>
             </head>
             <body>
-              <div class="bg-blue-100 p-5">
-                <div class="text-center">
-                  <h1 class="text-blue-700 text-lg font-semibold">New Message Received.</h1>
-                </div>
-                <div class="border rounded-xl p-5 mt-5">
-                  <p><strong class="text-blue-700">Name:</strong> ${name}</p>
-                  <p><strong class="text-blue-700">Email:</strong> ${email}</p>
-                  <p><strong class="text-blue-700">Message:</strong> ${message}</p>
+              <div class="panel">
+                <h1>New message received</h1>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Message:</strong> ${message}</p>
                 </div>
               </div>
             </body>

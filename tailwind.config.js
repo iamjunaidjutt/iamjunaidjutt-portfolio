@@ -17,6 +17,11 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				ink: "var(--ink)",
+				"on-ink": "var(--on-ink)",
+				coral: "var(--coral)",
+				graphite: "var(--graphite)",
+				"graphite-soft": "var(--graphite-soft)",
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
@@ -50,9 +55,6 @@ module.exports = {
 					DEFAULT: "hsl(var(--card))",
 					foreground: "hsl(var(--card-foreground))",
 				},
-				myRed: " hsl(var(--my-red))",
-				myBlue: "hsl(var(--my-blue))",
-				myBgBlue: "hsl(var(--my-BgBlue))",
 			},
 			borderRadius: {
 				lg: "var(--radius)",
