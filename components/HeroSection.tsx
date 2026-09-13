@@ -23,8 +23,8 @@ const HeroSection = () => {
 				transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
 			>
 				<p className="eyebrow hero-status-pill">
-					<span className="status-dot" /> Available Now: Full-time • Lahore
-					&amp; Remote
+					<span className="status-dot" /> Available Now: Full-time •
+					Lahore &amp; Remote
 				</p>
 				<h1>
 					Muhammad Junaid
@@ -33,21 +33,18 @@ const HeroSection = () => {
 					</span>
 				</h1>
 				<p className="hero-role">
-					More than 1 year of building <strong>AI-enabled backend systems</strong>,
-					full-stack products, and production-ready delivery workflows.
+					More than 1 year of building{" "}
+					<strong>AI-enabled backend systems</strong>, full-stack
+					products, and production-ready delivery workflows.
 				</p>
 				<p className="hero-lede">
-					Associate Software Engineer (AI/ML) at <strong>Devsinc</strong>,
-					focused on scalable backend systems, LLMs, RAG, Azure, and
-					full-stack products that turn complex requirements into useful
-					software.
+					Associate Software Engineer (AI/ML) at{" "}
+					<strong>Devsinc</strong>, focused on scalable backend
+					systems, LLMs, RAG, Azure, and full-stack products that turn
+					complex requirements into meaningful solutions.
 				</p>
 				<div className="hero-actions">
-					<Button
-						asChild
-						size="lg"
-						className="hero-primary-button"
-					>
+					<Button asChild size="lg" className="hero-primary-button">
 						<Link href="#projects">
 							<Briefcase className="mr-2 h-4 w-4" />
 							View selected work
