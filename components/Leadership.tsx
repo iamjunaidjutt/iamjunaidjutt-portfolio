@@ -9,8 +9,13 @@ const leadershipItems = [
 		period: "Dec 2023 — Mar 2024",
 		title: "Aspire Leaders Program",
 		org: "Aspire Institute · Remote",
-		copy: "Completed 30 hours of coursework across three full courses and a culminating leadership project. Final project: \"Empowering Minds — Education Outreach for Needy Children in Pakistan\", focused on improving access to education for underserved children through creative and collaborative strategies.",
-		tags: ["Leadership Development", "Social Impact", "Education Outreach", "Teamwork"],
+		copy: 'Completed 30 hours of coursework across three full courses and a culminating leadership project. Final project: "Empowering Minds — Education Outreach for Needy Children in Pakistan", focused on improving access to education for underserved children through creative and collaborative strategies.',
+		tags: [
+			"Leadership Development",
+			"Social Impact",
+			"Education Outreach",
+			"Teamwork",
+		],
 		link: "https://drive.google.com/file/d/13RdRi2w56hCt0Dt1Wxnzlk1aQKRu6aPO/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -19,7 +24,12 @@ const leadershipItems = [
 		title: "Deputy Head of Marketing",
 		org: "SOFTEC'23 · FAST-NUCES, Lahore, Pakistan",
 		copy: "Led a team of over 40 officers to collect sponsorships totalling more than PKR 1,000,000. Collaborated with top executives to close three significant strategic partnerships, increasing sponsorship targets by 25%.",
-		tags: ["Team Leadership", "Sponsorships", "Strategic Partnerships", "Marketing"],
+		tags: [
+			"Team Leadership",
+			"Sponsorships",
+			"Strategic Partnerships",
+			"Marketing",
+		],
 		link: "https://drive.google.com/file/d/1gPtFvc7lbRl_uWWfl82TZ6HQd14IWLCz/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -40,7 +50,12 @@ const volunteeringItems = [
 		title: "Volunteer · Marketing, Software House Enclosure & Infrastructure",
 		org: "SOFTEC'22 · FAST-NUCES, Lahore, Pakistan",
 		copy: "Met with HR managers and CEOs to prepare sponsorship meetings. Collaborated with the setup team to manage the Software House Enclosure and supported maintaining company exhibits, interacting with visitors to keep things running smoothly.",
-		tags: ["Marketing", "Sponsorships", "Stakeholder Relations", "Event Management"],
+		tags: [
+			"Marketing",
+			"Sponsorships",
+			"Stakeholder Relations",
+			"Event Management",
+		],
 		link: "https://drive.google.com/file/d/1m5YY44z8DmlIh-26BHSFRG47CkuriCpd/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -104,12 +119,17 @@ const Leadership = () => (
 				transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
 			>
 				<div>
-					<p className="eyebrow">07 / Leadership &amp; Volunteering</p>
-					<h2 className="section-title">Leading teams. Giving back.</h2>
+					<p className="eyebrow">
+						07 / Leadership &amp; Volunteering
+					</p>
+					<h2 className="section-title">
+						Leading teams. Giving back.
+					</h2>
 				</div>
 				<p className="section-intro">
-					Beyond engineering — driving sponsorships, managing large teams,
-					and contributing to community events at university and beyond.
+					Beyond engineering — driving sponsorships, managing large
+					teams, and contributing to community events at university
+					and beyond.
 				</p>
 			</motion.div>
 
@@ -126,7 +146,11 @@ const Leadership = () => (
 			</motion.p>
 			<div className="timeline">
 				{leadershipItems.map((item, index) => (
-					<TimelineItem key={`${item.org}-${item.title}`} item={item} index={index} />
+					<TimelineItem
+						key={`${item.org}-${item.title}`}
+						item={item}
+						index={index}
+					/>
 				))}
 			</div>
 
@@ -144,7 +168,11 @@ const Leadership = () => (
 			</motion.p>
 			<div className="timeline">
 				{volunteeringItems.map((item, index) => (
-					<TimelineItem key={`${item.org}-${item.title}`} item={item} index={index} />
+					<TimelineItem
+						key={`${item.org}-${item.title}`}
+						item={item}
+						index={index}
+					/>
 				))}
 			</div>
 		</div>

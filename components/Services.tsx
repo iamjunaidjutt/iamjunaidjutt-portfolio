@@ -42,7 +42,7 @@ const Services = () => {
 					transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
 				>
 					<div>
-						<p className="eyebrow">04 / Capabilities</p>
+						<p className="eyebrow">05 / Capabilities</p>
 						<h2 className="section-title">
 							The work I can take from concept to delivery.
 						</h2>
@@ -53,23 +53,25 @@ const Services = () => {
 					</p>
 				</motion.div>
 				<div className="capability-grid">
-					{capabilities.map(({ icon: Icon, title, description }, index) => (
-						<motion.div
-							key={title}
-							initial={{ opacity: 0, y: 24 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true, margin: "-60px" }}
-							transition={{
-								duration: 0.5,
-								delay: index * 0.08,
-								ease: [0.22, 1, 0.36, 1],
-							}}
-						>
-							<Icon />
-							<h3>{title}</h3>
-							<p>{description}</p>
-						</motion.div>
-					))}
+					{capabilities.map(
+						({ icon: Icon, title, description }, index) => (
+							<motion.div
+								key={title}
+								initial={{ opacity: 0, y: 24 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, margin: "-60px" }}
+								transition={{
+									duration: 0.5,
+									delay: index * 0.08,
+									ease: [0.22, 1, 0.36, 1],
+								}}
+							>
+								<Icon />
+								<h3>{title}</h3>
+								<p>{description}</p>
+							</motion.div>
+						),
+					)}
 				</div>
 			</div>
 		</section>
