@@ -80,7 +80,7 @@ const Projects = () => {
 					transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
 				>
 					<div>
-						<p className="eyebrow">05 / Selected work</p>
+						<p className="eyebrow">06 / Selected work</p>
 						<h2 className="section-title">
 							Projects with a reason to exist.
 						</h2>

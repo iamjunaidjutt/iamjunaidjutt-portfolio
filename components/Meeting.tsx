@@ -2,12 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Calendar, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 
 const Meeting = () => {
+	const pathname = usePathname();
 	return (
 		<section className="contact-band" id="contact-cta">
 			<motion.div
@@ -18,7 +20,9 @@ const Meeting = () => {
 				transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
 			>
 				<div>
-					<p className="eyebrow">06 / Contact</p>
+					<p className="eyebrow">
+						{pathname === "/" ? "08 / Contact" : "01 / Contact"}
+					</p>
 					<h2>Have a product problem worth solving?</h2>
 					<p>
 						Tell me what you&apos;re building. I&apos;m always

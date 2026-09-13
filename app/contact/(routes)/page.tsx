@@ -116,20 +116,61 @@ export default function ContactPage() {
 								}}
 							>
 								<Form {...form}>
-								<form
-									onSubmit={form.handleSubmit(onSubmit)}
-									className="space-y-8"
-								>
-									<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+									<form
+										onSubmit={form.handleSubmit(onSubmit)}
+										className="space-y-8"
+									>
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+											<FormField
+												control={form.control}
+												name="name"
+												render={({ field }) => (
+													<FormItem>
+														<FormLabel>
+															Name
+														</FormLabel>
+														<FormControl>
+															<Input
+																placeholder="Name"
+																className="p-4 text-base"
+																{...field}
+															/>
+														</FormControl>
+														<FormMessage />
+													</FormItem>
+												)}
+											/>
+											<FormField
+												control={form.control}
+												name="email"
+												render={({ field }) => (
+													<FormItem>
+														<FormLabel>
+															Email
+														</FormLabel>
+														<FormControl>
+															<Input
+																placeholder="Email address"
+																className="p-4 text-base"
+																{...field}
+															/>
+														</FormControl>
+														<FormMessage />
+													</FormItem>
+												)}
+											/>
+										</div>
 										<FormField
 											control={form.control}
-											name="name"
+											name="subject"
 											render={({ field }) => (
 												<FormItem>
-													<FormLabel>Name</FormLabel>
+													<FormLabel>
+														Subject
+													</FormLabel>
 													<FormControl>
 														<Input
-															placeholder="Name"
+															placeholder="Subject"
 															className="p-4 text-base"
 															{...field}
 														/>
@@ -140,13 +181,16 @@ export default function ContactPage() {
 										/>
 										<FormField
 											control={form.control}
-											name="email"
+											name="message"
 											render={({ field }) => (
 												<FormItem>
-													<FormLabel>Email</FormLabel>
+													<FormLabel>
+														Message
+													</FormLabel>
 													<FormControl>
-														<Input
-															placeholder="Email address"
+														<Textarea
+															rows={5}
+															placeholder="Message"
 															className="p-4 text-base"
 															{...field}
 														/>
@@ -155,54 +199,20 @@ export default function ContactPage() {
 												</FormItem>
 											)}
 										/>
-									</div>
-									<FormField
-										control={form.control}
-										name="subject"
-										render={({ field }) => (
-											<FormItem>
-												<FormLabel>Subject</FormLabel>
-												<FormControl>
-													<Input
-														placeholder="Subject"
-														className="p-4 text-base"
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-									<FormField
-										control={form.control}
-										name="message"
-										render={({ field }) => (
-											<FormItem>
-												<FormLabel>Message</FormLabel>
-												<FormControl>
-													<Textarea
-														rows={5}
-														placeholder="Message"
-														className="p-4 text-base"
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-									<div className=" max-md:text-center">
-										<Button
-											type="submit"
-											size={"lg"}
-											disabled={isLoading}
-										>
-											{isLoading ? "Loading..." : "Send"}
-										</Button>
-									</div>
-								</form>
-							</Form>
-						</motion.div>
+										<div className=" max-md:text-center">
+											<Button
+												type="submit"
+												size={"lg"}
+												disabled={isLoading}
+											>
+												{isLoading
+													? "Loading..."
+													: "Send"}
+											</Button>
+										</div>
+									</form>
+								</Form>
+							</motion.div>
 						</div>
 					</div>
 				</div>

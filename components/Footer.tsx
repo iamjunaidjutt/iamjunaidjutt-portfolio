@@ -71,7 +71,7 @@ const Footer = () => (
 		</div>
 		<div className="page-width footer-bottom">
 			<span>© {new Date().getFullYear()} Muhammad Junaid</span>
-			<span>AI/ML · Full-stack · Platform engineering</span>
+			<span>AI/ML · Full-Stack · Platform Engineering</span>
 		</div>
 	</footer>
 );
