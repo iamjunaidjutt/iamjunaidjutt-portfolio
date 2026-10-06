@@ -53,12 +53,12 @@ export default function ContactPage() {
 					"Content-Type": "application/json",
 				},
 			});
-			toast.success("Message sent successfully");
+			toast.success("Message sent. Thanks!");
 			router.push("/");
 		} catch (error) {
 			console.log(error);
 			setIsLoading(false);
-			toast.error("Something went wrong");
+			toast.error("Something went wrong. Please try again, or email me directly.");
 		} finally {
 			setIsLoading(false);
 		}
@@ -67,15 +67,15 @@ export default function ContactPage() {
 	return (
 		<>
 			<PageWrapper>
-				<div className="mt-20">
-					<div className="grid grid-cols-1 md:grid-cols-2 p-5 md:p-20 gap-5 max-md:text-center">
+				<div className="page-width mt-20">
+					<div className="grid grid-cols-1 md:grid-cols-2 py-5 md:py-20 gap-5 md:gap-12 max-md:text-center">
 						<div className="flex flex-col gap-10">
 							<div className="space-y-2">
 								<h2 className="text-2xl md:text-4xl font-bold font-poppins">
-									Let&#39;s Work Together
+									Get in touch
 								</h2>
 								<p className="opacity-50">
-									feel free to reach out!
+									Send a message here, or reach me directly below.
 								</p>
 							</div>
 							<div className="flex flex-col gap-5 max-md:justify-center">

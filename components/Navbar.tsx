@@ -25,9 +25,9 @@ const Navbar = () => {
 
 	return (
 		<div
-			className={`site-nav fixed w-screen top-0 right-0 z-40 lg:pl-24 ${scrolled ? "is-scrolled" : ""}`}
+			className={`site-nav fixed top-0 left-0 right-0 z-40 lg:pl-20 ${scrolled ? "is-scrolled" : ""}`}
 		>
-			<div className="flex items-center space-x-6 justify-between px-14 py-1">
+			<div className="page-width flex items-center justify-between py-1">
 				<Link href="/">
 					<Image
 						src="/logos/logo.png"

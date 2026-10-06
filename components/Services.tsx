@@ -6,27 +6,27 @@ import { motion } from "framer-motion";
 const capabilities = [
 	{
 		icon: BrainCircuit,
-		title: "AI-enabled systems",
+		title: "AI features",
 		description:
-			"LLM integrations, RAG pipelines, NLP workflows, and agentic automation connected to real product needs.",
+			"Adding LLMs, RAG, and agents to a product: reading and writing documents, answering questions from your own data, and automating routine steps.",
 	},
 	{
 		icon: Code2,
-		title: "Full-stack products",
+		title: "Full-stack web apps",
 		description:
-			"Fast, accessible interfaces and robust APIs across Next.js, React, Node.js, Python, and ASP.NET Core.",
+			"Websites and web apps from the interface down to the API and database, including login and role-based access. Mostly Next.js, React, Node.js, Python, and ASP.NET Core.",
 	},
 	{
 		icon: DatabaseZap,
 		title: "Platform engineering",
 		description:
-			"Data modeling, secure authentication, scalable services, and integrations that keep products dependable.",
+			"Setting up the infrastructure apps run on: Docker and Kubernetes, Terraform and Ansible, and monitoring with Grafana, Prometheus, and Loki.",
 	},
 	{
 		icon: CloudCog,
-		title: "Cloud delivery",
+		title: "Cloud and deployment",
 		description:
-			"Azure/AWS deployments, CI/CD pipelines, Docker workflows, and release practices that reduce friction.",
+			"Deploying to Azure, AWS, or Vercel with CI/CD pipelines (GitHub Actions, Jenkins, GitLab CI), so a release is routine instead of a big event.",
 	},
 ];
 
@@ -42,14 +42,13 @@ const Services = () => {
 					transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
 				>
 					<div>
-						<p className="eyebrow">05 / Capabilities</p>
+						<p className="eyebrow">05 / What I can do</p>
 						<h2 className="section-title">
-							The work I can take from concept to delivery.
+							What I can help with.
 						</h2>
 					</div>
 					<p className="section-intro">
-						A focused set of engineering capabilities built around
-						practical product outcomes.
+						The kinds of work I&apos;m most useful for.
 					</p>
 				</motion.div>
 				<div className="capability-grid">

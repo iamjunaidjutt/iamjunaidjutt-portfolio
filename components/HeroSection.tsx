@@ -23,8 +23,8 @@ const HeroSection = () => {
 				transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
 			>
 				<p className="eyebrow hero-status-pill">
-					<span className="status-dot" /> Available Now: Full-time •
-					Lahore &amp; Remote
+					<span className="status-dot" /> Open to full-time roles · Lahore
+					or remote
 				</p>
 				<h1>
 					Muhammad Junaid
@@ -33,21 +33,21 @@ const HeroSection = () => {
 					</span>
 				</h1>
 				<p className="hero-role">
-					More than 1 year of building{" "}
-					<strong>AI-enabled backend systems</strong>, full-stack
-					products, and production-ready delivery workflows.
+					I build backend systems for a legal platform used by 300+ law
+					firms, mostly the parts where{" "}
+					<strong>LLMs read and write documents</strong>.
 				</p>
 				<p className="hero-lede">
-					Associate Software Engineer (AI/ML) at{" "}
-					<strong>Devsinc</strong>, focused on scalable backend
-					systems, LLMs, RAG, Azure, and full-stack products that turn
-					complex requirements into meaningful solutions.
+					I&apos;m an Associate Software Engineer at <strong>Devsinc</strong>,
+					working on LawPractice.ai, which plaintiff law firms in the
+					United States use. Before this I built frontends with Next.js
+					and React.
 				</p>
 				<div className="hero-actions">
 					<Button asChild size="lg" className="hero-primary-button">
 						<Link href="#projects">
 							<Briefcase className="mr-2 h-4 w-4" />
-							View selected work
+							See my work
 						</Link>
 					</Button>
 					<Button
@@ -57,7 +57,7 @@ const HeroSection = () => {
 						className="border-ink/20 bg-transparent"
 					>
 						<Link href="/contact">
-							Let&apos;s connect{" "}
+							Get in touch{" "}
 							<ArrowUpRight className="ml-2 h-4 w-4" />
 						</Link>
 					</Button>
@@ -99,10 +99,10 @@ const HeroSection = () => {
 			<div className="hero-meta">
 				<span>Associate Software Engineer (AI/ML) · Devsinc</span>
 				<span>BS Software Engineering · FAST-NUCES</span>
-				<span>Pakistan · Open to remote collaboration</span>
+				<span>Lahore, Pakistan · Remote is fine</span>
 			</div>
 			<Link href="#about" className="scroll-cue">
-				<ArrowDown className="h-4 w-4" /> Scroll to explore
+				<ArrowDown className="h-4 w-4" /> Scroll down
 			</Link>
 		</div>
 	);

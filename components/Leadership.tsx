@@ -11,14 +11,9 @@ const leadershipItems = [
 		org: "Aspire Institute · Remote",
 		bullets: [
 			"Completed 30 hours of coursework, including three full modules and a culminating project.",
-			"Final Project: \"Empowering Minds - Education Outreach for Needy Children in Pakistan\" - a plan to help children in need get a better education.",
+			"Final project: \"Empowering Minds - Education Outreach for Needy Children in Pakistan\", a plan to help children in need get a better education.",
 		],
-		tags: [
-			"Leadership Development",
-			"Social Impact",
-			"Education Outreach",
-			"Teamwork",
-		],
+		tags: ["Leadership", "Community work", "Education outreach", "Teamwork"],
 		link: "https://drive.google.com/file/d/13RdRi2w56hCt0Dt1Wxnzlk1aQKRu6aPO/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -27,15 +22,10 @@ const leadershipItems = [
 		title: "Deputy Head of Marketing",
 		org: "SOFTEC'23 · FAST-NUCES, Lahore, Pakistan",
 		bullets: [
-			"Helped lead a marketing team of about 40 members before and during the event.",
-			"Worked with company executives to close three sponsorship deals and raise more than PKR 1,000,000, exceeding the target by 25%.",
+			"Helped lead a marketing team of about 40 people, before and during the event.",
+			"Worked with company executives to close three sponsorship deals. We raised over PKR 1,000,000, which was 25% above the target.",
 		],
-		tags: [
-			"Team Leadership",
-			"Sponsorships",
-			"Strategic Partnerships",
-			"Marketing",
-		],
+		tags: ["Team leadership", "Sponsorships", "Partnerships", "Marketing"],
 		link: "https://drive.google.com/file/d/1gPtFvc7lbRl_uWWfl82TZ6HQd14IWLCz/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -49,9 +39,9 @@ const volunteeringItems = [
 		bullets: [
 			"Checked billboards, banners, and other promotional materials.",
 			"Looked after security at the auditorium and VIP areas while working with senior police officers, including the District Police Officer.",
-			"Helped set up and pack up the event while coordinating with teams and vendors.",
+			"Helped set up and pack up the event, and stayed in touch with teams and vendors.",
 		],
-		tags: ["Event Operations", "Logistics", "Security Coordination"],
+		tags: ["Event operations", "Logistics", "Security"],
 		link: "https://drive.google.com/file/d/1EFlcRZoIpfwwjiB9TjlKzMBtu00niuLk/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -60,16 +50,11 @@ const volunteeringItems = [
 		title: "Volunteer · Marketing, Software House Enclosure & Infrastructure",
 		org: "SOFTEC'22 · FAST-NUCES, Lahore, Pakistan",
 		bullets: [
-			"Called HR managers and CEOs to arrange sponsorship meetings and joined meetings with the marketing head.",
+			"Called HR managers and CEOs to set up sponsorship meetings, and joined those meetings with the marketing head.",
 			"Worked with the setup team to run the Software House Enclosure.",
-			"Looked after company exhibits and talked with visitors to keep operations running smoothly.",
+			"Looked after company exhibits and talked with visitors to keep things running smoothly.",
 		],
-		tags: [
-			"Marketing",
-			"Sponsorships",
-			"Stakeholder Relations",
-			"Event Management",
-		],
+		tags: ["Marketing", "Sponsorships", "Sponsor outreach", "Event management"],
 		link: "https://drive.google.com/file/d/1m5YY44z8DmlIh-26BHSFRG47CkuriCpd/view?usp=sharing",
 		linkLabel: "View certificate",
 	},
@@ -141,13 +126,12 @@ const Leadership = () => (
 						07 / Leadership &amp; Volunteering
 					</p>
 					<h2 className="section-title">
-						Leading teams. Giving back.
+						Outside of code.
 					</h2>
 				</div>
 				<p className="section-intro">
-					Beyond engineering — driving sponsorships, managing large
-					teams, and contributing to community events at university
-					and beyond.
+					What I did at university besides studying: sponsorship
+					work, event teams, and volunteering.
 				</p>
 			</motion.div>
 
