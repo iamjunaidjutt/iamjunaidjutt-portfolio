@@ -76,6 +76,7 @@ const Projects = () => {
 			stack: ["Python", "TensorFlow", "BiLSTM", "Flask"],
 			image: undefined,
 			link: undefined,
+			code: "https://github.com/iamjunaidjutt/Fake-News-Detector",
 		},
 		{
 			name: "Emotion Recognition",
@@ -104,6 +105,7 @@ const Projects = () => {
 			stack: ["Python", "Scikit-learn", "Pandas", "Flask", "Docker", "GitHub Actions", "Heroku"],
 			image: undefined,
 			link: undefined,
+			code: "https://github.com/iamjunaidjutt/Boston-House-Price-Prediction",
 		},
 		{
 			name: "Buxom Cosmetics",
@@ -118,6 +120,7 @@ const Projects = () => {
 			stack: ["React.js", "Node.js", "Express.js", "MySQL", "Prisma ORM", "Redux Toolkit", "Stripe"],
 			image: undefined,
 			link: undefined,
+			code: "https://github.com/iamjunaidjutt/Buxom-Cosmetics",
 		},
 		{
 			name: "POS Pharmacy",
@@ -132,6 +135,7 @@ const Projects = () => {
 			stack: ["Java", "Java Swing", "Hibernate", "MySQL", "JUnit", "JasperReports"],
 			image: undefined,
 			link: undefined,
+			code: "https://github.com/iamjunaidjutt/pos",
 		},
 	];
 	return (
