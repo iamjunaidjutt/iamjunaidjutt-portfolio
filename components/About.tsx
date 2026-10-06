@@ -37,7 +37,7 @@ const About = () => {
 						I studied software engineering at FAST-NUCES. I also helped lead the marketing team at SOFTEC, where we raised more than PKR 1,000,000 from sponsors.
 					</p>
 					<p>
-						I like to understand what people need before I write any code. I want my work to still runs after the demo is over.
+						I like to understand what people need before I write any code. I want my work to still run after the demo is over.
 					</p>
 					<Button
 						asChild

@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import { Separator } from "@/components/ui/separator";
 import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
+import ChatWidget from "@/components/chatbot/ChatWidget";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -23,7 +24,7 @@ const poppins = Poppins({
 	variable: "--font-poppins",
 });
 
-const siteTitle = "Muhammad Junaid | AI/ML & Full-stack Engineer";
+const siteTitle = "Muhammad Junaid | AI & Full-stack Engineer";
 const siteDescription =
 	"Muhammad Junaid is a software engineer in Lahore. He builds backend systems and web apps, including the LLM features of a legal platform used by law firms in the US.";
 
@@ -94,6 +95,7 @@ export default function RootLayout({
 						<Toaster />
 						<Separator className="footer-separator" />
 						<Footer />
+						<ChatWidget />
 					</div>
 				</ThemeProvider>
 			</body>
