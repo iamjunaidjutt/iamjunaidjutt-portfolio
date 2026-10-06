@@ -29,7 +29,7 @@ const HeroSection = () => {
 				<h1>
 					Muhammad Junaid
 					<span className="hero-title-accent">
-						AI/ML &amp; Full-Stack Engineer
+						AI &amp; Full-Stack Engineer
 					</span>
 				</h1>
 				<p className="hero-role">
@@ -38,7 +38,7 @@ const HeroSection = () => {
 					<strong>LLMs read and write documents</strong>.
 				</p>
 				<p className="hero-lede">
-					I&apos;m an Associate Software Engineer at <strong>Devsinc</strong>,
+					Associate Software Engineer at <strong>Devsinc</strong>,
 					working on LawPractice.ai, which plaintiff law firms in the
 					United States use. Before this I built frontends with Next.js
 					and React.
@@ -54,7 +54,7 @@ const HeroSection = () => {
 						asChild
 						size="lg"
 						variant="outline"
-						className="border-ink/20 bg-transparent"
+						className="hero-secondary-button border-ink/20 bg-transparent"
 					>
 						<Link href="/contact">
 							Get in touch{" "}

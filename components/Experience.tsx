@@ -135,11 +135,10 @@ const Experience = () => (
 					<p>FAST-NUCES · 2021 — 2025</p>
 				</div>
 				<div>
-					<p className="eyebrow">Courses</p>
-					<h3>Online courses</h3>
+					<p className="eyebrow">Learning</p>
+					<h3>AI, Backend, Frontend, and DevOps</h3>
 					<p>
-						Recent ones cover AI agents, LLM apps, DevOps, machine
-						learning basics, and React.
+						Mostly self-paced courses on Udemy, Coursera, Github, and Youtube where I built projects along the way
 					</p>
 				</div>
 				<ArrowUpRight className="education-arrow" />

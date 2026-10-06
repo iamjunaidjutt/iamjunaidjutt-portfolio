@@ -42,7 +42,7 @@ const MainNav = () => {
 				document.documentElement.scrollHeight - 100;
 
 			if (isAtBottom) {
-				setActiveSection("projects");
+				setActiveSection("leadership");
 				return;
 			}
 

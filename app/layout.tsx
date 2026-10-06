@@ -10,6 +10,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Separator } from "@/components/ui/separator";
 import ScrollToTop from "@/components/ScrollToTop";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -84,6 +85,7 @@ export default function RootLayout({
 				)}
 			>
 				<ThemeProvider attribute="class">
+					<SmoothScroll />
 					<SocialMediaSideBar />
 					<div className="lg:pl-20">
 						<Navbar />
