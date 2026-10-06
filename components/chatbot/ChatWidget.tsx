@@ -76,31 +76,16 @@ const getStoredMessages = (): Message[] => {
 	}
 };
 
-const normalizeAssistantMarkdown = (content: string): string =>
+// Only touches invisible/odd characters. Spacing problems are fixed at the source
+// (the stream), not with regexes that guess where spaces belong.
+const cleanAssistantText = (content: string): string =>
 	content
-		.replace(
-			/([^\n])(?=\*\*(?:Current Role|Key Responsibilities|Impact|Tools & Technologies)\*\*)/g,
-			"$1\n",
-		)
-		.replace(
-			/(### (?:Current Role|Primary Project|Key Responsibilities|Impact|Tools & Technologies))(?=\S)/gi,
-			"$1\n",
-		)
-		.replace(/(^#{1,6}\s+[^\n]*?[a-z])(?=[A-Z][a-z])/gm, "$1\n")
-		.replace(/([^\n])\s*-\s+(?=(?:\*\*|[A-Z]))/g, "$1\n- ")
-		.replace(
-			/(^|\n)(\s*[-*+]\s+[^\n]+)\n(?!\s*(?:[-*+]|#{1,6}\s)|\s*$)/gm,
-			"$1$2 ",
-		)
-		.replace(/\n[ \t]*\n(?=[ \t]*[-*+]\s+)/g, "\n")
-		.replace(/([.!?)])(?=\*\*[A-Z][^*\n]{2,60}\*\*)/g, "$1\n")
-		.replace(
-			/\*\*(Current Role|Primary Project|Key Responsibilities|Impact|Tools & Technologies)\*\*/gi,
-			"### $1",
-		)
-		.replace(/(^|\n)(\s*-\s+\*\*[^*\n]+\*\*):(?=\S)/g, "$1$2: ")
-		.replace(/([a-z])(?=\d)/g, "$1 ")
-		.replace(/(\d)(?=[A-Za-z])/g, "$1 ");
+		.replace(/\r\n/g, "\n")
+		.replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000]/g, " ")
+		.replace(/[\u200B-\u200D\u2060\uFEFF]/g, "")
+		.replace(/(\d)\s?\u00D7/g, "$1x")
+		.replace(/([^\n])\n(#{1,6} )/g, "$1\n\n$2")
+		.replace(/\n{3,}/g, "\n\n");
 
 const suggestions = [
 	"What does Junaid do at Devsinc?",
@@ -110,13 +95,13 @@ const suggestions = [
 ];
 
 const markdownComponents: Components = {
-	p: ({ children }) => <p className="m-0">{children}</p>,
+	p: ({ children }) => <p className="m-0 mt-2 first:mt-0">{children}</p>,
 	h1: ({ children }) => <h1 className="m-0 text-base font-semibold">{children}</h1>,
 	h2: ({ children }) => <h2 className="m-0 text-sm font-semibold">{children}</h2>,
-	h3: ({ children }) => <h3 className="m-0 font-semibold">{children}</h3>,
-	ul: ({ children }) => <ul className="m-0 list-disc pl-5">{children}</ul>,
-	ol: ({ children }) => <ol className="m-0 list-decimal pl-5">{children}</ol>,
-	li: ({ children }) => <li>{children}</li>,
+	h3: ({ children }) => <h3 className="m-0 mt-3 font-semibold first:mt-0">{children}</h3>,
+	ul: ({ children }) => <ul className="m-0 mt-2 list-disc pl-5 first:mt-0">{children}</ul>,
+	ol: ({ children }) => <ol className="m-0 mt-2 list-decimal pl-5 first:mt-0">{children}</ol>,
+	li: ({ children }) => <li className="mt-1 first:mt-0">{children}</li>,
 	a: ({ children, href }) => (
 		<a
 			href={href}
@@ -380,9 +365,9 @@ export default function ChatWidget() {
 										</div>
 									)}
 									<div
-										className={`max-w-[86%] whitespace-pre-wrap rounded-xl px-3 py-3 text-sm leading-5 ${
+										className={`max-w-[86%] rounded-xl px-3 py-3 text-sm leading-5 ${
 											message.role === "user"
-													? "bg-[var(--chat-user)] text-white"
+													? "whitespace-pre-wrap bg-[var(--chat-user)] text-white"
 												: "bg-[var(--paper)] text-[var(--ink)]"
 										}`}
 									>
@@ -391,7 +376,7 @@ export default function ChatWidget() {
 												components={markdownComponents}
 												remarkPlugins={[remarkGfm]}
 											>
-												{normalizeAssistantMarkdown(message.content)}
+												{cleanAssistantText(message.content)}
 											</ReactMarkdown>
 										) : (
 											message.content

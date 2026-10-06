@@ -147,8 +147,12 @@ export async function POST(request: Request) {
 					for await (const chunk of responseStream) {
 						const text = chunk.choices[0]?.delta?.content;
 
-						if (text?.trim()) {
-							hasText = true;
+						if (text) {
+							// Keep whitespace-only chunks (" ", "\n\n"): models stream the spaces
+							// around numbers and paragraph breaks as separate tokens.
+							if (text.trim()) {
+								hasText = true;
+							}
 							sendEvent({ text });
 						}
 					}
