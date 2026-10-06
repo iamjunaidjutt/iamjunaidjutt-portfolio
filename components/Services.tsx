@@ -48,7 +48,7 @@ const Services = () => {
 						</h2>
 					</div>
 					<p className="section-intro">
-						The kinds of work I'm most useful for.
+						The kinds of work I&apos;m most useful for.
 					</p>
 				</motion.div>
 				<div className="capability-grid">

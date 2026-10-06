@@ -150,7 +150,7 @@ const Projects = () => {
 					<div>
 						<p className="eyebrow">06 / Selected work</p>
 						<h2 className="section-title">
-							Things I've built.
+							Things I&apos;ve built.
 						</h2>
 					</div>
 					<p className="section-intro">

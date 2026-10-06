@@ -38,7 +38,7 @@ const HeroSection = () => {
 					<strong>LLMs read and write documents</strong>.
 				</p>
 				<p className="hero-lede">
-					I'm an Associate Software Engineer at <strong>Devsinc</strong>,
+					I&apos;m an Associate Software Engineer at <strong>Devsinc</strong>,
 					working on LawPractice.ai, which plaintiff law firms in the
 					United States use. Before this I built frontends with Next.js
 					and React.
