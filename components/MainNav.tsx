@@ -154,7 +154,7 @@ const MainNav = () => {
 							<Menu />
 						</Button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent className="w-56 p-3 mr-14">
+					<DropdownMenuContent className="w-56 p-3 mr-6">
 						{routes.map((route) => {
 							const isActive =
 								pathname === "/contact"

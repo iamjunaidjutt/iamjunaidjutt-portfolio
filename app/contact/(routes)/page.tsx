@@ -67,8 +67,8 @@ export default function ContactPage() {
 	return (
 		<>
 			<PageWrapper>
-				<div className="mt-20">
-					<div className="grid grid-cols-1 md:grid-cols-2 p-5 md:p-20 gap-5 max-md:text-center">
+				<div className="page-width mt-20">
+					<div className="grid grid-cols-1 md:grid-cols-2 py-5 md:py-20 gap-5 md:gap-12 max-md:text-center">
 						<div className="flex flex-col gap-10">
 							<div className="space-y-2">
 								<h2 className="text-2xl md:text-4xl font-bold font-poppins">
