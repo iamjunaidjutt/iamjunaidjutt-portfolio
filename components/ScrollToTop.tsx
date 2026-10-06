@@ -17,10 +17,7 @@ const ScrollToTop = () => {
 	}, []);
 
 	const scrollTop = () => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+		window.dispatchEvent(new Event("lenis:scroll-to-top"));
 	};
 	return (
 		<div>

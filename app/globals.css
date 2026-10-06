@@ -104,7 +104,7 @@
 }
 
 html {
-	scroll-behavior: smooth;
+	scroll-behavior: auto;
 }
 
 .page-width {
@@ -236,6 +236,39 @@ html {
 	color: var(--on-ink) !important;
 }
 
+.dark .hero-primary-button,
+.dark .meeting-primary-button {
+	background: var(--coral) !important;
+	color: var(--graphite) !important;
+}
+
+.dark .hero-primary-button:hover,
+.dark .meeting-primary-button:hover {
+	background: color-mix(in srgb, var(--coral) 82%, white) !important;
+	color: var(--graphite) !important;
+}
+
+.dark .hero-secondary-button,
+.dark .meeting-secondary-button {
+	background: var(--paper) !important;
+	border-color: var(--coral) !important;
+	color: var(--ink) !important;
+}
+
+.dark .hero-secondary-button:hover,
+.dark .meeting-secondary-button:hover {
+	background: var(--coral) !important;
+	color: var(--graphite) !important;
+}
+
+:root:not(.dark) .about-button {
+	border-color: color-mix(in srgb, var(--ink) 20%, transparent) !important;
+}
+
+.dark .about-button {
+	border-color: var(--coral) !important;
+}
+
 .social-x-mark {
 	color: var(--muted-ink);
 	display: inline-block;
@@ -365,6 +398,11 @@ html {
 	gap: 4rem;
 	padding-block: 5rem;
 	position: relative;
+}
+
+.hero-copy {
+	position: relative;
+	top: 4rem;
 }
 
 .hero-copy h1 {
@@ -553,9 +591,14 @@ html {
 }
 
 .about-grid {
+	align-items: center;
 	display: grid;
 	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
 	gap: 5rem;
+}
+
+.about-grid > div:first-child {
+	transform: translateY(-1rem);
 }
 
 .about-grid h2 {
@@ -1096,6 +1139,10 @@ html {
 		/* Increased top padding to avoid overlap with fixed navbar on mobile */
 	}
 
+	.hero-copy {
+		top: 2rem;
+	}
+
 	.hero-copy h1 {
 		font-size: clamp(2.7rem, 14vw, 4.4rem);
 	}
@@ -1122,6 +1169,10 @@ html {
 
 	.about-grid {
 		display: block;
+	}
+
+	.about-grid > div:first-child {
+		transform: none;
 	}
 
 	.about-copy {

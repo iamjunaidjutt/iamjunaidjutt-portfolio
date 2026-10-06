@@ -25,25 +25,24 @@ const About = () => {
 				</div>
 				<div className="about-copy">
 					<p>
-						I work across the stack, but lately most of my time goes to
-						backend work involving LLMs. At Devsinc I work on
-						LawPractice.ai with ASP.NET Core, FastAPI, RAG, Azure, and
-						CI/CD pipelines, and I keep in touch with the client about
-						what they need. A lot of the work is document pipelines:
-						OCR, pulling data out of files, and generating things like
-						demand letters.
+						I'm a software engineer at Devsinc in Lahore. I work on LawPractice.ai, a tool that law firms in the United States use. More than 300 firms use it now.
 					</p>
 					<p>
-						Before that I built frontends and REST integrations at
-						Kryptomind, led the frontend team on a CRM, and got into
-						Web3 for a while. I care about getting the requirements
-						straight first, and about code that still works after the
-						demo.
+						Most of my work is backend. Law firms send us messy files. Our system reads them, finds the important details, and writes new documents, like demand letters. I help build and fix these parts. I also work on the prompts we give the AI. Better prompts helped cut mistakes in the documents by about 90%.
+					</p>
+					<p>
+						I started with frontend work. At Kryptomind I built web pages with Next.js and made one project load much faster. Later I led a team of three on a CRM called ResQ. I also built projects on my own, like Mawaddah, a matchmaking website.
+					</p>
+					<p>
+						I studied software engineering at FAST-NUCES. I also helped lead the marketing team at SOFTEC, where we raised more than PKR 1,000,000 from sponsors.
+					</p>
+					<p>
+						I like to understand what people need before I write any code. I want my work to still runs after the demo is over.
 					</p>
 					<Button
 						asChild
 						variant="outline"
-						className="mt-5 border-ink/20"
+						className="about-button mt-5 border-ink/20"
 					>
 						<Link href="#experience">
 							See my experience{" "}

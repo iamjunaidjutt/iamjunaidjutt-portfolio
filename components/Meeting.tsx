@@ -35,7 +35,7 @@ const Meeting = () => {
 					<Button
 						asChild
 						size="lg"
-						className="bg-coral text-on-ink hover:bg-coral/90"
+						className="meeting-primary-button min-h-[2.75rem] px-12 text-base bg-coral text-on-ink hover:bg-coral/90"
 					>
 						<Link
 							href="https://cal.com/iamjunaidjutt"
@@ -51,7 +51,7 @@ const Meeting = () => {
 						asChild
 						size="lg"
 						variant="outline"
-						className="border-white/20 text-white hover:bg-white/10 hover:text-white bg-transparent"
+						className="meeting-secondary-button min-h-[2.75rem] px-12 text-base border-white/20 text-white hover:bg-white/10 hover:text-white bg-transparent"
 					>
 						<Link href="mailto:info.iamjunaidjutt@gmail.com">
 							<Mail className="mr-2 h-4 w-4" />
