@@ -202,6 +202,10 @@ html {
 	position: relative;
 }
 
+.contact-page {
+	min-width: 0;
+}
+
 .dark .contact-form-panel {
 	background: color-mix(in srgb, var(--paper) 60%, transparent);
 	border: 1px solid color-mix(in srgb, var(--line) 45%, transparent) !important;

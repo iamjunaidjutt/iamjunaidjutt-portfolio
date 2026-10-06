@@ -130,7 +130,7 @@ const MainNav = () => {
 					<ModeToggle />
 				</div>
 			</nav>
-			<nav className="flex md:hidden items-center gap-2">
+			<nav className="flex shrink-0 md:hidden items-center gap-2">
 				<Button
 					asChild
 					size="sm"
