@@ -17,8 +17,8 @@ const Footer = () => (
 			<div className="footer-intro">
 				<p className="footer-brand">Muhammad Junaid</p>
 				<p>
-					AI/ML and full-stack engineer building useful systems with a
-					dependable core.
+					I build backend systems and web apps, usually with some AI
+					in them.
 				</p>
 				<a
 					className="footer-email"
@@ -65,13 +65,13 @@ const Footer = () => (
 					</a>
 				</div>
 				<p className="footer-location">
-					Open to work: Lahore &amp; Remote
+					Open to work: Lahore or remote
 				</p>
 			</div>
 		</div>
 		<div className="page-width footer-bottom">
 			<span>© {new Date().getFullYear()} Muhammad Junaid</span>
-			<span>AI/ML · Full-Stack · Platform Engineering</span>
+			<span>AI/ML · Full-stack · Platform engineering</span>
 		</div>
 	</footer>
 );

@@ -19,25 +19,24 @@ const About = () => {
 				<div>
 					<p className="eyebrow">01 / About</p>
 					<h2>
-						Systems that solve real problems, with AI where it earns
-						its place.
+						I mostly build backend systems, and lately that means working
+						with LLMs.
 					</h2>
 				</div>
 				<div className="about-copy">
 					<p>
-						I work across the stack, with a current focus on
-						AI-enabled backend systems. At Devsinc, I develop legal
-						technology products with ASP.NET Core, FastAPI, LLMs, RAG,
-						Microsoft Azure, and CI/CD pipelines while staying close
-						to client needs and delivery outcomes.
+						I work across the stack, but lately most of my time goes to
+						backend work involving LLMs. At Devsinc I work on
+						LawPractice.ai with ASP.NET Core, FastAPI, RAG, Azure, and
+						CI/CD pipelines, and I keep in touch with the client about
+						what they need.
 					</p>
 					<p>
-						Before that, I built responsive experiences and REST API
-						integrations at Kryptomind, led frontend work for a CRM,
-						and explored Web3 through blockchain, smart contracts,
-						and wallet integrations. I care about clear
-						requirements, useful abstractions, and software that
-						holds up after the demo.
+						Before that I built frontends and REST integrations at
+						Kryptomind, led the frontend team on a CRM, and got into
+						Web3 for a while. I care about getting the requirements
+						straight first, and about code that still works after the
+						demo.
 					</p>
 					<Button
 						asChild
@@ -45,7 +44,7 @@ const About = () => {
 						className="mt-5 border-ink/20"
 					>
 						<Link href="#experience">
-							Explore my experience{" "}
+							See my experience{" "}
 							<ArrowUpRight className="ml-2 h-4 w-4" />
 						</Link>
 					</Button>
@@ -64,7 +63,7 @@ const About = () => {
 			>
 				<div>
 					<MapPin className="h-5 w-5 text-coral" />
-					<span>Pakistan · Open to remote collaboration</span>
+					<span>Lahore, Pakistan · Remote is fine</span>
 				</div>
 				<div>
 					<GraduationCap className="h-5 w-5 text-coral" />
@@ -72,7 +71,7 @@ const About = () => {
 				</div>
 				<div>
 					<Sparkles className="h-5 w-5 text-coral" />
-					<span>AI/ML · Full-Stack · Platform Engineering</span>
+					<span>AI/ML · Full-stack · Platform engineering</span>
 				</div>
 			</motion.div>
 		</section>

@@ -124,8 +124,8 @@ const Skills = () => {
 						<h2 className="section-title">What I work with.</h2>
 					</div>
 					<p className="section-intro">
-						Tools I use to turn product requirements into dependable
-						software, from interface to infrastructure.
+						The tools I use, from the interface to the infrastructure
+						underneath it.
 					</p>
 				</motion.div>
 				<div className="stack-grid">

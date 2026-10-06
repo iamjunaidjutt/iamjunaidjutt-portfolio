@@ -10,10 +10,10 @@ const roles = [
 		title: "Associate Software Engineer",
 		company: "Devsinc · Lahore, Pakistan",
 		bullets: [
-			"Built backend features for LawPractice.ai using ASP.NET Core, LLMs, RAG, and MCP, contributing to a 70% reduction in document preparation time and 7x faster demand letter turnaround.",
-			"Helped build APIs and AI agents that read, extract, process, and generate legal documents, while improving prompts to reduce documentation errors by about 90%.",
-			"Maintained OCR, document reading, and document writing pipelines for multiple document types, fixed production issues, and added new pipelines for a platform used by more than 300 law firms.",
-			"Used OpenCV, Azure Document Intelligence, Azure Foundry, Azure SQL Database, Azure Cosmos DB, and RabbitMQ background workers to build and run these features.",
+			"Built backend features for LawPractice.ai using ASP.NET Core, LLMs, RAG, and MCP. My work on processing legal demands and case summaries helped cut document preparation time by 70% and made demand letters about 7x faster to turn around.",
+			"Helped build the APIs and AI agents that read, extract, process, and generate documents, and improved their prompts. Together these helped cut documentation errors by about 90%.",
+			"Kept the OCR, document reading, and document writing pipelines running across different document types, added new ones when needed, and fixed issues clients reported in production. The platform is now used by 300+ law firms.",
+			"Day to day: Azure Document Intelligence and Foundry, Azure SQL and Cosmos DB, RabbitMQ background workers, and OpenCV.",
 		],
 		tags: [
 			"ASP.NET Core",
@@ -34,7 +34,7 @@ const roles = [
 		company: "Devsinc · Lahore, Pakistan",
 		bullets: [
 			"Worked on backend development, bug fixes, and AI features for LawPractice.ai.",
-			"Contributed to product work that led into the Associate Software Engineer role.",
+			"That work led to my current full-time role.",
 		],
 		tags: ["Backend", "AI/ML", "Client collaboration"],
 		link: "https://drive.google.com/file/d/1kbY3Bnu1EXWsCYwJMx6Knzlx5xFwLyaX/view?usp=sharing",
@@ -45,9 +45,9 @@ const roles = [
 		title: "Software Engineer Intern",
 		company: "Kryptomind LLC · Lahore, Pakistan",
 		bullets: [
-			"Built user interfaces with animations and 3D models using GSAP and React Three Fiber across several projects.",
-			"Used Next.js, TypeScript, and React to connect frontend applications to REST APIs, including server-side rendering and code splitting that improved a Lighthouse score from 55 to 90.",
-			"Worked on an NFT marketplace and learned Web3 fundamentals, including blockchain, smart contracts, and wallet integration.",
+			"Built interfaces with animations and 3D models using GSAP and React Three Fiber across several projects, and used Lenis for smooth scrolling.",
+			"Connected Next.js, TypeScript, and React frontends to REST APIs. Server-side rendering and code splitting took one project's Lighthouse score from 55 to 90.",
+			"Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts, and wallet integration.",
 		],
 		tags: ["Next.js", "TypeScript", "React", "GSAP", "Firebase", "Web3"],
 		link: "https://drive.google.com/file/d/1V97WzynXJDH4v_e7pidoIxPf9BKlb3Dk/view?usp=sharing",
@@ -72,8 +72,8 @@ const Experience = () => (
 					</h2>
 				</div>
 				<p className="section-intro">
-					A practical path from full-stack product development into AI
-					systems, shaped by client work and constant experimentation.
+					I started in frontend, moved to backend, and ended up working
+					on AI features.
 				</p>
 			</motion.div>
 			<div className="timeline">
@@ -135,12 +135,11 @@ const Experience = () => (
 					<p>FAST-NUCES · 2021 — 2025</p>
 				</div>
 				<div>
-					<p className="eyebrow">Continuous learning</p>
-					<h3>AI, ML &amp; delivery</h3>
+					<p className="eyebrow">Courses</p>
+					<h3>Online courses</h3>
 					<p>
-						Focused training in Agentic AI, Generative AI, LLM
-						engineering, RAG, QLoRA, supervised machine learning,
-						DevOps, and React.
+						Recent ones cover AI agents, LLM apps, DevOps, machine
+						learning basics, and React.
 					</p>
 				</div>
 				<ArrowUpRight className="education-arrow" />

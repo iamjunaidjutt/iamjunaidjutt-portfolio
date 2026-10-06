@@ -25,7 +25,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
 	title: "Muhammad Junaid | AI/ML & Full-stack Engineer",
 	description:
-		"Portfolio of Muhammad Junaid, an Associate Software Engineer focused on AI/ML, full-stack products, and scalable backend systems.",
+		"Muhammad Junaid is a software engineer in Lahore. He builds backend systems and web apps, including the LLM features of a legal platform used by law firms in the US.",
 };
 
 export default function RootLayout({

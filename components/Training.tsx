@@ -11,7 +11,7 @@ const training = [
 		provider: "Udemy",
 		bullets: [
 			"Built eight AI agent projects using OpenAI Agents SDK, CrewAI, LangGraph, AutoGen, and MCP.",
-			"Created a simulated trading floor where four agents collaborate, make trades autonomously, and use tools through MCP servers.",
+			"The final project was a simulated trading floor where four agents work together, make trades on their own, and use tools through MCP servers.",
 		],
 		tags: ["Agents", "MCP", "CrewAI", "LangGraph", "AutoGen"],
 		certificate:
@@ -22,8 +22,8 @@ const training = [
 		title: "AI Engineer · Core Track",
 		provider: "Udemy",
 		bullets: [
-			"Built eight LLM applications across an eight-week course using Hugging Face, LangChain, RAG with vector search, and QLoRA fine-tuning.",
-			"Built multi-agent systems and compared open-source and commercial models on coding and business tasks.",
+			"Built eight LLM apps in eight weeks, using Hugging Face, LangChain, RAG with vector search, and QLoRA fine-tuning.",
+			"Also built multi-agent systems and compared open-source and commercial models on coding and business tasks.",
 		],
 		tags: ["LLM engineering", "RAG", "QLoRA", "Fine-tuning", "HuggingFace"],
 		certificate:
@@ -35,7 +35,7 @@ const training = [
 		provider: "Udemy",
 		bullets: [
 			"Learned DevOps through hands-on projects with AWS, Linux, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Helm, and ArgoCD.",
-			"Covered monitoring and used GitHub Copilot and Amazon Q to speed up scripting and automation.",
+			"Also covered monitoring, and used GitHub Copilot and Amazon Q to help write scripts and automate things.",
 		],
 		tags: [
 			"AWS",
@@ -55,7 +55,7 @@ const training = [
 		provider: "DeepLearning.AI · Coursera",
 		bullets: [
 			"Learned to build and train regression and classification models in Python with NumPy and scikit-learn.",
-			"Covered multiple input features, regularization, and model evaluation techniques.",
+			"Covered linear and logistic regression, models with several input features, and regularization.",
 		],
 		tags: ["Machine learning", "Regression", "Classification", "Python"],
 		certificate:
@@ -67,7 +67,7 @@ const training = [
 		provider: "Udemy",
 		bullets: [
 			"Learned React components, hooks, forms, routing, Context API, and Redux Toolkit.",
-			"Covered Next.js fundamentals and deploying React applications.",
+			"Also covered an intro to Next.js and how to deploy React apps.",
 		],
 		tags: ["React", "Next.js", "Redux", "Frontend"],
 		certificate:
@@ -92,9 +92,8 @@ const Training = () => (
 					</h2>
 				</div>
 				<p className="section-intro">
-					Recent training is deliberately hands-on: agent systems, LLM
-					products, cloud delivery, and the infrastructure that takes
-					them to production.
+					These are the courses where I built projects instead of just
+					watching videos.
 				</p>
 			</motion.div>
 			<div className="training-grid">
@@ -157,7 +156,7 @@ const Training = () => (
 				viewport={{ once: true, margin: "-60px" }}
 				transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
 			>
-				<span>Coursework applied to</span>
+				<span>What these courses covered</span>
 				<strong>
 					Agentic AI · RAG · LLMs · CI/CD · Cloud infrastructure
 				</strong>
