@@ -67,9 +67,9 @@ export default function ContactPage() {
 	return (
 		<>
 			<PageWrapper>
-				<div className="page-width mt-20">
+				<div className="page-width contact-page mt-20">
 					<div className="grid grid-cols-1 md:grid-cols-2 py-5 md:py-20 gap-5 md:gap-12 max-md:text-center">
-						<div className="flex flex-col gap-10">
+						<div className="min-w-0 flex flex-col gap-10">
 							<div className="space-y-2">
 								<h2 className="text-2xl md:text-4xl font-bold font-poppins">
 									Get in touch
@@ -85,7 +85,7 @@ export default function ContactPage() {
 										href={
 											"https://api.whatsapp.com/send?phone=03074254648"
 										}
-										className="text-link w-max"
+										className="text-link block max-w-full break-words"
 									>
 										+92-307-4254648
 									</Link>
@@ -95,19 +95,19 @@ export default function ContactPage() {
 										href={
 											"mailto:info.iamjunaidjutt@gmail.com"
 										}
-										className="text-link w-max"
+										className="text-link block max-w-full break-words"
 									>
 										info.iamjunaidjutt@gmail.com
 									</Link>
 								</div>
 							</div>
 						</div>
-						<div className="relative">
+						<div className="relative min-w-0 overflow-hidden">
 							<div className="absolute -top-12 -right-12 w-64 h-64 bg-coral/15 rounded-full blur-3xl pointer-events-none" />
 							<div className="absolute -bottom-10 -left-10 w-48 h-48 bg-coral/10 rounded-full blur-3xl pointer-events-none" />
 							<motion.div
-								className="contact-form-panel rounded-2xl p-6 md:p-10 text-start"
-								initial={{ opacity: 0, x: 100, y: 0 }}
+								className="contact-form-panel w-full max-w-full rounded-2xl p-6 md:p-10 text-start"
+								initial={{ opacity: 0, x: 40, y: 0 }}
 								animate={{ opacity: 1, x: 0, y: 0 }}
 								transition={{
 									delay: 0.5,
