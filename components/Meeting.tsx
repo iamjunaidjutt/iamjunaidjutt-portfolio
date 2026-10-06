@@ -26,8 +26,9 @@ const Meeting = () => {
 					<h2>Working on something? Let&apos;s talk.</h2>
 					<p>
 						Tell me what you&apos;re working on. I&apos;m open to
-						full-time roles, and happy to talk about AI, backend
-						work, or web apps.
+						full-time roles in Lahore or remote, and happy to talk
+						about AI, backend work, or web apps. Email is the
+						quickest way to reach me.
 					</p>
 				</div>
 				<div className="flex flex-col gap-3 shrink-0 max-md:mt-8 w-full sm:w-auto">

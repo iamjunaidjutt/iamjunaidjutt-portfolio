@@ -68,7 +68,7 @@ const Experience = () => (
 				<div>
 					<p className="eyebrow">02 / Experience</p>
 					<h2 className="section-title">
-						Where I&apos;ve built things.
+						Where I&apos;ve worked.
 					</h2>
 				</div>
 				<p className="section-intro">

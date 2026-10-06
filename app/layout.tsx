@@ -22,10 +22,49 @@ const poppins = Poppins({
 	variable: "--font-poppins",
 });
 
+const siteTitle = "Muhammad Junaid | AI/ML & Full-stack Engineer";
+const siteDescription =
+	"Muhammad Junaid is a software engineer in Lahore. He builds backend systems and web apps, including the LLM features of a legal platform used by law firms in the US.";
+
 export const metadata: Metadata = {
-	title: "Muhammad Junaid | AI/ML & Full-stack Engineer",
-	description:
-		"Muhammad Junaid is a software engineer in Lahore. He builds backend systems and web apps, including the LLM features of a legal platform used by law firms in the US.",
+	metadataBase: new URL("https://iamjunaidjutt.vercel.app"),
+	title: siteTitle,
+	description: siteDescription,
+	authors: [{ name: "Muhammad Junaid" }],
+	keywords: [
+		"Muhammad Junaid",
+		"Software Engineer",
+		"AI/ML Engineer",
+		"Full-stack Developer",
+		"Backend Developer",
+		"LLM",
+		"RAG",
+		"ASP.NET Core",
+		"Next.js",
+		"Azure",
+		"Lahore",
+		"Pakistan",
+	],
+	alternates: { canonical: "/" },
+	openGraph: {
+		type: "website",
+		url: "/",
+		title: siteTitle,
+		description: siteDescription,
+		siteName: "Muhammad Junaid",
+		images: [
+			{
+				url: "/images/profile.png",
+				alt: "Muhammad Junaid",
+			},
+		],
+	},
+	twitter: {
+		card: "summary",
+		title: siteTitle,
+		description: siteDescription,
+		images: ["/images/profile.png"],
+	},
 };
 
 export default function RootLayout({

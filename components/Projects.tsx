@@ -8,20 +8,6 @@ import { motion } from "framer-motion";
 const Projects = () => {
 	const projects = [
 		{
-			name: "Gold Investment Estimations Assistant",
-			category: "AI app",
-			description: "A chat assistant that answers questions about gold investing, using the live gold price.",
-			bullets: [
-				"Connected MetalPriceAPI to Google Gemini 2.0 so answers use the current gold price.",
-				"Added voice input with OpenAI Whisper so you can speak your question, and built the interface with Gradio.",
-				"Handled API errors and missing data. If the price isn't available, it uses the last saved price or says so instead of guessing.",
-			],
-			impact: "Live gold prices · Voice input",
-			stack: ["Python", "Gemini", "Whisper", "Gradio"],
-			image: undefined,
-			link: undefined,
-		},
-		{
 			name: "ResQ CRM",
 			category: "Web app",
 			description: "A CRM for managing leads, tracking riders, and keeping staff in touch.",
@@ -32,6 +18,34 @@ const Projects = () => {
 			],
 			impact: "Live rider tracking · 1.8s dashboard load",
 			stack: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
+			image: undefined,
+			link: undefined,
+		},
+		{
+			name: "Mawaddah",
+			category: "Web app",
+			description: "A marriage matchmaking site, built from requirements gathering through deployment.",
+			bullets: [
+				"Built login with tokens and Google, role-based access, multi-step forms, matching by age, city, and preferences, paid subscriptions, and dashboards with filters.",
+				"Designed the Supabase database and added indexes for matching and filtering. The main matching query went from about 350 ms to 120 ms on test data.",
+				"Deployed on Vercel. Main pages load in under 2 seconds, with a mobile Lighthouse performance score of 86.",
+			],
+			impact: "350ms → 120ms matching query",
+			stack: ["Next.js", "Node.js", "Supabase", "Vercel"],
+			image: undefined,
+			link: undefined,
+		},
+		{
+			name: "Gold Investment Estimations Assistant",
+			category: "AI app",
+			description: "A chat assistant that answers questions about gold investing, using the live gold price.",
+			bullets: [
+				"Connected MetalPriceAPI to Google Gemini 2.0 so answers use the current gold price.",
+				"Added voice input with OpenAI Whisper so you can speak your question, and built the interface with Gradio.",
+				"Handled API errors and missing data. If the price isn't available, it uses the last saved price or says so instead of guessing.",
+			],
+			impact: "Live gold prices · Voice input",
+			stack: ["Python", "Gemini", "Whisper", "Gradio"],
 			image: undefined,
 			link: undefined,
 		},
@@ -47,20 +61,6 @@ const Projects = () => {
 			image: "/projects/promptopia.png",
 			link: "https://promptopia-chi-ten.vercel.app/",
 			code: "https://github.com/iamjunaidjutt/promptopia",
-		},
-		{
-			name: "Mawaddah",
-			category: "Web app",
-			description: "A marriage matchmaking site, built from requirements gathering through deployment.",
-			bullets: [
-				"Built login with tokens and Google, role-based access, multi-step forms, matching by age, city, and preferences, paid subscriptions, and dashboards with filters.",
-				"Designed the Supabase database and added indexes for matching and filtering. The main matching query went from about 350 ms to 120 ms on test data.",
-				"Deployed on Vercel. Main pages load in under 2 seconds, with a mobile Lighthouse performance score of 86.",
-			],
-			impact: "350ms → 120ms matching query",
-			stack: ["Next.js", "Node.js", "Supabase", "Vercel"],
-			image: undefined,
-			link: undefined,
 		},
 		{
 			name: "Fake News Detector",

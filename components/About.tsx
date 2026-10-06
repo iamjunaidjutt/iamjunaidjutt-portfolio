@@ -29,7 +29,9 @@ const About = () => {
 						backend work involving LLMs. At Devsinc I work on
 						LawPractice.ai with ASP.NET Core, FastAPI, RAG, Azure, and
 						CI/CD pipelines, and I keep in touch with the client about
-						what they need.
+						what they need. A lot of the work is document pipelines:
+						OCR, pulling data out of files, and generating things like
+						demand letters.
 					</p>
 					<p>
 						Before that I built frontends and REST integrations at
