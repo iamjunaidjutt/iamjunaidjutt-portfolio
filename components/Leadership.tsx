@@ -9,7 +9,10 @@ const leadershipItems = [
 		period: "Dec 2023 — Mar 2024",
 		title: "Aspire Leaders Program",
 		org: "Aspire Institute · Remote",
-		copy: 'Completed 30 hours of coursework across three full courses and a culminating leadership project. Final project: "Empowering Minds — Education Outreach for Needy Children in Pakistan", focused on improving access to education for underserved children through creative and collaborative strategies.',
+		bullets: [
+			"Completed 30 hours of coursework, including three full modules and a culminating project.",
+			"Final Project: \"Empowering Minds - Education Outreach for Needy Children in Pakistan\" - a plan to help children in need get a better education.",
+		],
 		tags: [
 			"Leadership Development",
 			"Social Impact",
@@ -23,7 +26,10 @@ const leadershipItems = [
 		period: "Aug 2022 — May 2023",
 		title: "Deputy Head of Marketing",
 		org: "SOFTEC'23 · FAST-NUCES, Lahore, Pakistan",
-		copy: "Led a team of over 40 officers to collect sponsorships totalling more than PKR 1,000,000. Collaborated with top executives to close three significant strategic partnerships, increasing sponsorship targets by 25%.",
+		bullets: [
+			"Helped lead a marketing team of about 40 members before and during the event.",
+			"Worked with company executives to close three sponsorship deals and raise more than PKR 1,000,000, exceeding the target by 25%.",
+		],
 		tags: [
 			"Team Leadership",
 			"Sponsorships",
@@ -40,7 +46,11 @@ const volunteeringItems = [
 		period: "Nov 2022 — Jan 2023",
 		title: "Volunteer · Operations",
 		org: "Future Fest'23 · Lahore, Pakistan",
-		copy: "Assisted with advertising by monitoring billboards, banners, and promotional materials. Managed security for the auditorium and VIP areas in collaboration with senior police personnel. Coordinated with teams and vendors during setup and pack-up to ensure smooth event execution.",
+		bullets: [
+			"Checked billboards, banners, and other promotional materials.",
+			"Looked after security at the auditorium and VIP areas while working with senior police officers, including the District Police Officer.",
+			"Helped set up and pack up the event while coordinating with teams and vendors.",
+		],
 		tags: ["Event Operations", "Logistics", "Security Coordination"],
 		link: "https://drive.google.com/file/d/1EFlcRZoIpfwwjiB9TjlKzMBtu00niuLk/view?usp=sharing",
 		linkLabel: "View certificate",
@@ -49,7 +59,11 @@ const volunteeringItems = [
 		period: "Oct 2021 — Aug 2022",
 		title: "Volunteer · Marketing, Software House Enclosure & Infrastructure",
 		org: "SOFTEC'22 · FAST-NUCES, Lahore, Pakistan",
-		copy: "Met with HR managers and CEOs to prepare sponsorship meetings. Collaborated with the setup team to manage the Software House Enclosure and supported maintaining company exhibits, interacting with visitors to keep things running smoothly.",
+		bullets: [
+			"Called HR managers and CEOs to arrange sponsorship meetings and joined meetings with the marketing head.",
+			"Worked with the setup team to run the Software House Enclosure.",
+			"Looked after company exhibits and talked with visitors to keep operations running smoothly.",
+		],
 		tags: [
 			"Marketing",
 			"Sponsorships",
@@ -87,7 +101,11 @@ const TimelineItem = ({
 		<div className="timeline-content">
 			<h3>{item.title}</h3>
 			<p className="timeline-company">{item.org}</p>
-			<p className="timeline-copy">{item.copy}</p>
+			<ul className="timeline-copy timeline-list">
+				{item.bullets.map((bullet) => (
+					<li key={bullet}>{bullet}</li>
+				))}
+			</ul>
 			<div className="tag-row">
 				{item.tags.map((tag) => (
 					<span className="soft-tag" key={tag}>

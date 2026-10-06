@@ -9,8 +9,10 @@ const training = [
 		icon: BookOpen,
 		title: "AI Engineer · Agentic Track",
 		provider: "Udemy",
-		description:
-			"Hands-on work with autonomous agents, OpenAI Agents SDK, CrewAI, LangGraph, AutoGen, MCP, tool calling, and multi-agent design patterns across real-world projects.",
+		bullets: [
+			"Built eight AI agent projects using OpenAI Agents SDK, CrewAI, LangGraph, AutoGen, and MCP.",
+			"Created a simulated trading floor where four agents collaborate, make trades autonomously, and use tools through MCP servers.",
+		],
 		tags: ["Agents", "MCP", "CrewAI", "LangGraph", "AutoGen"],
 		certificate:
 			"https://www.udemy.com/certificate/UC-834f64a1-cba5-401e-b922-f5e48c950421/",
@@ -19,8 +21,10 @@ const training = [
 		icon: BookOpen,
 		title: "AI Engineer · Core Track",
 		provider: "Udemy",
-		description:
-			"Practical Generative AI and LLM engineering covering frontier and open-source models, HuggingFace, LangChain, Gradio, RAG, vector search, QLoRA, fine-tuning, and production deployment.",
+		bullets: [
+			"Built eight LLM applications across an eight-week course using Hugging Face, LangChain, RAG with vector search, and QLoRA fine-tuning.",
+			"Built multi-agent systems and compared open-source and commercial models on coding and business tasks.",
+		],
 		tags: ["LLM engineering", "RAG", "QLoRA", "Fine-tuning", "HuggingFace"],
 		certificate:
 			"https://www.udemy.com/certificate/UC-84a36fb6-5a17-4d21-8b97-e570d737727e/",
@@ -29,8 +33,10 @@ const training = [
 		icon: Cloud,
 		title: "Decoding DevOps",
 		provider: "Udemy",
-		description:
-			"A complete cloud-native delivery path covering AWS, GCP, Linux, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI/CD, Docker, Kubernetes, Helm, ArgoCD, monitoring, and observability.",
+		bullets: [
+			"Learned DevOps through hands-on projects with AWS, Linux, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Helm, and ArgoCD.",
+			"Covered monitoring and used GitHub Copilot and Amazon Q to speed up scripting and automation.",
+		],
 		tags: [
 			"AWS",
 			"GCP",
@@ -47,8 +53,10 @@ const training = [
 		icon: Network,
 		title: "Supervised Machine Learning",
 		provider: "DeepLearning.AI · Coursera",
-		description:
-			"Practical supervised machine learning focused on regression, classification, model evaluation, and applying core techniques to real datasets.",
+		bullets: [
+			"Learned to build and train regression and classification models in Python with NumPy and scikit-learn.",
+			"Covered multiple input features, regularization, and model evaluation techniques.",
+		],
 		tags: ["Machine learning", "Regression", "Classification", "Python"],
 		certificate:
 			"https://www.coursera.org/account/accomplishments/verify/EZ65K9HN6F86",
@@ -57,8 +65,10 @@ const training = [
 		icon: BookOpen,
 		title: "React · The Complete Guide",
 		provider: "Udemy",
-		description:
-			"Focused training in React, Next.js, Redux, and modern frontend application patterns for building responsive, maintainable user experiences.",
+		bullets: [
+			"Learned React components, hooks, forms, routing, Context API, and Redux Toolkit.",
+			"Covered Next.js fundamentals and deploying React applications.",
+		],
 		tags: ["React", "Next.js", "Redux", "Frontend"],
 		certificate:
 			"https://www.udemy.com/certificate/UC-9f0a3caf-cfcf-4a6e-8f7f-2d9ef8c35286/",
@@ -94,7 +104,7 @@ const Training = () => (
 							icon: Icon,
 							title,
 							provider,
-							description,
+									bullets,
 							tags,
 							certificate,
 						},
@@ -115,9 +125,11 @@ const Training = () => (
 							<Icon className="training-icon" />
 							<p className="training-provider">{provider}</p>
 							<h3>{title}</h3>
-							<p className="training-description">
-								{description}
-							</p>
+							<ul className="training-description training-list">
+								{bullets.map((bullet) => (
+									<li key={bullet}>{bullet}</li>
+								))}
+							</ul>
 							<div className="tag-row">
 								{tags.map((tag) => (
 									<span className="soft-tag" key={tag}>
