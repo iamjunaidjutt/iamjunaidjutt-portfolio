@@ -23,7 +23,7 @@ const ScrollToTop = () => {
 		<div>
 			{showScrollTopButton && (
 				<ChevronsUp
-					className="scroll-top fixed bottom-24 right-6 text-4xl cursor-pointer transition ease-in duration-300 delay-100 rounded-full p-2 drop-shadow-lg animate-bounce z-40"
+					className="scroll-top fixed bottom-36 right-6 text-4xl cursor-pointer transition ease-in duration-300 delay-100 rounded-full p-2 drop-shadow-lg animate-bounce z-40"
 					size={40}
 					onClick={scrollTop}
 				/>

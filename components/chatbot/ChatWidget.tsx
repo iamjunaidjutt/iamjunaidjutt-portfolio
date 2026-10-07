@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
 	Bot,
 	Loader2,
-	MessageCircle,
 	Plus,
 	RotateCcw,
 	Send,
@@ -15,16 +14,14 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useRef, useState } from "react";
 
+import { ASSISTANT } from "@/lib/chat/assistant";
+
 type Message = {
 	role: "user" | "assistant";
 	content: string;
 };
 
-const welcomeMessages = [
-	"Hi, I'm Junaid's AI assistant. I can help you explore his work, projects, skills, and experience. What would you like to know?",
-	"Welcome. I'm Junaid's AI assistant, here to help you learn about his work, projects, and technical background.",
-	"Hello! I'm Junaid's AI assistant. Ask me about his role, projects, skills, or career experience.",
-];
+const welcomeMessages = ASSISTANT.greetings;
 
 const initialMessage: Message = { role: "assistant", content: welcomeMessages[0] };
 const legacyWelcomeMessage =
@@ -36,6 +33,7 @@ const createWelcomeMessage = (): Message => ({
 });
 
 const chatStorageKey = "junaid-portfolio-chat-history";
+const teaserStorageKey = "junaid-portfolio-chat-teaser-dismissed";
 const maxStoredMessages = 100;
 
 const isStoredMessage = (value: unknown): value is Message => {
@@ -87,12 +85,7 @@ const cleanAssistantText = (content: string): string =>
 		.replace(/([^\n])\n(#{1,6} )/g, "$1\n\n$2")
 		.replace(/\n{3,}/g, "\n\n");
 
-const suggestions = [
-	"What does Junaid do at Devsinc?",
-	"Which projects show his AI work?",
-	"What is his tech stack?",
-	"Is he open to remote roles?",
-];
+const suggestions = ASSISTANT.suggestions;
 
 const markdownComponents: Components = {
 	p: ({ children }) => <p className="m-0 mt-2 first:mt-0">{children}</p>,
@@ -135,6 +128,7 @@ export default function ChatWidget() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [statusText, setStatusText] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
+	const [showTeaser, setShowTeaser] = useState(false);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -166,6 +160,43 @@ export default function ChatWidget() {
 			// Storage can be unavailable in private browsing or when it is full.
 		}
 	}, [hasLoadedStoredMessages, messages]);
+
+	// A small, one-time nudge: shown once per visit, only to people who have not chatted yet.
+	useEffect(() => {
+		if (isOpen) {
+			setShowTeaser(false);
+		}
+	}, [isOpen]);
+
+	useEffect(() => {
+		let dismissed = false;
+		try {
+			dismissed = sessionStorage.getItem(teaserStorageKey) === "1";
+		} catch {
+			// Storage can be unavailable; showing the nudge is harmless.
+		}
+
+		if (dismissed || isOpen || !hasLoadedStoredMessages || messages.length > 1) {
+			return;
+		}
+
+		const showTimer = window.setTimeout(() => setShowTeaser(true), 6000);
+		const hideTimer = window.setTimeout(() => setShowTeaser(false), 20000);
+
+		return () => {
+			window.clearTimeout(showTimer);
+			window.clearTimeout(hideTimer);
+		};
+	}, [hasLoadedStoredMessages, isOpen, messages.length]);
+
+	const dismissTeaser = () => {
+		setShowTeaser(false);
+		try {
+			sessionStorage.setItem(teaserStorageKey, "1");
+		} catch {
+			// Ignore: the nudge will simply be allowed again on the next visit.
+		}
+	};
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
@@ -341,14 +372,14 @@ export default function ChatWidget() {
 					>
 						<header className="flex min-h-[4.5rem] items-center justify-between border-b border-[var(--line)] bg-[var(--graphite)] px-4 py-3 text-[var(--on-ink)]">
 							<div className="flex min-w-0 items-center gap-3">
-								<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--chat-assistant)] text-white shadow-sm leading-none">
-									<Bot size={20} />
+								<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--chat-assistant)] text-lg font-semibold leading-none text-white shadow-sm">
+									{ASSISTANT.name.charAt(0)}
 								</div>
 								<div className="flex min-w-0 flex-col justify-center gap-1">
-									<h2 className="truncate text-sm font-semibold leading-tight">Junaid&apos;s AI Assistant</h2>
+									<h2 className="truncate text-sm font-semibold leading-tight">{ASSISTANT.name}</h2>
 									<p className="inline-flex h-4 items-center gap-1.5 text-[11px] leading-none text-white/70">
 										<span className="chat-status-dot" />
-										Online
+										Online · {ASSISTANT.tagline}
 									</p>
 								</div>
 							</div>
@@ -488,15 +519,52 @@ export default function ChatWidget() {
 				)}
 			</AnimatePresence>
 
+			<AnimatePresence>
+				{showTeaser && !isOpen && (
+					<motion.div
+						initial={{ opacity: 0, y: 8, scale: 0.96 }}
+						animate={{ opacity: 1, y: 0, scale: 1 }}
+						exit={{ opacity: 0, y: 8, scale: 0.96 }}
+						transition={{ duration: 0.25 }}
+						className="fixed bottom-[5.25rem] right-6 z-[60] flex max-w-[15.5rem] items-start gap-1 rounded-2xl rounded-br-md border border-[var(--line)] bg-[var(--surface)] py-2 pl-3 pr-1 text-[var(--ink)] shadow-xl"
+					>
+						<button
+							type="button"
+							onClick={() => setIsOpen(true)}
+							className="py-0.5 text-left text-sm leading-snug focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+						>
+							{ASSISTANT.teaser}
+						</button>
+						<button
+							type="button"
+							aria-label="Dismiss"
+							onClick={dismissTeaser}
+							className="shrink-0 rounded-full p-1.5 text-[var(--muted-ink)] transition hover:text-[var(--ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+						>
+							<X size={14} />
+						</button>
+					</motion.div>
+				)}
+			</AnimatePresence>
+
 			<button
 				type="button"
-				aria-label="Ask about Junaid"
+				aria-label={isOpen ? "Close chat" : `${ASSISTANT.launcherTitle} ${ASSISTANT.launcherSubtitle}`}
 				aria-hidden={isOpen}
 				tabIndex={isOpen ? -1 : 0}
 				onClick={() => setIsOpen((open) => !open)}
-				className={`fixed bottom-5 right-6 z-[60] rounded-full bg-[var(--coral)] p-4 text-white shadow-lg transition hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 ${isOpen ? "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
+				className={`chat-launcher fixed bottom-5 right-6 z-[60] flex items-center gap-3 rounded-full bg-[var(--coral)] py-2 pl-2 pr-5 text-white shadow-lg transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 ${isOpen ? "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
 			>
-				<MessageCircle size={25} />
+				<span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-semibold leading-none">
+					{isOpen ? <X size={20} /> : ASSISTANT.name.charAt(0)}
+					{!isOpen && <span className="chat-launcher-dot" />}
+				</span>
+				<span className="flex flex-col text-left leading-tight">
+					<span className="text-sm font-semibold">{isOpen ? "Close" : ASSISTANT.launcherTitle}</span>
+					{!isOpen && (
+						<span className="hidden text-[11px] text-white/85 sm:block">{ASSISTANT.launcherSubtitle}</span>
+					)}
+				</span>
 			</button>
 		</>
 	);

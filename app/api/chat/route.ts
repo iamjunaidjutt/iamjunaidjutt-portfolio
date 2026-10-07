@@ -11,7 +11,8 @@ import { executeChatTool, getChatTools, getRepoIndex } from "@/lib/chat/tools";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// 2. Expand Zod schema message count and per-message length
+const MAX_HISTORY_REPLY_CHARS = 6000;
+
 const messagesSchema = z.object({
     messages: z
         .array(
@@ -22,7 +23,13 @@ const messagesSchema = z.object({
                 }),
                 z.object({
                     role: z.literal("assistant"),
-                    content: z.string().trim().min(1).max(8000), // Increased from 2000
+                    // Long earlier answers are shortened, not rejected. Rejecting them made every
+                    // later message fail with "Invalid request".
+                    content: z
+                        .string()
+                        .trim()
+                        .min(1)
+                        .transform((value) => value.slice(0, MAX_HISTORY_REPLY_CHARS)),
                 }),
             ]),
         )
@@ -31,7 +38,7 @@ const messagesSchema = z.object({
 });
 
 const fallbackReply =
-    "I do not know that yet. Please email Junaid at info.iamjunaidjutt@gmail.com or use the contact page.";
+    "I don't know about that one. Junaid would be the best person to ask: you can email him at info.iamjunaidjutt@gmail.com or use the contact page.";
 
 const isQuotaError = (error: unknown): boolean => {
     if (!error || typeof error !== "object") return false;
@@ -115,11 +122,12 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Invalid request" }, { status: 400 });
         }
 
-        const apiKey = process.env.LLM_API_KEY || process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY;
-        const model = process.env.LLM_MODEL || "gemini-1.5-flash";
+        const apiKey = process.env.LLM_API_KEY || process.env.GEMINI_API_KEY;
+        // No default model on purpose: a hard-coded name goes stale (gemini-1.5-flash is gone).
+        const model = process.env.LLM_MODEL;
         const baseURL = process.env.LLM_BASE_URL || "https://generativelanguage.googleapis.com/v1beta/openai/";
 
-        if (!apiKey) {
+        if (!apiKey || !model) {
             return NextResponse.json(
                 { error: "The assistant is not configured yet. Please try again later." },
                 { status: 500 },
@@ -133,8 +141,13 @@ export async function POST(request: Request) {
 
         const repoIndex = await getRepoIndex();
 
-        // Keep the last 20 messages so the conversation can continue indefinitely
+        // Keep the last 20 messages so the conversation can continue indefinitely. Start at the
+        // first visitor message: the greeting is an assistant message, some providers reject a
+        // history that opens with one, and it only costs tokens.
         const recentMessages = parsed.data.messages.slice(-20);
+        while (recentMessages[0]?.role === "assistant") {
+            recentMessages.shift();
+        }
 
         const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: buildSystemPrompt(repoIndex) },
@@ -153,7 +166,7 @@ export async function POST(request: Request) {
                         client,
                         model,
                         messages,
-                        tools: getChatTools(model, baseURL),
+                        tools: getChatTools(),
                         ip,
                         sendEvent,
                         execute: executeChatTool,

@@ -120,36 +120,37 @@ const emailTool: ChatCompletionTool = {
 	},
 };
 
+// Web search backends. Tavily can be limited to Junaid's own pages. Gemini grounding
+// searches the open web through Google, so it is only used for "general" questions
+// about public things (a course, a tool, a company), never for facts about Junaid.
+// Google Search grounding is not available through the OpenAI-compatible chat endpoint
+// (the docs only show it for image models), so it is called as its own native request.
+const hasTavily = (): boolean => Boolean(process.env.TAVILY_API_KEY);
+
+const geminiKey = (): string | undefined =>
+	process.env.GEMINI_API_KEY ||
+	((process.env.LLM_BASE_URL ?? "").includes("generativelanguage.googleapis.com")
+		? process.env.LLM_API_KEY
+		: undefined);
+
+const searchModel = (): string => process.env.GEMINI_SEARCH_MODEL || process.env.LLM_MODEL || "";
+
+const hasGeminiSearch = (): boolean =>
+	process.env.GEMINI_GROUNDED_SEARCH === "true" && Boolean(geminiKey()) && Boolean(searchModel());
+
 // Only offer tools that can actually run, so the model never calls a dead tool.
-// Add this helper to detect if Gemini native search should handle web queries
-export const isGeminiNativeSearchEnabled = (model = "", baseURL = ""): boolean => {
-    const isGeminiEndpoint =
-        baseURL.includes("generativelanguage.googleapis.com") ||
-        model.toLowerCase().startsWith("gemini");
-    const isEnabled = process.env.GEMINI_NATIVE_SEARCH === "true";
+export const getChatTools = (): ChatCompletionTool[] => {
+	const tools: ChatCompletionTool[] = [searchGithubTool, readmeTool, listFilesTool, readFileTool];
 
-    return isGeminiEndpoint && isEnabled;
-};
+	if (hasTavily() || hasGeminiSearch()) {
+		tools.push(webSearchTool);
+	}
 
-// Only offer tools that can actually run, so the model never calls a dead tool
-export const getChatTools = (model = "", baseURL = ""): ChatCompletionTool[] => {
-    const tools: ChatCompletionTool[] = [searchGithubTool, readmeTool, listFilesTool, readFileTool];
+	if (process.env.EMAIL && process.env.EMAIL_PASSWORD) {
+		tools.push(emailTool);
+	}
 
-    // Priority 1: Gemini Native Search Grounding
-    // If Gemini native search is enabled, Google's servers run search automatically
-    // without invoking your local client execution tool.
-    const useGeminiNative = isGeminiNativeSearchEnabled(model, baseURL);
-
-    // Priority 2: Fallback to Tavily custom function tool
-    if (!useGeminiNative && process.env.TAVILY_API_KEY) {
-        tools.push(webSearchTool);
-    }
-
-    if (process.env.EMAIL && process.env.EMAIL_PASSWORD) {
-        tools.push(emailTool);
-    }
-
-    return tools;
+	return tools;
 };
 
 /* --------------------------------- helpers --------------------------------- */
@@ -472,6 +473,67 @@ const readGithubFile = async (argumentsJson: string): Promise<string> => {
 	return result;
 };
 
+const geminiSearch = async (query: string): Promise<string> => {
+	const apiKey = geminiKey();
+	const model = searchModel();
+
+	if (!apiKey || !/^[A-Za-z0-9._-]{1,80}$/.test(model)) {
+		return "Web search is not configured.";
+	}
+
+	const response = await fetch(
+		`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+		{
+			method: "POST",
+			headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+			body: JSON.stringify({
+				contents: [
+					{
+						role: "user",
+						parts: [
+							{
+								text: `Use web search to answer in at most 150 words, with facts only: ${query}`,
+							},
+						],
+					},
+				],
+				tools: [{ google_search: {} }],
+			}),
+			cache: "no-store",
+			signal: AbortSignal.timeout(12_000),
+		},
+	);
+
+	if (!response.ok) {
+		return "Web search is temporarily unavailable.";
+	}
+
+	const data = (await response.json()) as {
+		candidates?: Array<{
+			content?: { parts?: Array<{ text?: string; thought?: boolean }> };
+			groundingMetadata?: { groundingChunks?: Array<{ web?: { uri?: string; title?: string } }> };
+		}>;
+	};
+	const candidate = data.candidates?.[0];
+	const summary = (candidate?.content?.parts ?? [])
+		.filter((part) => part.text && !part.thought)
+		.map((part) => part.text)
+		.join("")
+		.trim();
+
+	if (!summary) {
+		return "The search returned nothing useful.";
+	}
+
+	const sources = (candidate?.groundingMetadata?.groundingChunks ?? [])
+		.map((chunk) => chunk.web)
+		.filter((web): web is { uri?: string; title?: string } => Boolean(web))
+		.slice(0, 4)
+		.map((web) => ({ title: web.title, url: web.uri }));
+
+	return clip(JSON.stringify({ summary: summary.slice(0, 1500), sources }));
+};
+
 const webSearch = async (argumentsJson: string): Promise<string> => {
 	const { query, scope } = z
 		.object({
@@ -483,7 +545,13 @@ const webSearch = async (argumentsJson: string): Promise<string> => {
 	const general = scope === "general";
 
 	if (!apiKey) {
-		return "Web search is not configured. Use the profile and GitHub results only.";
+		if (hasGeminiSearch()) {
+			return general
+				? geminiSearch(query)
+				: "Web search cannot reliably find facts about Junaid himself. Use the GitHub tools and what you already know.";
+		}
+
+		return "Web search is not configured. Use what you already know and the GitHub results only.";
 	}
 
 	const response = await fetch("https://api.tavily.com/search", {

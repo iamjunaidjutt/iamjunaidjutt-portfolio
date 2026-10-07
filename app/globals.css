@@ -1302,3 +1302,35 @@ html {
 		gap: 0.4rem;
 	}
 }
+
+/* Chat launcher: a pill with a short, attention-getting pulse that stops by itself. */
+.chat-launcher {
+	animation: chat-launcher-pulse 2.6s ease-out 1.5s 3;
+}
+
+.chat-launcher-dot {
+	position: absolute;
+	right: -1px;
+	bottom: -1px;
+	width: 0.7rem;
+	height: 0.7rem;
+	border-radius: 9999px;
+	background: #34d399;
+	border: 2px solid var(--coral);
+}
+
+@keyframes chat-launcher-pulse {
+	0% {
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 0 0 0 color-mix(in srgb, var(--coral) 55%, transparent);
+	}
+	70%,
+	100% {
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 0 0 16px transparent;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.chat-launcher {
+		animation: none;
+	}
+}
