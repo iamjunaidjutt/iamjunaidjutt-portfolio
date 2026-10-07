@@ -27,58 +27,68 @@ pnpm dev
 
 ## Chatbot
 
-The portfolio chatbot answers questions about Muhammad Junaid's work,
-experience, education, projects, and skills. It uses Groq and
-Upstash Redis for request rate limiting.
+The portfolio assistant, **Juno**, answers questions about Muhammad Junaid's work,
+experience, education, projects, and skills. Its name, greetings, starter
+questions and the launcher text live in [`lib/chat/assistant.ts`](lib/chat/assistant.ts).
+It talks to any OpenAI-compatible endpoint (Gemini by default) and uses Upstash
+Redis for per-IP rate limiting.
 
 ### Environment variables
 
 Add these variables to `.env.local`:
 
 ```env
-GROQ_API_KEY=your_groq_api_key
-GROQ_MODEL=openai/gpt-oss-20b
+LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+LLM_API_KEY=your_gemini_api_key
+LLM_MODEL=gemini-3.1-flash-lite
 GITHUB_TOKEN=optional_read_only_github_token
 TAVILY_API_KEY=optional_tavily_search_key
-GROQ_NATIVE_WEB_SEARCH=false
+GEMINI_GROUNDED_SEARCH=false
 CHAT_RATE_LIMIT_PER_MINUTE=20
 CHAT_RATE_LIMIT_PER_DAY=200
 UPSTASH_REDIS_REST_URL=your_upstash_redis_rest_url
 UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_rest_token
 ```
 
-To get a Groq key, open [Groq Console](https://console.groq.com/keys), sign in,
-and create an API key. `llama-3.1-8b-instant` is the fast default; replace
-`GROQ_MODEL` with another available Groq model if needed. Create a free database at [Upstash](https://upstash.com/),
-then copy its REST URL and REST token into the two `UPSTASH_REDIS_*` variables.
-The rate-limit variables control the per-IP request limits; the defaults allow
-20 questions per minute and 200 per day.
-The chatbot has up to six tools. A live list of all public repositories
-(including forks, which are marked as other people's work) is added to every
-prompt, and four GitHub tools read them: `search_github`, `get_github_readme`,
-`list_github_files` and `read_github_file` (text files and notebooks only; `.env`
-and key files are blocked). They work without a token, but unauthenticated
-GitHub calls are limited to 60 per hour per IP and Vercel shares IPs, so set
-`GITHUB_TOKEN` (read-only, public data, no extra permissions) in production.
-If GitHub fails, the last good list is reused.
+Create a key in [Google AI Studio](https://aistudio.google.com/apikey). There is
+**no default model**: set `LLM_MODEL` to a current model name from Google's
+models page, because names go stale. Optional tuning: `LLM_REASONING_EFFORT`
+(`minimal`, `low`, `medium`, `high`) and `LLM_TEMPERATURE`. For Gemini 3 models
+no temperature is sent unless you set one, because Google recommends the default.
 
-`web_search` only appears when `TAVILY_API_KEY` is set. Scope `junaid` is limited
-to Junaid's own site and GitHub; scope `general` searches the open web and is
-for explaining public courses and tools, never for facts about Junaid.
-`email_follow_up` only appears when `EMAIL` and `EMAIL_PASSWORD` are set; it
-needs the visitor's own email address, replies go to that address, and it is
-limited to `CHAT_EMAIL_LIMIT_PER_DAY` (default 3) per IP.
+Create a free database at [Upstash](https://upstash.com/), then copy its REST URL
+and REST token into the two `UPSTASH_REDIS_*` variables. The rate-limit variables
+control the per-IP limits; the defaults allow 20 questions per minute and 200 per day.
 
-Groq retired `llama-3.1-8b-instant`, `llama-3.3-70b-versatile` and the Compound
-systems in 2026, so the default model is `openai/gpt-oss-20b`. Groq's built-in
-search is now `browser_search`, available on the gpt-oss models only. Set
-`GROQ_NATIVE_WEB_SEARCH=true` to use it instead of Tavily. It cannot be limited
-to Junaid's own domains, so Tavily stays the default.
+### Tools
 
-Open `http://localhost:3000` after the development server starts. The chatbot
-answers only from [`data/profile.ts`](data/profile.ts), so update that file
-whenever the CV changes. Information that is not present there should not be
-added to chatbot responses.
+A live list of all public repositories (forks are marked as other people's work)
+is added to every prompt, and four GitHub tools read them: `search_github`,
+`get_github_readme`, `list_github_files` and `read_github_file` (text files and
+notebooks only; `.env` and key files are blocked). They work without a token, but
+unauthenticated GitHub calls are limited to 60 per hour per IP and Vercel shares
+IPs, so set `GITHUB_TOKEN` (read-only, public data) in production. If GitHub
+fails, the last good list is reused.
+
+`web_search` appears when `TAVILY_API_KEY` is set, or when
+`GEMINI_GROUNDED_SEARCH=true` (Google Search through Gemini's native API, using
+`GEMINI_API_KEY` or `LLM_API_KEY`, and `GEMINI_SEARCH_MODEL` if you want a model
+other than `LLM_MODEL`). Tavily can be limited to Junaid's own site and GitHub.
+Gemini grounding is only used for explaining public courses and tools, never for
+facts about Junaid, and may be billed per search on paid plans, so check Google's
+pricing page. Google Search grounding is not available through the
+OpenAI-compatible chat endpoint, which is why it runs as a separate request.
+
+`email_follow_up` appears when `EMAIL` and `EMAIL_PASSWORD` are set. It needs the
+visitor's own email address, replies go to that address, and it is limited to
+`CHAT_EMAIL_LIMIT_PER_DAY` (default 3) per IP.
+
+### Keeping it accurate
+
+The assistant answers only from [`data/profile.ts`](data/profile.ts), the live
+repository list, and its tools, so update `data/profile.ts` whenever the CV changes.
+On Gemini 3 models, tool calls carry a "thought signature" that must be sent back
+unchanged; `lib/chat/agent.ts` does this.
 
 ### Repo Activity
 
