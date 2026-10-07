@@ -553,7 +553,7 @@ export default function ChatWidget() {
 				aria-hidden={isOpen}
 				tabIndex={isOpen ? -1 : 0}
 				onClick={() => setIsOpen((open) => !open)}
-				className={`chat-launcher fixed bottom-5 right-6 z-[60] flex items-center gap-3 rounded-full bg-[var(--coral)] py-2 pl-2 pr-5 text-white shadow-lg transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 ${isOpen ? "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
+				className={`chat-launcher fixed bottom-5 right-6 z-[60] flex items-center gap-3 rounded-full bg-[var(--chat-launcher-bg)] py-2 pl-2 pr-5 text-white shadow-lg transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] ${isOpen ? "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
 			>
 				<span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-semibold leading-none">
 					{isOpen ? <X size={20} /> : ASSISTANT.name.charAt(0)}
