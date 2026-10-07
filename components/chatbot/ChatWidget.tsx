@@ -36,7 +36,7 @@ const createWelcomeMessage = (): Message => ({
 });
 
 const chatStorageKey = "junaid-portfolio-chat-history";
-const maxStoredMessages = 50;
+const maxStoredMessages = 100;
 
 const isStoredMessage = (value: unknown): value is Message => {
 	if (!value || typeof value !== "object") {
@@ -187,7 +187,7 @@ export default function ChatWidget() {
 		const nextMessages = addUserMessage
 			? [...messages, { role: "user" as const, content: trimmedContent }]
 			: messages;
-		const requestMessages = nextMessages.slice(-10);
+		const requestMessages = nextMessages.slice(-25); // Limit to last 25 messages for context
 
 		setError(null);
 		setInput("");
@@ -389,11 +389,10 @@ export default function ChatWidget() {
 										</div>
 									)}
 									<div
-										className={`max-w-[86%] rounded-xl px-3 py-3 text-sm leading-5 ${
-											message.role === "user"
-													? "whitespace-pre-wrap bg-[var(--chat-user)] text-white"
-												: "bg-[var(--paper)] text-[var(--ink)]"
-										}`}
+										className={`max-w-[86%] rounded-xl px-3 py-3 text-sm leading-5 ${message.role === "user"
+											? "whitespace-pre-wrap bg-[var(--chat-user)] text-white"
+											: "bg-[var(--paper)] text-[var(--ink)]"
+											}`}
 									>
 										{message.role === "assistant" ? (
 											<ReactMarkdown
@@ -461,7 +460,7 @@ export default function ChatWidget() {
 								<textarea
 									ref={textareaRef}
 									value={input}
-									maxLength={500}
+									maxLength={2000}
 									onChange={(event) => setInput(event.target.value)}
 									onKeyDown={(event) => {
 										if (event.key === "Enter" && !event.shiftKey) {
@@ -483,7 +482,7 @@ export default function ChatWidget() {
 									<Send size={17} />
 								</button>
 							</div>
-							<p className="mt-1 text-right text-[10px] text-[var(--muted-ink)]">{input.length}/500</p>
+							<p className="mt-1 text-right text-[10px] text-[var(--muted-ink)]">{input.length}/2000</p>
 						</form>
 					</motion.section>
 				)}
