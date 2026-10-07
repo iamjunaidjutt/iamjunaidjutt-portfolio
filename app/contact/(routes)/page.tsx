@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { MapPin, MessageCircle, Mail } from "lucide-react";
 
 import {
 	Form,
@@ -78,28 +79,50 @@ export default function ContactPage() {
 									Send a message here, or reach me directly below.
 								</p>
 							</div>
-							<div className="flex flex-col gap-5 max-md:justify-center">
-								<p>Lahore, Pakistan</p>
-								<div>
-									<Link
-										href={
-											"https://api.whatsapp.com/send?phone=03074254648"
-										}
-										className="text-link block max-w-full break-words"
-									>
-										+92-307-4254648
-									</Link>
+							<div className="flex flex-col gap-5">
+								{/* Address */}
+								<div className="flex items-center gap-3">
+									<MapPin
+										size={20}
+										strokeWidth={1.8}
+										className="shrink-0"
+									/>
+
+									<p>
+										Lahore, Pakistan
+									</p>
 								</div>
-								<div>
-									<Link
-										href={
-											"mailto:info.iamjunaidjutt@gmail.com"
-										}
-										className="text-link block max-w-full break-words"
-									>
+
+								{/* WhatsApp */}
+								<Link
+									href="https://api.whatsapp.com/send?phone=923074254648"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-link flex w-fit items-center gap-3 break-words"
+								>
+									<MessageCircle
+										size={20}
+										strokeWidth={1.8}
+										className="shrink-0"
+									/>
+									+92-307-4254648
+								</Link>
+
+								{/* Email */}
+								<Link
+									href="mailto:info.iamjunaidjutt@gmail.com"
+									className="text-link flex w-fit items-center gap-3 break-words"
+								>
+									<Mail
+										size={20}
+										strokeWidth={1.8}
+										className="shrink-0"
+									/>
+
+									<span>
 										info.iamjunaidjutt@gmail.com
-									</Link>
-								</div>
+									</span>
+								</Link>
 							</div>
 						</div>
 						<div className="relative min-w-0 overflow-hidden">
