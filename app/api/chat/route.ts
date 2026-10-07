@@ -11,21 +11,22 @@ import { executeChatTool, getChatTools, getRepoIndex } from "@/lib/chat/tools";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// 2. Expand Zod schema message count and per-message length
 const messagesSchema = z.object({
     messages: z
         .array(
             z.discriminatedUnion("role", [
                 z.object({
                     role: z.literal("user"),
-                    content: z.string().trim().min(1).max(500),
+                    content: z.string().trim().min(1).max(2000), // Increased from 500
                 }),
                 z.object({
                     role: z.literal("assistant"),
-                    content: z.string().trim().min(1).max(2000),
+                    content: z.string().trim().min(1).max(8000), // Increased from 2000
                 }),
             ]),
         )
-        .max(12)
+        .max(100) // Increased from 12 to 100 messages per session; High ceiling for safety; sliding window manages actual model context
         .refine((messages) => messages.at(-1)?.role === "user"),
 });
 
@@ -82,9 +83,9 @@ const getProviderErrorMessage = (error: unknown): string => {
 
 export async function POST(request: Request) {
     try {
+        // 1. Allow larger request payloads (e.g., 64KB instead of 8KB)
         const contentLength = Number(request.headers.get("content-length"));
-
-        if (contentLength > 8000) {
+        if (contentLength > 64_000) {
             return NextResponse.json(
                 { error: "Request body is too large." },
                 { status: 413 },
@@ -131,9 +132,13 @@ export async function POST(request: Request) {
         });
 
         const repoIndex = await getRepoIndex();
+
+        // Keep the last 20 messages so the conversation can continue indefinitely
+        const recentMessages = parsed.data.messages.slice(-20);
+
         const messages: ChatCompletionMessageParam[] = [
             { role: "system", content: buildSystemPrompt(repoIndex) },
-            ...parsed.data.messages,
+            ...recentMessages,
         ];
 
         const encoder = new TextEncoder();
