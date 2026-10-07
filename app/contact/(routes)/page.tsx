@@ -69,8 +69,8 @@ export default function ContactPage() {
 		<>
 			<PageWrapper>
 				<div className="page-width contact-page mt-20">
-					<div className="grid grid-cols-1 md:grid-cols-2 py-5 md:py-20 gap-5 md:gap-12 max-md:text-center">
-						<div className="min-w-0 flex flex-col gap-10">
+					<div className="grid grid-cols-1 lg:grid-cols-2 py-5 lg:py-20 gap-8 lg:gap-12 max-lg:text-center">
+						<div className="min-w-0 flex flex-col gap-10 max-lg:items-center">
 							<div className="space-y-2">
 								<h2 className="text-2xl md:text-4xl font-bold font-poppins">
 									Get in touch
@@ -79,7 +79,7 @@ export default function ContactPage() {
 									Send a message here, or reach me directly below.
 								</p>
 							</div>
-							<div className="flex flex-col gap-5">
+							<div className="flex flex-col gap-5 max-lg:items-center">
 								{/* Address */}
 								<div className="flex items-center gap-3">
 									<MapPin
@@ -129,7 +129,7 @@ export default function ContactPage() {
 							<div className="absolute -top-12 -right-12 w-64 h-64 bg-coral/15 rounded-full blur-3xl pointer-events-none" />
 							<div className="absolute -bottom-10 -left-10 w-48 h-48 bg-coral/10 rounded-full blur-3xl pointer-events-none" />
 							<motion.div
-								className="contact-form-panel w-full max-w-full rounded-2xl p-6 md:p-10 text-start"
+								className="contact-form-panel w-full max-w-full max-lg:max-w-xl max-lg:mx-auto rounded-2xl p-6 md:p-10 text-start"
 								initial={{ opacity: 0, x: 40, y: 0 }}
 								animate={{ opacity: 1, x: 0, y: 0 }}
 								transition={{
