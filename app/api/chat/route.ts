@@ -1,9 +1,14 @@
 import Groq from "groq-sdk";
+import type {
+	ChatCompletionMessageParam,
+	ChatCompletionTool,
+} from "groq-sdk/resources/chat/completions";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { checkRateLimit } from "@/lib/chat/rateLimit";
 import { buildSystemPrompt } from "@/lib/chat/systemPrompt";
+import { chatTools, executeChatTool } from "@/lib/chat/tools";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -123,16 +128,64 @@ export async function POST(request: Request) {
 		}
 
 		const groq = new Groq({ apiKey });
-		const responseStream = await groq.chat.completions.create({
+		const tools = chatTools as ChatCompletionTool[];
+		const conversation: ChatCompletionMessageParam[] = [
+			{ role: "system", content: buildSystemPrompt() },
+			...parsed.data.messages,
+		];
+
+		let completion = await groq.chat.completions.create({
 			model,
-			messages: [
-				{ role: "system", content: buildSystemPrompt() },
-				...parsed.data.messages,
-			],
+			messages: conversation,
+			tools,
+			tool_choice: "auto",
 			temperature: 0.3,
 			max_tokens: 1200,
-			stream: true,
+			stream: false,
 		});
+
+		for (let round = 0; round < 2; round += 1) {
+			const assistantMessage = completion.choices[0]?.message;
+			const toolCalls = assistantMessage?.tool_calls;
+
+			if (!assistantMessage || !toolCalls?.length) {
+				break;
+			}
+
+			conversation.push(assistantMessage);
+			for (const toolCall of toolCalls) {
+				const result = await executeChatTool(
+					toolCall.function.name,
+					toolCall.function.arguments,
+				);
+				conversation.push({
+					role: "tool",
+					tool_call_id: toolCall.id,
+					content: result,
+				});
+			}
+
+			completion = await groq.chat.completions.create({
+				model,
+				messages: conversation,
+				tools,
+				tool_choice: "auto",
+				temperature: 0.3,
+				max_tokens: 1200,
+				stream: false,
+			});
+		}
+
+		const completedText = completion.choices[0]?.message.content?.trim();
+		const responseStream = completedText
+			? null
+			: await groq.chat.completions.create({
+					model,
+					messages: conversation,
+					temperature: 0.3,
+					max_tokens: 1200,
+					stream: true,
+				});
 
 		const encoder = new TextEncoder();
 		const stream = new ReadableStream({
@@ -144,16 +197,19 @@ export async function POST(request: Request) {
 				};
 
 				try {
-					for await (const chunk of responseStream) {
-						const text = chunk.choices[0]?.delta?.content;
+					if (completedText) {
+						hasText = true;
+						sendEvent({ text: completedText });
+					} else if (responseStream) {
+						for await (const chunk of responseStream) {
+							const text = chunk.choices[0]?.delta?.content;
 
-						if (text) {
-							// Keep whitespace-only chunks (" ", "\n\n"): models stream the spaces
-							// around numbers and paragraph breaks as separate tokens.
-							if (text.trim()) {
-								hasText = true;
+							if (text) {
+								if (text.trim()) {
+									hasText = true;
+								}
+								sendEvent({ text });
 							}
-							sendEvent({ text });
 						}
 					}
 

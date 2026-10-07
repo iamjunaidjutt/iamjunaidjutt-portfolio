@@ -38,6 +38,8 @@ Add these variables to `.env.local`:
 ```env
 GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=llama-3.1-8b-instant
+GITHUB_TOKEN=optional_read_only_github_token
+TAVILY_API_KEY=optional_tavily_search_key
 CHAT_RATE_LIMIT_PER_MINUTE=20
 CHAT_RATE_LIMIT_PER_DAY=200
 UPSTASH_REDIS_REST_URL=your_upstash_redis_rest_url
@@ -50,6 +52,11 @@ and create an API key. `llama-3.1-8b-instant` is the fast default; replace
 then copy its REST URL and REST token into the two `UPSTASH_REDIS_*` variables.
 The rate-limit variables control the per-IP request limits; the defaults allow
 20 questions per minute and 200 per day.
+The chatbot can search Junaid's public GitHub repositories without a token;
+`GITHUB_TOKEN` is optional and should be read-only. `TAVILY_API_KEY` enables
+web search and is optional. If profile data and searches cannot answer a
+question, the chatbot can email it to Junaid for follow-up using the existing
+`EMAIL` and `EMAIL_PASSWORD` settings.
 
 Open `http://localhost:3000` after the development server starts. The chatbot
 answers only from [`data/profile.ts`](data/profile.ts), so update that file
