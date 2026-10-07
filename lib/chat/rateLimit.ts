@@ -82,3 +82,38 @@ export async function checkRateLimit(ip: string): Promise<boolean> {
 
 	return minuteResult.success && dayResult.success;
 }
+
+// Separate, much stricter limit for the email_follow_up tool: every call sends a
+// real email to Junaid, so a visitor (or a prompt injection) must not be able to
+// trigger it repeatedly.
+const emailDayLimit = readLimit("CHAT_EMAIL_LIMIT_PER_DAY", 3);
+const emailMemory = new Map<string, { startedAt: number; count: number }>();
+
+const emailLimiter = hasUpstashConfig
+	? new Ratelimit({
+			redis: Redis.fromEnv(),
+			limiter: Ratelimit.fixedWindow(emailDayLimit, "1 d"),
+			prefix: "chat:email",
+		})
+	: null;
+
+export async function checkEmailLimit(ip: string): Promise<boolean> {
+	if (emailLimiter) {
+		return (await emailLimiter.limit(ip)).success;
+	}
+
+	const now = Date.now();
+	const entry = emailMemory.get(ip);
+
+	if (!entry || now - entry.startedAt >= dayWindowMs) {
+		emailMemory.set(ip, { startedAt: now, count: 1 });
+		return true;
+	}
+
+	if (entry.count >= emailDayLimit) {
+		return false;
+	}
+
+	entry.count += 1;
+	return true;
+}
