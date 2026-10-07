@@ -48,31 +48,29 @@ export const isToolUseFailure = (error: unknown): boolean => {
 const runModelTurn = async ({
 	client,
 	model,
-	baseURL = "",
 	messages,
 	tools,
 	onText,
 }: {
 	client: OpenAI;
 	model: string;
-	baseURL?: string;
 	messages: ChatCompletionMessageParam[];
 	tools: ChatCompletionTool[];
 	onText: (text: string) => void;
 }): Promise<ModelTurn> => {
 	const isGeminiSearch =
 		process.env.GEMINI_NATIVE_SEARCH === "true" &&
-		(baseURL.includes("generativelanguage.googleapis.com") || model.toLowerCase().startsWith("gemini"));
+		((client.baseURL ?? "").includes("generativelanguage.googleapis.com") ||
+			model.toLowerCase().startsWith("gemini"));
 
 	const attempt = async (withTools: boolean): Promise<ModelTurn> => {
 		const responseStream = await client.chat.completions.create({
 			model,
 			messages,
 			temperature: 0.3,
-			max_tokens: 2500, // Increased from 1200 (Flash-Lite supports up to 64k output tokens)
+			max_tokens: 2500,
 			stream: true,
 			...(withTools && tools.length > 0 ? { tools, tool_choice: "auto" } : {}),
-			// Pass Gemini-native search grounding via extra_body if enabled
 			...(isGeminiSearch
 				? {
 					extra_body: {

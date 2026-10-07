@@ -152,7 +152,6 @@ export async function POST(request: Request) {
                     await runChatAgent({
                         client,
                         model,
-                        baseURL,
                         messages,
                         tools: getChatTools(model, baseURL),
                         ip,
