@@ -35,9 +35,9 @@ const createWelcomeMessage = (): Message => ({
 const chatStorageKey = "junaid-portfolio-chat-history";
 const teaserStorageKey = "junaid-portfolio-chat-teaser-dismissed";
 // How the nudge repeats: first appearance, how long it stays, and the pause before it returns.
-const teaserFirstDelayMs = 6000;
-const teaserVisibleMs = 12000;
-const teaserPauseMs = 18000;
+const teaserFirstDelayMs = 3000;
+const teaserVisibleMs = 6000;
+const teaserPauseMs = 4000;
 const maxStoredMessages = 100;
 
 const isStoredMessage = (value: unknown): value is Message => {
