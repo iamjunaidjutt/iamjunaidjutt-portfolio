@@ -116,7 +116,7 @@ export async function POST(request: Request) {
 		}
 
 		const apiKey = process.env.GROQ_API_KEY;
-		const model = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
+		const model = process.env.GROQ_MODEL || "openai/gpt-oss-20b";
 
 		if (!apiKey || !model) {
 			return NextResponse.json(
@@ -143,7 +143,7 @@ export async function POST(request: Request) {
 						groq,
 						model,
 						messages,
-						tools: getChatTools(),
+						tools: getChatTools(model),
 						ip,
 						sendEvent,
 						execute: executeChatTool,

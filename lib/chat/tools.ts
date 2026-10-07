@@ -84,11 +84,18 @@ const emailTool: ChatCompletionTool = {
 	},
 };
 
-// Only offer tools that can actually run, so the model never calls a dead tool.
-export const getChatTools = (): ChatCompletionTool[] => {
-	const tools = [searchGithubTool, readmeTool];
+// Groq's built-in web search now only exists as "browser_search" on the gpt-oss
+// models (the old Compound systems were shut down on 21 Sep 2026).
+export const supportsNativeSearch = (model: string): boolean => model.startsWith("openai/gpt-oss");
 
-	if (process.env.TAVILY_API_KEY) {
+// Only offer tools that can actually run, so the model never calls a dead tool.
+export const getChatTools = (model = ""): ChatCompletionTool[] => {
+	const tools: ChatCompletionTool[] = [searchGithubTool, readmeTool];
+
+	if (process.env.GROQ_NATIVE_WEB_SEARCH === "true" && supportsNativeSearch(model)) {
+		// Runs on Groq's servers: no function to execute here, and no domain filter.
+		tools.push({ type: "browser_search" });
+	} else if (process.env.TAVILY_API_KEY) {
 		tools.push(webSearchTool);
 	}
 

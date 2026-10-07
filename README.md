@@ -37,9 +37,10 @@ Add these variables to `.env.local`:
 
 ```env
 GROQ_API_KEY=your_groq_api_key
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 GITHUB_TOKEN=optional_read_only_github_token
 TAVILY_API_KEY=optional_tavily_search_key
+GROQ_NATIVE_WEB_SEARCH=false
 CHAT_RATE_LIMIT_PER_MINUTE=20
 CHAT_RATE_LIMIT_PER_DAY=200
 UPSTASH_REDIS_REST_URL=your_upstash_redis_rest_url
@@ -58,9 +59,13 @@ optional (read-only) and raises GitHub's rate limit. `web_search` only appears
 when `TAVILY_API_KEY` is set and is limited to Junaid's own site and GitHub.
 `email_follow_up` only appears when `EMAIL` and `EMAIL_PASSWORD` are set; it
 needs the visitor's own email address, replies go to that address, and it is
-limited to `CHAT_EMAIL_LIMIT_PER_DAY` (default 3) per IP. Tool use works best
-with a larger Groq model than `llama-3.1-8b-instant`; set `GROQ_MODEL` to one
-that Groq lists as supporting tool use.
+limited to `CHAT_EMAIL_LIMIT_PER_DAY` (default 3) per IP.
+
+Groq retired `llama-3.1-8b-instant`, `llama-3.3-70b-versatile` and the Compound
+systems in 2026, so the default model is `openai/gpt-oss-20b`. Groq's built-in
+search is now `browser_search`, available on the gpt-oss models only. Set
+`GROQ_NATIVE_WEB_SEARCH=true` to use it instead of Tavily. It cannot be limited
+to Junaid's own domains, so Tavily stays the default.
 
 Open `http://localhost:3000` after the development server starts. The chatbot
 answers only from [`data/profile.ts`](data/profile.ts), so update that file

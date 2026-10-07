@@ -65,6 +65,9 @@ const runModelTurn = async ({
 			temperature: 0.3,
 			max_tokens: 1200,
 			stream: true,
+			// Groq recommends low effort for browser search: higher levels browse longer
+			// and use many more tokens. It is also faster for a simple Q&A bot.
+			...(model.startsWith("openai/gpt-oss") ? { reasoning_effort: "low" as const } : {}),
 			...(withTools ? { tools, tool_choice: "auto" as const } : {}),
 		});
 
