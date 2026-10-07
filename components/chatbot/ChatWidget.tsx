@@ -133,6 +133,7 @@ export default function ChatWidget() {
 	const [hasLoadedStoredMessages, setHasLoadedStoredMessages] = useState(false);
 	const [input, setInput] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+	const [statusText, setStatusText] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -219,6 +220,19 @@ export default function ChatWidget() {
 			const decoder = new TextDecoder();
 			let buffer = "";
 
+			const resetAssistantText = () => {
+				setMessages((currentMessages) => {
+					const updatedMessages = [...currentMessages];
+					const lastMessage = updatedMessages.at(-1);
+
+					if (lastMessage?.role === "assistant") {
+						updatedMessages[updatedMessages.length - 1] = { ...lastMessage, content: "" };
+					}
+
+					return updatedMessages;
+				});
+			};
+
 			const appendText = (text: string) => {
 				setMessages((currentMessages) => {
 					const updatedMessages = [...currentMessages];
@@ -249,12 +263,21 @@ export default function ChatWidget() {
 
 					const data = JSON.parse(dataLine.slice(6)) as {
 						text?: string;
+						status?: string;
+						reset?: boolean;
 						error?: string;
 					};
 					if (data.error) {
 						throw new Error(data.error);
 					}
+					if (data.status) {
+						setStatusText(data.status);
+					}
+					if (data.reset) {
+						resetAssistantText();
+					}
 					if (data.text) {
+						setStatusText(null);
 						appendText(data.text);
 					}
 				}
@@ -277,6 +300,7 @@ export default function ChatWidget() {
 			);
 		} finally {
 			setIsLoading(false);
+			setStatusText(null);
 		}
 	};
 
@@ -403,8 +427,9 @@ export default function ChatWidget() {
 
 							{isLoading && (
 								<div className="flex justify-start">
-									<div className="rounded-xl bg-[var(--paper)] px-3 py-2 text-[var(--muted-ink)]">
+									<div className="flex items-center gap-2 rounded-xl bg-[var(--paper)] px-3 py-2 text-[var(--muted-ink)]">
 										<Loader2 className="animate-spin" size={17} aria-label="Assistant is typing" />
+										{statusText && <span className="text-xs">{statusText}</span>}
 									</div>
 								</div>
 							)}

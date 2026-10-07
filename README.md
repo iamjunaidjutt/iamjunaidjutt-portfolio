@@ -52,11 +52,15 @@ and create an API key. `llama-3.1-8b-instant` is the fast default; replace
 then copy its REST URL and REST token into the two `UPSTASH_REDIS_*` variables.
 The rate-limit variables control the per-IP request limits; the defaults allow
 20 questions per minute and 200 per day.
-The chatbot can search Junaid's public GitHub repositories without a token;
-`GITHUB_TOKEN` is optional and should be read-only. `TAVILY_API_KEY` enables
-web search and is optional. If profile data and searches cannot answer a
-question, the chatbot can email it to Junaid for follow-up using the existing
-`EMAIL` and `EMAIL_PASSWORD` settings.
+The chatbot has up to four tools. `search_github` and `get_github_readme` read
+Junaid's public repositories and work without a token; `GITHUB_TOKEN` is
+optional (read-only) and raises GitHub's rate limit. `web_search` only appears
+when `TAVILY_API_KEY` is set and is limited to Junaid's own site and GitHub.
+`email_follow_up` only appears when `EMAIL` and `EMAIL_PASSWORD` are set; it
+needs the visitor's own email address, replies go to that address, and it is
+limited to `CHAT_EMAIL_LIMIT_PER_DAY` (default 3) per IP. Tool use works best
+with a larger Groq model than `llama-3.1-8b-instant`; set `GROQ_MODEL` to one
+that Groq lists as supporting tool use.
 
 Open `http://localhost:3000` after the development server starts. The chatbot
 answers only from [`data/profile.ts`](data/profile.ts), so update that file

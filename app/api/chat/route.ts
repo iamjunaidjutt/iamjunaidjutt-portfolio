@@ -1,14 +1,12 @@
 import Groq from "groq-sdk";
-import type {
-	ChatCompletionMessageParam,
-	ChatCompletionTool,
-} from "groq-sdk/resources/chat/completions";
+import type { ChatCompletionMessageParam } from "groq-sdk/resources/chat/completions";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { type ChatEvent, runChatAgent } from "@/lib/chat/agent";
 import { checkRateLimit } from "@/lib/chat/rateLimit";
 import { buildSystemPrompt } from "@/lib/chat/systemPrompt";
-import { chatTools, executeChatTool } from "@/lib/chat/tools";
+import { executeChatTool, getChatTools } from "@/lib/chat/tools";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -128,95 +126,29 @@ export async function POST(request: Request) {
 		}
 
 		const groq = new Groq({ apiKey });
-		const tools = chatTools as ChatCompletionTool[];
-		const conversation: ChatCompletionMessageParam[] = [
+		const messages: ChatCompletionMessageParam[] = [
 			{ role: "system", content: buildSystemPrompt() },
 			...parsed.data.messages,
 		];
 
-		let completion = await groq.chat.completions.create({
-			model,
-			messages: conversation,
-			tools,
-			tool_choice: "auto",
-			temperature: 0.3,
-			max_tokens: 1200,
-			stream: false,
-		});
-
-		for (let round = 0; round < 2; round += 1) {
-			const assistantMessage = completion.choices[0]?.message;
-			const toolCalls = assistantMessage?.tool_calls;
-
-			if (!assistantMessage || !toolCalls?.length) {
-				break;
-			}
-
-			conversation.push(assistantMessage);
-			for (const toolCall of toolCalls) {
-				const result = await executeChatTool(
-					toolCall.function.name,
-					toolCall.function.arguments,
-				);
-				conversation.push({
-					role: "tool",
-					tool_call_id: toolCall.id,
-					content: result,
-				});
-			}
-
-			completion = await groq.chat.completions.create({
-				model,
-				messages: conversation,
-				tools,
-				tool_choice: "auto",
-				temperature: 0.3,
-				max_tokens: 1200,
-				stream: false,
-			});
-		}
-
-		const completedText = completion.choices[0]?.message.content?.trim();
-		const responseStream = completedText
-			? null
-			: await groq.chat.completions.create({
-					model,
-					messages: conversation,
-					temperature: 0.3,
-					max_tokens: 1200,
-					stream: true,
-				});
-
 		const encoder = new TextEncoder();
 		const stream = new ReadableStream({
 			async start(controller) {
-				let hasText = false;
-
-				const sendEvent = (event: { text?: string; error?: string; done?: boolean }) => {
+				const sendEvent = (event: ChatEvent) => {
 					controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
 				};
 
 				try {
-					if (completedText) {
-						hasText = true;
-						sendEvent({ text: completedText });
-					} else if (responseStream) {
-						for await (const chunk of responseStream) {
-							const text = chunk.choices[0]?.delta?.content;
-
-							if (text) {
-								if (text.trim()) {
-									hasText = true;
-								}
-								sendEvent({ text });
-							}
-						}
-					}
-
-					if (!hasText) {
-						sendEvent({ text: fallbackReply });
-					}
-					sendEvent({ done: true });
+					await runChatAgent({
+						groq,
+						model,
+						messages,
+						tools: getChatTools(),
+						ip,
+						sendEvent,
+						execute: executeChatTool,
+						fallbackReply,
+					});
 				} catch (error) {
 					sendEvent({ error: getProviderErrorMessage(error) });
 				} finally {
