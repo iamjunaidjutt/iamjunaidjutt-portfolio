@@ -17,12 +17,14 @@ type ModelTurn = { text: string; toolCalls: PendingToolCall[] };
 
 type ExecuteTool = (name: string, args: string, context: { ip: string }) => Promise<string>;
 
-const MAX_TOOL_ROUNDS = 3;
+const MAX_TOOL_ROUNDS = 4;
 const MAX_TOOL_CALLS_PER_ROUND = 3;
 
 const TOOL_STATUS: Record<string, string> = {
 	search_github: "Checking Junaid's GitHub...",
 	get_github_readme: "Reading the project README...",
+	list_github_files: "Looking through the repository...",
+	read_github_file: "Reading a file from GitHub...",
 	web_search: "Searching Junaid's public pages...",
 	email_follow_up: "Sending your question to Junaid...",
 };
