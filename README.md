@@ -53,10 +53,18 @@ and create an API key. `llama-3.1-8b-instant` is the fast default; replace
 then copy its REST URL and REST token into the two `UPSTASH_REDIS_*` variables.
 The rate-limit variables control the per-IP request limits; the defaults allow
 20 questions per minute and 200 per day.
-The chatbot has up to four tools. `search_github` and `get_github_readme` read
-Junaid's public repositories and work without a token; `GITHUB_TOKEN` is
-optional (read-only) and raises GitHub's rate limit. `web_search` only appears
-when `TAVILY_API_KEY` is set and is limited to Junaid's own site and GitHub.
+The chatbot has up to six tools. A live list of all public repositories
+(including forks, which are marked as other people's work) is added to every
+prompt, and four GitHub tools read them: `search_github`, `get_github_readme`,
+`list_github_files` and `read_github_file` (text files and notebooks only; `.env`
+and key files are blocked). They work without a token, but unauthenticated
+GitHub calls are limited to 60 per hour per IP and Vercel shares IPs, so set
+`GITHUB_TOKEN` (read-only, public data, no extra permissions) in production.
+If GitHub fails, the last good list is reused.
+
+`web_search` only appears when `TAVILY_API_KEY` is set. Scope `junaid` is limited
+to Junaid's own site and GitHub; scope `general` searches the open web and is
+for explaining public courses and tools, never for facts about Junaid.
 `email_follow_up` only appears when `EMAIL` and `EMAIL_PASSWORD` are set; it
 needs the visitor's own email address, replies go to that address, and it is
 limited to `CHAT_EMAIL_LIMIT_PER_DAY` (default 3) per IP.

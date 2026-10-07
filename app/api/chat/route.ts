@@ -6,7 +6,7 @@ import { z } from "zod";
 import { type ChatEvent, runChatAgent } from "@/lib/chat/agent";
 import { checkRateLimit } from "@/lib/chat/rateLimit";
 import { buildSystemPrompt } from "@/lib/chat/systemPrompt";
-import { executeChatTool, getChatTools } from "@/lib/chat/tools";
+import { executeChatTool, getChatTools, getRepoIndex } from "@/lib/chat/tools";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -126,8 +126,9 @@ export async function POST(request: Request) {
 		}
 
 		const groq = new Groq({ apiKey });
+		const repoIndex = await getRepoIndex();
 		const messages: ChatCompletionMessageParam[] = [
-			{ role: "system", content: buildSystemPrompt() },
+			{ role: "system", content: buildSystemPrompt(repoIndex) },
 			...parsed.data.messages,
 		];
 
