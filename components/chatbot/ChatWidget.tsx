@@ -34,6 +34,10 @@ const createWelcomeMessage = (): Message => ({
 
 const chatStorageKey = "junaid-portfolio-chat-history";
 const teaserStorageKey = "junaid-portfolio-chat-teaser-dismissed";
+// How the nudge repeats: first appearance, how long it stays, and the pause before it returns.
+const teaserFirstDelayMs = 6000;
+const teaserVisibleMs = 12000;
+const teaserPauseMs = 18000;
 const maxStoredMessages = 100;
 
 const isStoredMessage = (value: unknown): value is Message => {
@@ -129,6 +133,9 @@ export default function ChatWidget() {
 	const [statusText, setStatusText] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [showTeaser, setShowTeaser] = useState(false);
+	const [teaserIndex, setTeaserIndex] = useState(0);
+	// null until sessionStorage has been read, so the nudge never flashes for someone who closed it.
+	const [teaserDismissed, setTeaserDismissed] = useState<boolean | null>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -161,7 +168,17 @@ export default function ChatWidget() {
 		}
 	}, [hasLoadedStoredMessages, messages]);
 
-	// A small, one-time nudge: shown once per visit, only to people who have not chatted yet.
+	// A friendly nudge that comes back every so often. It stops for good once the visitor
+	// closes it with the cross, opens the chat, or starts a conversation.
+	useEffect(() => {
+		try {
+			setTeaserDismissed(sessionStorage.getItem(teaserStorageKey) === "1");
+		} catch {
+			// Storage can be unavailable; showing the nudge is harmless.
+			setTeaserDismissed(false);
+		}
+	}, []);
+
 	useEffect(() => {
 		if (isOpen) {
 			setShowTeaser(false);
@@ -169,32 +186,36 @@ export default function ChatWidget() {
 	}, [isOpen]);
 
 	useEffect(() => {
-		let dismissed = false;
-		try {
-			dismissed = sessionStorage.getItem(teaserStorageKey) === "1";
-		} catch {
-			// Storage can be unavailable; showing the nudge is harmless.
-		}
-
-		if (dismissed || isOpen || !hasLoadedStoredMessages || messages.length > 1) {
+		if (teaserDismissed !== false || isOpen || !hasLoadedStoredMessages || messages.length > 1) {
+			setShowTeaser(false);
 			return;
 		}
 
-		const showTimer = window.setTimeout(() => setShowTeaser(true), 6000);
-		const hideTimer = window.setTimeout(() => setShowTeaser(false), 20000);
+		let timer = 0;
 
-		return () => {
-			window.clearTimeout(showTimer);
-			window.clearTimeout(hideTimer);
+		const hide = () => {
+			setShowTeaser(false);
+			setTeaserIndex((index) => index + 1);
+			timer = window.setTimeout(show, teaserPauseMs);
 		};
-	}, [hasLoadedStoredMessages, isOpen, messages.length]);
+
+		const show = () => {
+			setShowTeaser(true);
+			timer = window.setTimeout(hide, teaserVisibleMs);
+		};
+
+		timer = window.setTimeout(show, teaserFirstDelayMs);
+
+		return () => window.clearTimeout(timer);
+	}, [hasLoadedStoredMessages, isOpen, messages.length, teaserDismissed]);
 
 	const dismissTeaser = () => {
 		setShowTeaser(false);
+		setTeaserDismissed(true);
 		try {
 			sessionStorage.setItem(teaserStorageKey, "1");
 		} catch {
-			// Ignore: the nudge will simply be allowed again on the next visit.
+			// Ignore: the nudge simply stays dismissed until this page is reloaded.
 		}
 	};
 
@@ -522,6 +543,7 @@ export default function ChatWidget() {
 			<AnimatePresence>
 				{showTeaser && !isOpen && (
 					<motion.div
+						key={teaserIndex}
 						initial={{ opacity: 0, y: 8, scale: 0.96 }}
 						animate={{ opacity: 1, y: 0, scale: 1 }}
 						exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -533,7 +555,7 @@ export default function ChatWidget() {
 							onClick={() => setIsOpen(true)}
 							className="py-0.5 text-left text-sm leading-snug focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
 						>
-							{ASSISTANT.teaser}
+							{ASSISTANT.teasers[teaserIndex % ASSISTANT.teasers.length]}
 						</button>
 						<button
 							type="button"
