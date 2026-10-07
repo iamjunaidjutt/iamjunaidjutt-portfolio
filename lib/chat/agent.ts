@@ -1,8 +1,8 @@
-import type Groq from "groq-sdk";
+import type OpenAI from "openai";
 import type {
 	ChatCompletionMessageParam,
 	ChatCompletionTool,
-} from "groq-sdk/resources/chat/completions";
+} from "openai/resources/chat/completions";
 
 export type ChatEvent = {
 	text?: string;
@@ -29,8 +29,6 @@ const TOOL_STATUS: Record<string, string> = {
 	email_follow_up: "Sending your question to Junaid...",
 };
 
-// Small Llama models sometimes produce a malformed tool call. Groq reports that as a
-// 400 "tool_use_failed". That is recoverable: ask again without tools.
 export const isToolUseFailure = (error: unknown): boolean => {
 	if (!error || typeof error !== "object") {
 		return false;
@@ -48,29 +46,38 @@ export const isToolUseFailure = (error: unknown): boolean => {
 };
 
 const runModelTurn = async ({
-	groq,
+	client,
 	model,
 	messages,
 	tools,
 	onText,
 }: {
-	groq: Groq;
+	client: OpenAI;
 	model: string;
 	messages: ChatCompletionMessageParam[];
 	tools: ChatCompletionTool[];
 	onText: (text: string) => void;
 }): Promise<ModelTurn> => {
+	const isGeminiSearch =
+		process.env.GEMINI_NATIVE_SEARCH === "true" &&
+		((client.baseURL ?? "").includes("generativelanguage.googleapis.com") ||
+			model.toLowerCase().startsWith("gemini"));
+
 	const attempt = async (withTools: boolean): Promise<ModelTurn> => {
-		const responseStream = await groq.chat.completions.create({
+		const responseStream = await client.chat.completions.create({
 			model,
 			messages,
 			temperature: 0.3,
-			max_tokens: 1200,
+			max_tokens: 2500,
 			stream: true,
-			// Groq recommends low effort for browser search: higher levels browse longer
-			// and use many more tokens. It is also faster for a simple Q&A bot.
-			...(model.startsWith("openai/gpt-oss") ? { reasoning_effort: "low" as const } : {}),
-			...(withTools ? { tools, tool_choice: "auto" as const } : {}),
+			...(withTools && tools.length > 0 ? { tools, tool_choice: "auto" } : {}),
+			...(isGeminiSearch
+				? {
+					extra_body: {
+						tools: [{ google_search: {} }],
+					},
+				}
+				: {}),
 		});
 
 		let text = "";
@@ -78,10 +85,7 @@ const runModelTurn = async ({
 
 		for await (const chunk of responseStream) {
 			const delta = chunk.choices[0]?.delta;
-
-			if (!delta) {
-				continue;
-			}
+			if (!delta) continue;
 
 			if (delta.content) {
 				text += delta.content;
@@ -95,15 +99,9 @@ const runModelTurn = async ({
 					arguments: "",
 				};
 
-				if (part.id) {
-					entry.id = part.id;
-				}
-				if (part.function?.name && !entry.name) {
-					entry.name = part.function.name;
-				}
-				if (part.function?.arguments) {
-					entry.arguments += part.function.arguments;
-				}
+				if (part.id) entry.id = part.id;
+				if (part.function?.name && !entry.name) entry.name = part.function.name;
+				if (part.function?.arguments) entry.arguments += part.function.arguments;
 
 				calls.set(part.index, entry);
 			}
@@ -129,7 +127,7 @@ const runModelTurn = async ({
 };
 
 export async function runChatAgent({
-	groq,
+	client,
 	model,
 	messages,
 	tools,
@@ -138,7 +136,7 @@ export async function runChatAgent({
 	execute,
 	fallbackReply,
 }: {
-	groq: Groq;
+	client: OpenAI;
 	model: string;
 	messages: ChatCompletionMessageParam[];
 	tools: ChatCompletionTool[];
@@ -150,10 +148,9 @@ export async function runChatAgent({
 	const conversation = [...messages];
 	let hasText = false;
 
-	// The last round has no tools, so the loop always ends with a written answer.
 	for (let round = 0; round <= MAX_TOOL_ROUNDS; round += 1) {
 		const turn = await runModelTurn({
-			groq,
+			client,
 			model,
 			messages: conversation,
 			tools: round < MAX_TOOL_ROUNDS ? tools : [],
@@ -169,7 +166,6 @@ export async function runChatAgent({
 			break;
 		}
 
-		// Anything streamed before a tool call is a half-finished thought. Clear it.
 		if (turn.text) {
 			hasText = false;
 			sendEvent({ reset: true });
@@ -187,7 +183,6 @@ export async function runChatAgent({
 
 		const results = await Promise.all(
 			turn.toolCalls.map(async (call, index) => {
-				// Every tool_call id needs an answer, even the ones we refuse to run.
 				if (index >= MAX_TOOL_CALLS_PER_ROUND) {
 					return "Skipped: too many tool calls in one step.";
 				}

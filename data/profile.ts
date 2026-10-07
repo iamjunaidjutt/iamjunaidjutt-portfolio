@@ -1,7 +1,7 @@
 export const PROFILE = `
 NAME: Muhammad Junaid. Software engineer in Lahore, Pakistan.
 CONTACT: Email info.iamjunaidjutt@gmail.com. Website iamjunaidjutt.vercel.app.
-WHATSAPP: +92-307-4254648.
+WHATSAPP: +92 307 4254648
 GitHub and LinkedIn username: iamjunaidjutt.
 AVAILABILITY: Open to full-time roles, in Lahore or remote.
 LANGUAGES: Urdu and Punjabi (mother tongues), English B2, German A1.
@@ -37,6 +37,7 @@ Software Engineer Intern at Kryptomind LLC, Lahore (19 Aug 2024 to 19 Nov 2024).
 EDUCATION
 BS in Software Engineering, FAST-NUCES, Lahore (2021 to 2025).
 Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).
+
 
 COURSES & PROFESSIONAL TRAINING
 - AI Engineer Agentic Track: The Complete Agent & MCP Course / Master AI Agents in 30 Days
@@ -191,26 +192,15 @@ PROJECTS
   point-of-sale app with 16 JUnit test classes.
 
 SKILLS
-Languages: Python, JavaScript, TypeScript, Java, C#, C++, SQL, Bash.
-Web & Backend Engineering: React 19, Next.js (App Router, RSC), ASP.NET Core,
-FastAPI, Flask, Django, Node.js, Express, Redux Toolkit, React Router, Context API,
-Tailwind CSS, Styled Components, Jest, React Testing Library.
-AI, ML & Agentic Systems: LLMs, RAG, Agentic AI, MCP (Model Context Protocol),
-Prompt Engineering, LangChain, LangGraph, OpenAI Agents SDK, CrewAI, AutoGen,
-Hugging Face Transformers, QLoRA Fine-Tuning, Amazon Bedrock, SageMaker,
-Bedrock AgentCore, Google Generative AI (Gemini Pro / Vision), Whisper, DALL-E 3,
-Prompt Flow, TensorFlow, Keras, scikit-learn, OpenCV, YOLOv8.
-MLOps, Pipelines & Observability: MLflow, DVC, DagsHub, Evidently AI,
-Apache Airflow, BentoML, Kubeflow, LangSmith, LangServe, Langfuse, Prometheus,
-Grafana, Loki, Alloy, Alertmanager.
-Cloud, DevOps & Containers: AWS (EC2, S3, RDS, Lambda, VPC, Bedrock,
-App Runner, SQS, CloudFront, Route 53, SageMaker, ECR, CodePipeline), GCP, Azure
-(Azure OpenAI, Azure AI Studio, Azure AI Search, Azure Document Intelligence),
-Vercel, Docker, Kubernetes, Helm, ArgoCD, Terraform, Ansible, Jenkins, GitHub Actions,
-GitLab CI/CD, SonarQube, Vagrant.
-Databases & Vector Stores: ChromaDB, FAISS, LanceDB, Apache Cassandra,
-MS SQL Server, Azure SQL, Cosmos DB, Aurora Serverless, MySQL, PostgreSQL,
-MongoDB, Firebase, Supabase.
+Languages: Python, JavaScript, TypeScript, Java, C#, C++, SQL.
+Web and backend: ASP.NET Core, FastAPI, Flask, Django, Node.js, Express,
+Next.js, React, Redux Toolkit, Tailwind CSS.
+AI and ML: LLMs, RAG, agentic AI, MCP, prompt engineering, LangChain,
+LangGraph, OpenAI Agents SDK, CrewAI, AutoGen, Hugging Face, TensorFlow, Keras,
+scikit-learn, OpenCV.
+Cloud and DevOps: Azure, AWS, GCP, Docker, Kubernetes, Terraform, Ansible,
+Jenkins, GitHub Actions, GitLab CI, Grafana, Prometheus, Loki.
+Databases: MS SQL Server, MySQL, MongoDB, Firebase, Supabase.
 
 LEADERSHIP AND VOLUNTEERING
 - Deputy Head of Marketing, SOFTEC 2023: helped lead a marketing team of about
