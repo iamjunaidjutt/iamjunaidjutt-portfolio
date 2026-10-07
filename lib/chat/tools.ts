@@ -1,4 +1,4 @@
-import type { ChatCompletionTool } from "groq-sdk/resources/chat/completions";
+import type { ChatCompletionTool } from "openai/resources/chat/completions";
 import { z } from "zod";
 
 import { mailOptions, transporter } from "@/config/nodemailer";
@@ -120,26 +120,36 @@ const emailTool: ChatCompletionTool = {
 	},
 };
 
-// Groq's built-in web search now only exists as "browser_search" on the gpt-oss
-// models (the old Compound systems were shut down on 21 Sep 2026).
-export const supportsNativeSearch = (model: string): boolean => model.startsWith("openai/gpt-oss");
-
 // Only offer tools that can actually run, so the model never calls a dead tool.
-export const getChatTools = (model = ""): ChatCompletionTool[] => {
-	const tools: ChatCompletionTool[] = [searchGithubTool, readmeTool, listFilesTool, readFileTool];
+// Add this helper to detect if Gemini native search should handle web queries
+export const isGeminiNativeSearchEnabled = (model = "", baseURL = ""): boolean => {
+    const isGeminiEndpoint =
+        baseURL.includes("generativelanguage.googleapis.com") ||
+        model.toLowerCase().startsWith("gemini");
+    const isEnabled = process.env.GEMINI_NATIVE_SEARCH === "true";
 
-	if (process.env.GROQ_NATIVE_WEB_SEARCH === "true" && supportsNativeSearch(model)) {
-		// Runs on Groq's servers: no function to execute here, and no domain filter.
-		tools.push({ type: "browser_search" });
-	} else if (process.env.TAVILY_API_KEY) {
-		tools.push(webSearchTool);
-	}
+    return isGeminiEndpoint && isEnabled;
+};
 
-	if (process.env.EMAIL && process.env.EMAIL_PASSWORD) {
-		tools.push(emailTool);
-	}
+// Only offer tools that can actually run, so the model never calls a dead tool
+export const getChatTools = (model = "", baseURL = ""): ChatCompletionTool[] => {
+    const tools: ChatCompletionTool[] = [searchGithubTool, readmeTool, listFilesTool, readFileTool];
 
-	return tools;
+    // Priority 1: Gemini Native Search Grounding
+    // If Gemini native search is enabled, Google's servers run search automatically
+    // without invoking your local client execution tool.
+    const useGeminiNative = isGeminiNativeSearchEnabled(model, baseURL);
+
+    // Priority 2: Fallback to Tavily custom function tool
+    if (!useGeminiNative && process.env.TAVILY_API_KEY) {
+        tools.push(webSearchTool);
+    }
+
+    if (process.env.EMAIL && process.env.EMAIL_PASSWORD) {
+        tools.push(emailTool);
+    }
+
+    return tools;
 };
 
 /* --------------------------------- helpers --------------------------------- */
