@@ -35,7 +35,7 @@ const HeroSection = () => {
 				<p className="hero-role">
 					I build backend systems for a legal platform used by 300+ law
 					firms, mostly the parts where{" "}
-					<strong>LLMs read and write documents</strong>.
+					<strong>LLMs read and write massive documents</strong>.
 				</p>
 				<p className="hero-lede">
 					Associate Software Engineer at <strong>Devsinc</strong>,
