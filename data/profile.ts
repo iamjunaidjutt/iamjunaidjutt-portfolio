@@ -1,38 +1,29 @@
 export const PROFILE = `
 NAME: Muhammad Junaid. Software engineer in Lahore, Pakistan.
-CONTACT: Email info.iamjunaidjutt@gmail.com. Website iamjunaidjutt.vercel.app.
-WHATSAPP: +92 307 4254648
+CONTACT: Email info.iamjunaidjutt@gmail.com. WEBSITE: iamjunaidjutt.vercel.app. WHATSAPP: +92 307 4254648
 GitHub and LinkedIn username: iamjunaidjutt.
 AVAILABILITY: Open to full-time roles, in Lahore or remote.
 LANGUAGES: Urdu and Punjabi (mother tongues), English B2, German A1.
 WORKING STYLE: Likes to understand what people need before writing code, and wants his work to still run after the demo is over.
-HOBBIES: Reading books, learning new technologies, and exploring AI/ML.
+HOBBIES: Reading books, learning new technologies, exploring AI, and watching movies on Netflix.
 
 CURRENT ROLE
 Associate Software Engineer (AI/ML) at Devsinc, Lahore, since 16 Dec 2025.
 He joined as a Software Engineer Intern on 9 Oct 2025 and moved into this role.
 He works on LawPractice.ai, a platform used by plaintiff law firms in the
 United States. More than 300 law firms use it.
-- Built backend features using ASP.NET Core, LLMs, RAG and MCP for processing
-  legal demands and case summaries. His work helped cut document preparation
-  time by 70% and made demand letters about 7x faster to turn around.
-- Helped build APIs and AI agents that read, extract, process and generate
-  documents, and improved their prompts. Together these helped cut documentation
-  errors by about 90%.
-- Maintains OCR, document reading and document writing pipelines for different
-  document types, adds new ones when needed, and fixes issues clients report
+- Built backend features using ASP.NET Core, LLMs, RAG and MCP for processing legal demands and case summaries. His work helped cut document preparation time by 70% and made demand letters about 7x faster to turn around.
+- Helped build APIs, AI agents, custom tools, and RAG pipelines that read, extract, process and generate documents, and improved their prompts. Together these helped cut documentation errors by about 90%.
+- Maintains OCR, document reading and document writing pipelines for different document types, including large medical records of more than 1000 pages, adds new ones when needed, and fixes issues clients report
   in production.
-- Tools used: OpenCV, Azure Document Intelligence, Azure Foundry, Azure SQL
+- Tools used: OpenCV, Azure Document Intelligence, Azure AI Foundry, Azure AI Search, Azure SQL
   Database, Azure Cosmos DB, RabbitMQ background workers.
 
 PREVIOUS WORK
 Software Engineer Intern at Kryptomind LLC, Lahore (19 Aug 2024 to 19 Nov 2024).
-- Built interfaces with animations and 3D models using GSAP and React Three
-  Fiber, and used Lenis for smooth scrolling.
-- Connected Next.js, TypeScript and React frontends to REST APIs. Server-side
-  rendering and code splitting took one project's Lighthouse score from 55 to 90.
-- Worked on an NFT marketplace and learned Web3 basics: blockchain, smart
-  contracts and wallet integration.
+- Built interfaces with animations and 3D models using GSAP and React Three Fiber, and used Lenis for smooth scrolling.
+- Connected Next.js, TypeScript and React frontends to REST APIs. Server-side rendering and code splitting took one project's Lighthouse score from 55 to 90.
+- Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts and wallet integration.
 
 EDUCATION
 BS in Software Engineering, FAST-NUCES, Lahore (2021 to 2025).
@@ -41,8 +32,7 @@ Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).
 
 COURSES & PROFESSIONAL TRAINING
 - AI Engineer Agentic Track: The Complete Agent & MCP Course / Master AI Agents in 30 Days
-  (Instructors: Ed Donner — repeat AI startup founder/CTO, ex-MD at JPMorgan Chase,
-  Oxford MA in Physics; and Ligency Team):
+  (Instructors: Ed Donner — repeat AI startup founder/CTO, ex-MD at JPMorgan Chase, Oxford MA in Physics; and Ligency Team):
   6-week deep dive into autonomous AI agents across OpenAI Agents SDK, CrewAI,
   LangGraph, AutoGen, and Model Context Protocol (MCP).
   * Project 1: Career Digital Twin — autonomous personal agent representing professional
@@ -75,7 +65,7 @@ COURSES & PROFESSIONAL TRAINING
   * Project 7 (Capstone Part B): QLoRA Fine-Tuning — fine-tuned open-source LLM outperforming frontier baselines on regression tasks.
   * Project 8 (Capstone Part C): Autonomous Multi-Agent Deal Hunter — multi-agent deal detector with automated alerts.
 
-- [In Progress] AI Engineer Production Track: Deploy LLMs & Agents at Scale
+- [In Progress] AI Engineer Production Track: Deploy LLMs & Agents at Scale 
   (Instructors: Ed Donner and Ligency Team):
   Deploying scalable, secure, and observable AI systems across AWS, GCP, Azure, and Vercel.
   * Week 1 Project: SaaS Healthcare App — production SaaS deployed on Vercel and AWS App Runner with Clerk auth and subscriptions.
@@ -193,13 +183,9 @@ PROJECTS
 
 SKILLS
 Languages: Python, JavaScript, TypeScript, Java, C#, C++, SQL.
-Web and backend: ASP.NET Core, FastAPI, Flask, Django, Node.js, Express,
-Next.js, React, Redux Toolkit, Tailwind CSS.
-AI and ML: LLMs, RAG, agentic AI, MCP, prompt engineering, LangChain,
-LangGraph, OpenAI Agents SDK, CrewAI, AutoGen, Hugging Face, TensorFlow, Keras,
-scikit-learn, OpenCV.
-Cloud and DevOps: Azure, AWS, GCP, Docker, Kubernetes, Terraform, Ansible,
-Jenkins, GitHub Actions, GitLab CI, Grafana, Prometheus, Loki.
+Web and backend: ASP.NET Core, FastAPI, Flask, Django, Node.js, Express, Next.js, React, Redux Toolkit, Tailwind CSS.
+AI and LLMs: LLMs, RAG, agentic AI, MCP, prompt engineering, Generative AI, Embeddings, Vector databases/stores (Pinecone, Chroma, Qdrant, FAISS), LangChain, LangGraph, OpenAI Agents SDK, CrewAI, AutoGen, Hugging Face, TensorFlow, Keras, scikit-learn, OpenCV.
+Cloud and DevOps: Azure, AWS, GCP, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Grafana, Prometheus, Loki.
 Databases: MS SQL Server, MySQL, MongoDB, Firebase, Supabase.
 
 LEADERSHIP AND VOLUNTEERING
