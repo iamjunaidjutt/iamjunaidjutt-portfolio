@@ -588,9 +588,10 @@ html {
 
 .hero-meta {
 	border-top: 1px solid var(--line);
-	display: grid;
-	gap: 0.6rem;
-	grid-template-columns: repeat(3, 1fr);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem 2rem;
+	justify-content: space-between;
 	grid-column: 1 / -1;
 	margin-top: 2.5rem;
 	padding-top: 1rem;
@@ -646,9 +647,10 @@ html {
 
 .facts-grid {
 	border-top: 1px solid var(--line);
-	display: grid;
-	gap: 1rem;
-	grid-template-columns: repeat(3, 1fr);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 2rem;
+	justify-content: space-between;
 	margin-top: 5rem;
 	padding-top: 1.5rem;
 }
@@ -1184,8 +1186,10 @@ html {
 	}
 
 	.hero-meta {
-		grid-template-columns: 1fr;
+		flex-direction: column;
+		gap: 0.6rem;
 		grid-column: auto;
+		justify-content: flex-start;
 	}
 
 	.scroll-cue {
@@ -1205,7 +1209,8 @@ html {
 	}
 
 	.facts-grid {
-		grid-template-columns: 1fr;
+		flex-direction: column;
+		justify-content: flex-start;
 		margin-top: 3rem;
 	}
 
