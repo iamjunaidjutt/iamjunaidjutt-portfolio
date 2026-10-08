@@ -19,6 +19,7 @@ const groups = [
 		"Hugging Face",
 		"Fine-tuning",
 		"Vector Search",
+		"Vector Databases/Stores",
 		"NLP",
 		"TensorFlow",
 		"Keras",
