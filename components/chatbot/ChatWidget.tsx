@@ -205,8 +205,11 @@ export default function ChatWidget() {
 		}
 	}, [isOpen]);
 
+	const hasHistory = messages.length > 1;
+	const activeTeasers = hasHistory ? ASSISTANT.returningTeasers : ASSISTANT.teasers;
+
 	useEffect(() => {
-		if (teaserDismissed !== false || isOpen || !hasLoadedStoredMessages || messages.length > 1) {
+		if (teaserDismissed !== false || isOpen || !hasLoadedStoredMessages) {
 			setShowTeaser(false);
 			return;
 		}
@@ -227,7 +230,7 @@ export default function ChatWidget() {
 		timer = window.setTimeout(show, teaserFirstDelayMs);
 
 		return () => window.clearTimeout(timer);
-	}, [hasLoadedStoredMessages, isOpen, messages.length, teaserDismissed]);
+	}, [hasLoadedStoredMessages, isOpen, teaserDismissed]);
 
 	const dismissTeaser = () => {
 		setShowTeaser(false);
@@ -637,7 +640,7 @@ export default function ChatWidget() {
 							onClick={() => setIsOpen(true)}
 							className="py-0.5 text-left text-sm leading-snug focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
 						>
-							{ASSISTANT.teasers[teaserIndex % ASSISTANT.teasers.length]}
+							{activeTeasers[teaserIndex % activeTeasers.length]}
 						</button>
 						<button
 							type="button"

@@ -11,6 +11,16 @@ export const ASSISTANT = {
 		"Curious what Junaid has built? Ask me anything.",
 		"Want a quick tour of his projects? Just ask.",
 		"Looking for his tech stack or availability? I can help.",
+		"Wondering if he's open to new roles? I can answer that.",
+		"Not sure where to start? Ask me about his work.",
+	],
+	// Shown when the visitor has already chatted (messages.length > 1)
+	returningTeasers: [
+		"Welcome back — anything else you'd like to know?",
+		"Still here? Happy to answer more questions.",
+		"Want to know about a specific project or skill?",
+		"Ask me anything — I know his work pretty well.",
+		"Curious about his availability or tech stack? Ask away.",
 	],
 	greetings: [
 		"Hi, I'm Juno, Junaid's AI assistant. Ask me about his work, projects or skills.",
