@@ -82,9 +82,11 @@ export interface Profile {
     ai: string;
     cloud: string;
     databases: string;
-    frontend: string[];
-    backend: string[];
-    platforms: string[];
+    uiFrontend: string[];
+    uiBackend: string[];
+    uiPlatforms: string[];
+    uiAi: string[];
+    uiLanguages: string[];
   };
   leadershipText: string;
   leadership: {

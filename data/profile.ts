@@ -470,15 +470,25 @@ United States. More than 300 law firms use it.
     }
   ],
   skills: {
-    frontend: [
+    uiAi: [
+        "LLMs", "RAG", "Agentic AI", "OpenAI Agents SDK", "OpenAI API", "CrewAI", "LangGraph",
+        "AutoGen", "MCP", "Prompt Engineering", "LangChain", "Hugging Face", "Fine-tuning",
+        "Vector Search", "Vector Databases/Stores", "NLP", "TensorFlow", "Keras", "Scikit-learn",
+        "Pandas", "NumPy", "Matplotlib", "Seaborn", "OpenCV"
+    ],
+    uiLanguages: [
+        "Python", "JavaScript", "TypeScript", "Java", "C#", "C++", "SQL", "Git/GitHub", "CI/CD",
+        "GitHub Actions", "Jenkins", "GitLab / GitLab CI/CD", "RabbitMQ"
+    ],
+    uiFrontend: [
         "Next.js", "React", "Tailwind CSS", "Redux / Redux Toolkit",
         "React Native", "GSAP", "Lenis", "Framer Motion", "HTML", "CSS", "Android Studio"
     ],
-    backend: [
+    uiBackend: [
         "FastAPI", "Django / Django REST Framework", "Flask", "Node.js", "Express",
         "ASP.NET Core", "REST APIs"
     ],
-    platforms: [
+    uiPlatforms: [
         "AWS", "AWS ECS", "AWS EKS", "AWS S3", "AWS Lambda", "AWS API Gateway", "AWS Serverless",
         "Microsoft Azure", "Google Cloud Platform", "Vercel", "Linux", "Docker", "Kubernetes",
         "Terraform", "Grafana", "Prometheus", "Loki", "PostgreSQL", "MySQL", "MS SQL Server",

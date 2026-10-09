@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { PROFILE_DATA } from "@/data/profile";
 
 const groups = [
-	["AI & data", ...PROFILE_DATA.skills.ai],
-	["Backend & APIs", ...PROFILE_DATA.skills.backend],
-	["Frontend", ...PROFILE_DATA.skills.frontend],
-	["Platforms & storage", ...PROFILE_DATA.skills.platforms],
-	["Languages & delivery", ...PROFILE_DATA.skills.languages],
+	["AI & data", ...PROFILE_DATA.skills.uiAi],
+	["Backend & APIs", ...PROFILE_DATA.skills.uiBackend],
+	["Frontend", ...PROFILE_DATA.skills.uiFrontend],
+	["Platforms & storage", ...PROFILE_DATA.skills.uiPlatforms],
+	["Languages & delivery", ...PROFILE_DATA.skills.uiLanguages],
 ];
 
 const Skills = () => {
