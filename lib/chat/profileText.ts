@@ -55,6 +55,11 @@ export interface Profile {
     description: string;
   };
   courses: string;
+  services: {
+    title: string;
+    description: string;
+    icon: string;
+  }[];
   coursesList: {
     title: string;
     instructor: string;
@@ -139,7 +144,7 @@ COURSES & PROFESSIONAL TRAINING
 \${p.courses}
 
 PROJECTS
-\${p.projects}
+${p.projects.map(prj => `- **${prj.name}**: ${prj.description} (Tech: ${prj.stack.join(", ")})`).join("\\n")}
 
 SKILLS
 Languages: \${p.skills.languages}

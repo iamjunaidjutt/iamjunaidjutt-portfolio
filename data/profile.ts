@@ -227,6 +227,28 @@ United States. More than 300 law firms use it.
       linkLabel: "View certificate",
     },
   ],
+  services: [
+    {
+      title: "AI features",
+      description: "Adding LLMs, RAG, and agents to a product: reading and writing documents, answering questions from your own data, and automating routine steps.",
+      icon: "BrainCircuit"
+    },
+    {
+      title: "Full-stack web apps",
+      description: "Websites and web apps from the interface down to the API and database, including login and role-based access. Mostly Next.js, React, Node.js, Python, and ASP.NET Core.",
+      icon: "Code2"
+    },
+    {
+      title: "Platform engineering",
+      description: "Setting up the infrastructure apps run on: Docker and Kubernetes, Terraform and Ansible, and monitoring with Grafana, Prometheus, and Loki.",
+      icon: "DatabaseZap"
+    },
+    {
+      title: "Cloud and deployment",
+      description: "Deploying to Azure, AWS, or Vercel with CI/CD pipelines (GitHub Actions, Jenkins, GitLab CI), so a release is routine instead of a big event.",
+      icon: "CloudCog"
+    }
+  ],
   courses: `- AI Engineer Agentic Track: The Complete Agent & MCP Course / Master AI Agents in 30 Days
   (Instructors: Ed Donner — repeat AI startup founder/CTO, ex-MD at JPMorgan Chase, Oxford MA in Physics; and Ligency Team):
   6-week deep dive into autonomous AI agents across OpenAI Agents SDK, CrewAI,
@@ -351,121 +373,133 @@ United States. More than 300 law firms use it.
   projects: [
     {
       name: "ResQ CRM",
-      stack: ["Next.js", "Tailwind", "TypeScript", "Firebase"],
-      description: " led a frontend team of 3.\n  Role-based login, lead dashboard, forms, chat module, advanced filters,\n  Google Maps live rider locations. Used by about 25 staff in the United\n  States. Moved to server-side rendering with caching, so the main dashboard\n  loads in about 1.8 seconds instead of 3.5.",
+      description: "A CRM for managing leads, tracking riders, and keeping staff in touch.",
+      stack: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
       display: {
         category: "Web app",
         bullets: [
           "Led a frontend team of three and built role-based login, lead dashboards, forms, popups, chat, and advanced filters for about 25 staff members in the United States.",
           "Added Google Maps so staff can see riders' live locations, with Firebase Cloud Storage updating them every few seconds.",
-          "Moved the app from client-side to server-side rendering with caching. The main dashboard now loads in about 1.8 seconds instead of 3.5."
+          "Moved the app from client-side to server-side rendering with caching. The main dashboard now loads in about 1.8 seconds instead of 3.5.",
         ],
         impact: "Live rider tracking · 1.8s dashboard load",
       }
     },
     {
       name: "Mawaddah",
-      stack: ["Next.js", "Node.js", "Supabase", "Tailwind", "Vercel"],
-      description: " marriage matchmaking\n  site built from requirements gathering to deployment. Token and Google login,\n  role-based access, matching by age, city and preferences, paid subscriptions.\n  The main matching query went from about 350 ms to 120 ms after indexing.\n  Lighthouse mobile performance score 86.",
+      description: "A marriage matchmaking site, built from requirements gathering through deployment.",
+      stack: ["Next.js", "Node.js", "Supabase", "Vercel"],
       display: {
         category: "Web app",
         bullets: [
           "Built login with tokens and Google, role-based access, multi-step forms, matching by age, city, and preferences, paid subscriptions, and dashboards with filters.",
           "Designed the Supabase database and added indexes for matching and filtering. The main matching query went from about 350 ms to 120 ms on test data.",
-          "Lighthouse mobile performance score 86."
+          "Deployed on Vercel. Main pages load in under 2 seconds, with a mobile Lighthouse performance score of 86.",
         ],
-        impact: "120ms search · Vercel",
+        impact: "350ms → 120ms matching query",
       }
     },
     {
       name: "Gold Investment Estimations Assistant",
-      stack: ["Python", "Gemini 2.0", "OpenAI Whisper", "Gradio", "MetalPriceAPI"],
-      description: " chat assistant for gold investing questions that uses\n  the live gold price and supports voice input.",
+      description: "A chat assistant that answers questions about gold investing, using the live gold price.",
+      stack: ["Python", "Gemini", "Whisper", "Gradio"],
       display: {
         category: "AI app",
         bullets: [
-          "Built a chat assistant that gives estimations on questions related to gold investment.",
-          "It uses live gold price and takes both audio and text as input."
+          "Connected MetalPriceAPI to Google Gemini 2.0 so answers use the current gold price.",
+          "Added voice input with OpenAI Whisper so you can speak your question, and built the interface with Gradio.",
+          "Handled API errors and missing data. If the price isn't available, it uses the last saved price or says so instead of guessing.",
         ],
-        impact: "Gemini 2.0 · Live prices",
+        impact: "Live gold prices · Voice input",
       }
     },
     {
       name: "Promptopia",
-      stack: [],
-      description: " a site for finding and sharing AI prompts, with Google sign-in,\n  searchable tags and user profiles.",
+      description: "A site for finding and sharing AI prompts.",
+      stack: ["Next.js", "React", "MongoDB", "Tailwind CSS"],
       display: {
         category: "Web app",
         bullets: [
-          "A full-stack site for finding and sharing AI prompts.",
-          "Added Google sign-in, searchable tags, and user profiles."
+          "Built Google sign-in, prompt creation and editing, searchable tags, and user profile pages with Next.js and MongoDB.",
         ],
-        impact: "Auth · Database",
+        impact: "Live demo · Source on GitHub",
+        image: "/projects/promptopia.png",
+        link: "https://promptopia-chi-ten.vercel.app/",
+        githubUrl: "https://github.com/iamjunaidjutt/promptopia",
       }
     },
     {
       name: "Fake News Detector",
-      stack: ["TensorFlow BiLSTM", "NLTK", "Flask"],
-      description: " 96.2% accuracy and\n  ROC-AUC 0.993 on 14,308 test articles from the WELFake dataset.",
+      description: "A model that tells fake news articles from real ones.",
+      stack: ["Python", "TensorFlow", "BiLSTM", "Flask"],
       display: {
         category: "Machine learning",
         bullets: [
-          "Built a BiLSTM model to classify fake news.",
-          "96.2% accuracy and ROC-AUC 0.993 on 14,308 test articles from the WELFake dataset."
+          "Built a BiLSTM model in TensorFlow. On a test set of 14,308 articles from the WELFake dataset it reached 96.2% accuracy and a ROC-AUC of 0.993.",
+          "Cleaned the text with NLTK, stopped training early when scores stopped improving, and weighted the classes. Precision and recall were both 0.96.",
+          "Put it in a Flask app where you paste an article and get a label (real or fake) with a confidence score.",
         ],
-        impact: "96.2% accuracy · 14k test size",
+        impact: "96.2% accuracy · 0.993 ROC-AUC",
+        githubUrl: "https://github.com/iamjunaidjutt/Fake-News-Detector",
       }
     },
     {
-      name: "Emotion Recognition in Image Content",
-      stack: ["CNN", "TensorFlow", "Keras", "OpenCV"],
-      description: " picks\n  one of 7 emotions from a face photo. 84% accuracy on 32 test photos\n  (144 photos of 18 people), up from 72% after adding flips and rotations.",
+      name: "Emotion Recognition",
+      description: "A CNN that picks one of seven emotions from a face photo.",
+      stack: ["Python", "TensorFlow", "Keras", "OpenCV"],
       display: {
         category: "Computer vision",
         bullets: [
-          "Trained a CNN to detect 7 emotions from face photos.",
-          "Improved accuracy from 72% to 84% on a 32-photo test set (144 photos of 18 people) by adding flips and rotations."
+          "Used OpenCV to find and crop the face, resize it, and convert it to grayscale.",
+          "Trained on 144 photos of 18 people, split by person so the same person is never in both the training and test sets.",
+          "Added flips and small rotations to the training photos, which raised accuracy from 72% to 84% (27 of 32 test photos correct).",
         ],
-        impact: "84% accuracy · Data augmentation",
+        impact: "84% accuracy · 7 emotions",
       }
     },
     {
       name: "Boston House Price Prediction",
-      stack: ["scikit-learn", "Flask", "Docker", "GitHub Actions", "Heroku"],
-      description: " linear regression, R2 of 0.73 on 167 test houses.",
+      description: "A web app that predicts Boston house prices from 13 features.",
+      stack: ["Python", "Scikit-learn", "Pandas", "Flask", "Docker", "GitHub Actions", "Heroku"],
       display: {
         category: "Machine learning",
         bullets: [
-          "Built a linear regression model to predict prices.",
-          "R2 score of 0.73 on 167 test houses."
+          "Built a linear regression model with scikit-learn. On 167 test houses it got an R² of 0.73, with predictions off by about $3,100 on average.",
+          "Put it in a Flask app with a form, and clear errors when the input is missing or wrong.",
+          "Set up GitHub Actions to deploy to Heroku on every push to main, and added a Dockerfile.",
         ],
-        impact: "R2 0.73 · Docker · CI/CD",
+        impact: "R² 0.73 · $3,100 average error",
+        githubUrl: "https://github.com/iamjunaidjutt/Boston-House-Price-Prediction",
       }
     },
     {
       name: "Buxom Cosmetics",
-      stack: ["React", "Node", "Express", "MySQL", "Prisma", "Redux Toolkit", "Stripe test mode"],
-      description: " online store with cart and admin panel.",
+      description: "An online store with a shopping cart and an admin panel.",
+      stack: ["React.js", "Node.js", "Express.js", "MySQL", "Prisma ORM", "Redux Toolkit", "Stripe"],
       display: {
         category: "Web app",
         bullets: [
-          "Built a full-stack online cosmetics store.",
-          "Includes a shopping cart, Stripe integration, and admin panel."
+          "Built JWT login, a product catalogue with pagination and filters, and a shopping cart.",
+          "Added an admin panel to add, edit, and remove products, using Prisma with MySQL.",
+          "Used Redux Toolkit for state and Stripe (test mode) for payments.",
         ],
-        impact: "E-commerce · Postgres",
+        impact: "Catalog · Admin CMS · Payments",
+        githubUrl: "https://github.com/iamjunaidjutt/Buxom-Cosmetics",
       }
     },
     {
       name: "POS Pharmacy",
-      stack: ["Java Swing", "Hibernate", "MySQL", "JUnit", "JasperReports"],
-      description: " desktop\n  point-of-sale app with 16 JUnit test classes.",
+      description: "A desktop point-of-sale app for a pharmacy: sales, stock, and reports.",
+      stack: ["Java", "Java Swing", "Hibernate", "MySQL", "JUnit", "JasperReports"],
       display: {
-        category: "Desktop app",
+        category: "Desktop application",
         bullets: [
-          "Built a point-of-sale app for a pharmacy.",
-          "Wrote 16 JUnit test classes to verify logic."
+          "Built product management, stock tracking, sales records, and login with hashed passwords and user roles.",
+          "Added daily sales and low-stock reports with JasperReports.",
+          "Wrote JUnit tests in 16 test classes, covering the database classes, login and register, inventory, and the cart.",
         ],
-        impact: "Testing · Local DB",
+        impact: "Inventory · Sales · 16 JUnit test classes",
+        githubUrl: "https://github.com/iamjunaidjutt/pos",
       }
     }
   ],

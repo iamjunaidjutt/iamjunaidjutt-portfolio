@@ -54,7 +54,7 @@ pnpm lint
   - `lib/utils.ts` — cn utility for Tailwind class merging
 
 - **`data/`** — Static data
-  - `data/profile.ts` — **Single source of truth** for Junaid's profile. The chatbot answers from this file. Update it whenever the CV changes.
+  - `data/profile.ts` — **Single source of truth (SSOT)** for Junaid's profile. A heavily-typed configuration that drives both the React UI (Section components like Experience, Projects, Services, HeroSection) and the Chatbot system prompt context. Update it whenever the CV changes.
 
 - **`config/`** — Site configuration (metadata, nav links, social links)
 - **`public/`** — Static assets (images, resume PDF)
@@ -227,9 +227,3 @@ Provider errors are mapped to user-friendly messages in `app/api/chat/route.ts`:
 ## TypeScript
 
 Strict mode enabled. All files should be `.ts` or `.tsx`.
-
-## Git Workflow
-
-- Main branch: `main`
-- Current branch: `chatbot-jano`
-- Commit messages end with: `Co-Authored-By: Claude Code <noreply@anthropic.com>`

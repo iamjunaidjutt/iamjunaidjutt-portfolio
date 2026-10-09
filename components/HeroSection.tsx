@@ -12,6 +12,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { PROFILE_DATA } from "@/data/profile";
 
 const HeroSection = () => {
 	return (
@@ -27,7 +28,7 @@ const HeroSection = () => {
 					or remote
 				</p>
 				<h1>
-					Muhammad Junaid
+					{PROFILE_DATA.identity.name}
 					<span className="hero-title-accent">
 						AI &amp; Full-Stack Engineer
 					</span>
@@ -64,14 +65,14 @@ const HeroSection = () => {
 				</div>
 				<div className="hero-links">
 					<Link
-						href="https://www.linkedin.com/in/iamjunaidjutt/"
+						href={PROFILE_DATA.socials.linkedin}
 						target="_blank"
 					>
 						<Linkedin className="mr-2 h-4 w-4" />
 						LinkedIn
 					</Link>
 					<Link
-						href="https://github.com/iamjunaidjutt"
+						href={PROFILE_DATA.socials.github}
 						target="_blank"
 					>
 						<Github className="mr-2 h-4 w-4" />
@@ -90,7 +91,7 @@ const HeroSection = () => {
 						src="/images/profile.png"
 						width={512}
 						height={512}
-						alt="Muhammad Junaid"
+						alt={PROFILE_DATA.identity.name}
 						priority
 						className="h-full w-full object-contain object-bottom"
 					/>
@@ -99,7 +100,7 @@ const HeroSection = () => {
 			<div className="hero-meta">
 				<span>Associate Software Engineer (AI/ML) · Devsinc</span>
 				<span>BS Software Engineering · FAST-NUCES</span>
-				<span>Lahore, Pakistan · Remote is fine</span>
+				<span>{PROFILE_DATA.meta.location} · {PROFILE_DATA.meta.workPreference}</span>
 			</div>
 			<Link href="#about" className="scroll-cue">
 				<ArrowDown className="h-4 w-4" /> Scroll down

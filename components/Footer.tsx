@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { PROFILE_DATA } from "@/data/profile";
 
 const navigation = [
 	{ label: "About", href: "/#about" },
@@ -15,16 +16,15 @@ const Footer = () => (
 	<footer className="site-footer">
 		<div className="page-width footer-main">
 			<div className="footer-intro">
-				<p className="footer-brand">Muhammad Junaid</p>
+				<p className="footer-brand">{PROFILE_DATA.identity.name}</p>
 				<p>
-					I build backend systems and web apps, usually with some AI
-					in them.
+					{PROFILE_DATA.identity.description}
 				</p>
 				<a
 					className="footer-email"
-					href="mailto:info.iamjunaidjutt@gmail.com"
+					href={`mailto:${PROFILE_DATA.contact.email}`}
 				>
-					info.iamjunaidjutt@gmail.com{" "}
+					{PROFILE_DATA.contact.email}{" "}
 					<ArrowUpRight className="h-4 w-4" />
 				</a>
 			</div>
@@ -42,7 +42,7 @@ const Footer = () => (
 				<p className="footer-label">Connect</p>
 				<div className="footer-social-row">
 					<a
-						href="https://www.linkedin.com/in/iamjunaidjutt"
+						href={PROFILE_DATA.socials.linkedin}
 						target="_blank"
 						rel="noreferrer"
 						aria-label="LinkedIn"
@@ -50,7 +50,7 @@ const Footer = () => (
 						<Linkedin />
 					</a>
 					<a
-						href="https://github.com/iamjunaidjutt"
+						href={PROFILE_DATA.socials.github}
 						target="_blank"
 						rel="noreferrer"
 						aria-label="GitHub"
@@ -58,19 +58,19 @@ const Footer = () => (
 						<Github />
 					</a>
 					<a
-						href="mailto:info.iamjunaidjutt@gmail.com"
+						href={`mailto:${PROFILE_DATA.contact.email}`}
 						aria-label="Email"
 					>
 						<Mail />
 					</a>
 				</div>
 				<p className="footer-location">
-					Open to work: Lahore or remote
+					Open to work: {PROFILE_DATA.meta.location} or remote
 				</p>
 			</div>
 		</div>
 		<div className="page-width footer-bottom">
-			<span>© {new Date().getFullYear()} Muhammad Junaid</span>
+			<span>© {new Date().getFullYear()} {PROFILE_DATA.identity.name}</span>
 			<span>AI/ML · Full-stack · Platform engineering</span>
 		</div>
 	</footer>
