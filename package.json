@@ -10,7 +10,6 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@frank-mayer/react-tag-cloud": "^1.2.1",
 		"@hookform/resolvers": "^3.2.0",
 		"@radix-ui/react-dropdown-menu": "^2.0.5",
 		"@radix-ui/react-label": "^2.0.2",
