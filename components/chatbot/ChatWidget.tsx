@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
 	Bot,
 	Loader2,
@@ -9,12 +9,14 @@ import {
 	Send,
 	X,
 } from "lucide-react";
-import type { Components } from "react-markdown";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { useEffect, useRef, useState } from "react";
 
 import { ASSISTANT } from "@/lib/chat/assistant";
+import { usePathname } from "next/navigation";
+import { useActiveSection } from "@/lib/hooks/useActiveSection";
+import { getStarterSuggestions, deriveFollowUps } from "@/lib/chat/suggestions";
+import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
+import { MessageRow } from "./MessageRow";
 
 type Message = {
 	role: "user" | "assistant";
@@ -34,6 +36,8 @@ const createWelcomeMessage = (): Message => ({
 
 const chatStorageKey = "junaid-portfolio-chat-history";
 const teaserStorageKey = "junaid-portfolio-chat-teaser-dismissed";
+const layoutStorageKey = "junaid-portfolio-chat-layout";
+const layoutStorageKey = "junaid-portfolio-chat-layout";
 // How the nudge repeats: first appearance, how long it stays, and the pause before it returns.
 const teaserFirstDelayMs = 3000;
 const teaserVisibleMs = 6000;
@@ -89,40 +93,8 @@ const cleanAssistantText = (content: string): string =>
 		.replace(/([^\n])\n(#{1,6} )/g, "$1\n\n$2")
 		.replace(/\n{3,}/g, "\n\n");
 
-const suggestions = ASSISTANT.suggestions;
 
-const markdownComponents: Components = {
-	p: ({ children }) => <p className="m-0 mt-2 first:mt-0">{children}</p>,
-	h1: ({ children }) => <h1 className="m-0 text-base font-semibold">{children}</h1>,
-	h2: ({ children }) => <h2 className="m-0 text-sm font-semibold">{children}</h2>,
-	h3: ({ children }) => <h3 className="m-0 mt-3 font-semibold first:mt-0">{children}</h3>,
-	ul: ({ children }) => <ul className="m-0 mt-2 list-disc pl-5 first:mt-0">{children}</ul>,
-	ol: ({ children }) => <ol className="m-0 mt-2 list-decimal pl-5 first:mt-0">{children}</ol>,
-	li: ({ children }) => <li className="mt-1 first:mt-0">{children}</li>,
-	a: ({ children, href }) => (
-		<a
-			href={href}
-			target="_blank"
-			rel="noreferrer"
-			className="font-medium text-[var(--coral)] underline underline-offset-2"
-		>
-			{children}
-		</a>
-	),
-	blockquote: ({ children }) => (
-		<blockquote className="border-l-2 border-[var(--coral)] pl-3 italic">
-			{children}
-		</blockquote>
-	),
-	pre: ({ children }) => (
-		<pre className="my-0.5 overflow-x-auto rounded-md bg-[var(--surface)] p-2 text-xs">
-			{children}
-		</pre>
-	),
-	code: ({ children }) => (
-		<code className="rounded bg-[var(--surface)] px-1 py-0.5 text-[0.85em]">{children}</code>
-	),
-};
+
 
 export default function ChatWidget() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -132,20 +104,59 @@ export default function ChatWidget() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [statusText, setStatusText] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
+	const [liveMessage, setLiveMessage] = useState("");
 	const [showTeaser, setShowTeaser] = useState(false);
 	const [teaserIndex, setTeaserIndex] = useState(0);
 	// null until sessionStorage has been read, so the nudge never flashes for someone who closed it.
 	const [teaserDismissed, setTeaserDismissed] = useState<boolean | null>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+	const dialogRef = useRef<HTMLElement>(null);
+	const abortRef = useRef<AbortController | null>(null);
+	const abortedRef = useRef(false);
+	const [resetPending, setResetPending] = useState(false);
+	const [followUpChips, setFollowUpChips] = useState<string[]>([]);
+	const pathname = usePathname();
+	const activeSection = useActiveSection();
+	const currentSuggestions = useMemo(() => getStarterSuggestions({ pathname, section: activeSection }), [pathname, activeSection]);
+	const layoutClasses = {
+		compact: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(560px,70vh)] md:w-[min(380px,calc(100vw-2rem))]",
+		panel: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(85vh,760px)] md:w-[min(620px,calc(100vw-2rem))]",
+		fullscreen: "md:inset-3 md:h-auto md:w-auto",
+	} as const;
+	const layoutClasses = {
+		compact: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(560px,70vh)] md:w-[min(380px,calc(100vw-2rem))]",
+		panel: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(85vh,760px)] md:w-[min(620px,calc(100vw-2rem))]",
+		fullscreen: "md:inset-3 md:h-auto md:w-auto",
+	} as const;
+	const reducedMotion = useReducedMotion();
+	const [layout, setLayout] = useState<"compact" | "panel" | "fullscreen">("compact");
+	const [layout, setLayout] = useState<"compact" | "panel" | "fullscreen">("compact");
+
+	useFocusTrap(dialogRef, isOpen);
 
 	useEffect(() => {
 		if (!isOpen) {
 			return;
 		}
 
+		previouslyFocusedRef.current = document.activeElement as HTMLElement;
 		textareaRef.current?.focus();
+		window.dispatchEvent(new CustomEvent("lenis:stop"));
 	}, [isOpen]);
+
+	useEffect(() => {
+		return () => {
+			abortRef.current?.abort();
+		};
+	}, [setLayout]);
+
+	const closeChat = () => {
+		setIsOpen(false);
+		window.dispatchEvent(new CustomEvent("lenis:start"));
+		requestAnimationFrame(() => previouslyFocusedRef.current?.focus());
+	};
 
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -154,7 +165,19 @@ export default function ChatWidget() {
 	useEffect(() => {
 		setMessages(getStoredMessages());
 		setHasLoadedStoredMessages(true);
-	}, []);
+		try {
+			const stored = localStorage.getItem(layoutStorageKey);
+			if (stored === "panel" || stored === "fullscreen") {
+				setLayout(stored);
+			}
+		} catch {}
+	}, [setLayout]);
+
+	useEffect(() => {
+		try {
+			localStorage.setItem(layoutStorageKey, layout);
+		} catch {}
+	}, [layout]);
 
 	useEffect(() => {
 		if (!hasLoadedStoredMessages) {
@@ -177,7 +200,7 @@ export default function ChatWidget() {
 			// Storage can be unavailable; showing the nudge is harmless.
 			setTeaserDismissed(false);
 		}
-	}, []);
+	}, [setLayout]);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -221,20 +244,23 @@ export default function ChatWidget() {
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape") {
-				setIsOpen(false);
+			if (event.key === "Escape" && isOpen) {
+				closeChat();
 			}
 		};
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, []);
+	}, [isOpen]);
 
 	const sendMessage = async (content: string, addUserMessage = true) => {
 		const trimmedContent = content.trim();
 		if (!trimmedContent || isLoading) {
 			return;
 		}
+
+		abortRef.current = new AbortController();
+		abortedRef.current = false;
 
 		const nextMessages = addUserMessage
 			? [...messages, { role: "user" as const, content: trimmedContent }]
@@ -333,6 +359,7 @@ export default function ChatWidget() {
 					}
 					if (data.status) {
 						setStatusText(data.status);
+							setLiveMessage(data.status);
 					}
 					if (data.reset) {
 						resetAssistantText();
@@ -347,7 +374,11 @@ export default function ChatWidget() {
 					break;
 				}
 			}
-		} catch (requestError) {
+		} catch (requestError: any) {
+				if (requestError.name === "AbortError" || abortedRef.current) {
+					setLiveMessage("Generation stopped.");
+					return;
+				}
 			setMessages((currentMessages) => {
 				const lastMessage = currentMessages.at(-1);
 				return lastMessage?.role === "assistant" && !lastMessage.content
@@ -366,8 +397,16 @@ export default function ChatWidget() {
 	};
 
 	const handleSubmit = () => {
-		void sendMessage(input);
+		if (!isLoading) {
+			void sendMessage(input);
+		}
 	};
+
+	useEffect(() => {
+		if (!resetPending) return;
+		const timer = window.setTimeout(() => setResetPending(false), 4000);
+		return () => window.clearTimeout(timer);
+	}, [resetPending]);
 
 	const handleRetry = () => {
 		const lastUserMessage = [...messages].reverse().find((message) => message.role === "user");
@@ -392,13 +431,14 @@ export default function ChatWidget() {
 			<AnimatePresence>
 				{isOpen && (
 					<motion.section
-						initial={{ opacity: 0, y: 12 }}
+						initial={{ opacity: 0, y: reducedMotion ? 0 : 12 }}
 						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: 12 }}
+						exit={{ opacity: 0, y: reducedMotion ? 0 : 12 }}
 						transition={{ duration: 0.2 }}
 						role="dialog"
-						aria-label="Ask about Junaid"
-						className="fixed inset-x-3 bottom-3 top-16 z-[60] flex flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] shadow-2xl md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(560px,70vh)] md:w-[min(380px,calc(100vw-2rem))]"
+						aria-modal="true" aria-labelledby="juno-dialog-title" ref={dialogRef as any}
+						className={`fixed inset-x-3 bottom-3 top-16 z-[60] flex flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] shadow-2xl ${layoutClasses[layout]}`}
+							style={{ transition: reducedMotion ? "none" : "width 0.2s, height 0.2s" }}
 					>
 						<header className="flex min-h-[4.5rem] items-center justify-between border-b border-[var(--line)] bg-[var(--graphite)] px-4 py-3 text-[var(--on-ink)]">
 							<div className="flex min-w-0 items-center gap-3">
@@ -406,7 +446,7 @@ export default function ChatWidget() {
 									{ASSISTANT.name.charAt(0)}
 								</div>
 								<div className="flex min-w-0 flex-col justify-center gap-1">
-									<h2 className="truncate text-sm font-semibold leading-tight">{ASSISTANT.name}</h2>
+									<h2 id="juno-dialog-title" className="truncate text-sm font-semibold leading-tight">{ASSISTANT.name}</h2>
 									<p className="inline-flex h-4 items-center gap-1.5 text-[11px] leading-none text-white/70">
 										<span className="chat-status-dot" />
 										Online · {ASSISTANT.tagline}
@@ -414,19 +454,37 @@ export default function ChatWidget() {
 								</div>
 							</div>
 							<div className="flex shrink-0 items-center gap-1">
-								<button
-									type="button"
-									aria-label="Start a new chat"
-									title="New chat"
-									onClick={clearChat}
-									className="flex h-9 w-9 items-center justify-center rounded-md text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
-								>
-									<Plus size={18} />
-								</button>
+									{resetPending ? (
+										<div className="flex items-center gap-1 bg-white/10 rounded-md p-1 mr-1">
+											<span className="text-[11px] font-medium px-2">New chat?</span>
+											<button 
+												onClick={() => { clearChat(); setResetPending(false); }}
+												className="h-6 px-2 rounded-sm bg-[var(--coral)] text-white text-[10px] font-semibold transition hover:bg-opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+											>
+												Yes
+											</button>
+											<button 
+												onClick={() => setResetPending(false)}
+												className="h-6 px-2 rounded-sm text-white/80 text-[10px] transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+											>
+												No
+											</button>
+										</div>
+									) : (
+										<button
+											type="button"
+											aria-label="Start a new chat"
+											title="New chat"
+											onClick={() => setResetPending(true)}
+											className="flex h-9 w-9 items-center justify-center rounded-md text-white/75 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+										>
+											<Plus size={18} />
+										</button>
+									)}
 								<button
 									type="button"
 									aria-label="Close chat"
-									onClick={() => setIsOpen(false)}
+									onClick={closeChat}
 									className="flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] transition hover:bg-[var(--paper)] hover:text-[var(--ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
 								>
 									<X size={18} />
@@ -435,43 +493,23 @@ export default function ChatWidget() {
 						</header>
 
 						<div
-							aria-live="polite"
+							
 							data-lenis-prevent
 							className="min-h-0 flex-1 touch-pan-y space-y-4 overflow-y-auto overscroll-contain px-4 py-4"
 						>
 							{messages.map((message, index) => (
-								<div
-									key={`${message.role}-${index}`}
-									className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-								>
-									{message.role === "assistant" && (
-										<div className="mr-2 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[var(--chat-assistant)] text-white">
-											<Bot size={14} />
-										</div>
-									)}
-									<div
-										className={`max-w-[86%] rounded-xl px-3 py-3 text-sm leading-5 ${message.role === "user"
-											? "whitespace-pre-wrap bg-[var(--chat-user)] text-white"
-											: "bg-[var(--paper)] text-[var(--ink)]"
-											}`}
-									>
-										{message.role === "assistant" ? (
-											<ReactMarkdown
-												components={markdownComponents}
-												remarkPlugins={[remarkGfm]}
-											>
-												{cleanAssistantText(message.content)}
-											</ReactMarkdown>
-										) : (
-											message.content
-										)}
-									</div>
-								</div>
-							))}
+									<MessageRow
+										key={`${message.role}-${index}`}
+										role={message.role}
+										content={message.content}
+										isStreaming={isLoading && index === messages.length - 1}
+										setLiveMessage={setLiveMessage}
+									/>
+								))}
 
-							{messages.length === 1 && (
+								{messages.length === 1 && (
 								<div className="flex flex-wrap gap-2 pt-1">
-									{suggestions.map((suggestion) => (
+									{currentSuggestions.map((suggestion) => (
 										<button
 											key={suggestion}
 											type="button"
@@ -488,7 +526,7 @@ export default function ChatWidget() {
 							{isLoading && (
 								<div className="flex justify-start">
 									<div className="flex items-center gap-2 rounded-xl bg-[var(--paper)] px-3 py-2 text-[var(--muted-ink)]">
-										<Loader2 className="animate-spin" size={17} aria-label="Assistant is typing" />
+										<Loader2 className="animate-spin" size={17} aria-hidden="true" />
 										{statusText && <span className="text-xs">{statusText}</span>}
 									</div>
 								</div>
@@ -507,7 +545,23 @@ export default function ChatWidget() {
 									</button>
 								</div>
 							)}
-							<div ref={messagesEndRef} />
+							
+{followUpChips.length > 0 && messages.length > 1 && !isLoading && !error && (
+									<div className="flex flex-wrap gap-2 pt-1 pb-2">
+										{followUpChips.map((chip) => (
+											<button
+												key={chip}
+												type="button"
+												onClick={() => void sendMessage(chip)}
+												className="rounded-full border border-[var(--line)] px-3 py-1.5 text-left text-[11px] text-[var(--muted-ink)] transition hover:border-[var(--coral)] hover:text-[var(--coral)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+											>
+												{chip}
+											</button>
+										))}
+									</div>
+								)}
+								<div ref={messagesEndRef} />
+
 						</div>
 
 						<form
@@ -584,7 +638,7 @@ export default function ChatWidget() {
 				aria-hidden={isOpen}
 				tabIndex={isOpen ? -1 : 0}
 				onClick={() => setIsOpen((open) => !open)}
-				className={`chat-launcher fixed bottom-5 right-6 z-[60] flex items-center gap-3 rounded-full bg-[var(--chat-launcher-bg)] py-2 pl-2 pr-5 text-white shadow-lg transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] ${isOpen ? "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
+				className={`chat-launcher fixed bottom-5 right-6 z-[60] flex items-center gap-3 rounded-full bg-[var(--chat-launcher-bg)] py-2 pl-2 pr-5 text-white shadow-lg transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] ${isOpen ? layout !== "compact" ? "opacity-0 pointer-events-none" : "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
 			>
 				<span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-semibold leading-none">
 					{isOpen ? <X size={20} /> : ASSISTANT.name.charAt(0)}

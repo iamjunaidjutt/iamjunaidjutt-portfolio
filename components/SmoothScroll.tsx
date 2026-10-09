@@ -22,10 +22,17 @@ const SmoothScroll = () => {
 
 		animationFrameId = requestAnimationFrame(raf);
 		window.addEventListener("lenis:scroll-to-top", handleScrollToTop);
+		
+		const handleStop = () => lenis.stop();
+		const handleStart = () => lenis.start();
+		window.addEventListener("lenis:stop", handleStop);
+		window.addEventListener("lenis:start", handleStart);
 
 		return () => {
 			cancelAnimationFrame(animationFrameId);
 			window.removeEventListener("lenis:scroll-to-top", handleScrollToTop);
+			window.removeEventListener("lenis:stop", handleStop);
+			window.removeEventListener("lenis:start", handleStart);
 			lenis.destroy();
 		};
 	}, []);

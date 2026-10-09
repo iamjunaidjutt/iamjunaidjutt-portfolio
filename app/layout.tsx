@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import { Separator } from "@/components/ui/separator";
 import ScrollToTop from "@/components/ScrollToTop";
 import SmoothScroll from "@/components/SmoothScroll";
-import ChatWidget from "@/components/chatbot/ChatWidget";
+import ChatWidgetMount from "@/components/chatbot/ChatWidgetMount";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -95,7 +95,7 @@ export default function RootLayout({
 						<Toaster />
 						<Separator className="footer-separator" />
 						<Footer />
-						<ChatWidget />
+						<ChatWidgetMount />
 					</div>
 				</ThemeProvider>
 			</body>

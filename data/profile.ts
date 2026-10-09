@@ -1,21 +1,27 @@
-export const PROFILE = `
-NAME: Muhammad Junaid. Software engineer in Lahore, Pakistan.
-CONTACT
-- Email: info.iamjunaidjutt@gmail.com
-- Phone and WhatsApp: +92 307 4254648 (WhatsApp link: https://wa.me/923074254648)
-- Contact form: https://iamjunaidjutt.vercel.app/contact
-- Website: https://iamjunaidjutt.vercel.app
-SOCIAL MEDIA
-- LinkedIn: https://www.linkedin.com/in/iamjunaidjutt
-- GitHub: https://github.com/iamjunaidjutt
-- X: https://x.com/iamjunaidjutt_
-AVAILABILITY: Open to full-time roles, in Lahore or remote.
-LANGUAGES: Urdu and Punjabi (mother tongues), English B2, German A1.
-WORKING STYLE: Likes to understand what people need before writing code, and wants his work to still run after the demo is over.
-HOBBIES: Reading books, learning new technologies, exploring AI, and watching movies on Netflix.
+import { Profile, buildProfileText } from "@/lib/chat/profileText";
 
-CURRENT ROLE
-Associate Software Engineer (AI/ML) at Devsinc, Lahore, since 16 Dec 2025.
+export const PROFILE_DATA: Profile = {
+  identity: {
+    name: "Muhammad Junaid",
+    description: "Software engineer in Lahore, Pakistan."
+  },
+  contact: {
+    email: "info.iamjunaidjutt@gmail.com",
+    phone: "+92 307 4254648",
+    whatsappLink: "https://wa.me/923074254648",
+    contactForm: "https://iamjunaidjutt.vercel.app/contact",
+    website: "https://iamjunaidjutt.vercel.app"
+  },
+  socials: {
+    linkedin: "https://www.linkedin.com/in/iamjunaidjutt",
+    github: "https://github.com/iamjunaidjutt",
+    x: "https://x.com/iamjunaidjutt_"
+  },
+  availability: "Open to full-time roles, in Lahore or remote.",
+  languages: "Urdu and Punjabi (mother tongues), English B2, German A1.",
+  workingStyle: "Likes to understand what people need before writing code, and wants his work to still run after the demo is over.",
+  hobbies: "Reading books, learning new technologies, exploring AI, and watching movies on Netflix.",
+  currentRole: `Associate Software Engineer (AI/ML) at Devsinc, Lahore, since 16 Dec 2025.
 He joined as a Software Engineer Intern on 9 Oct 2025 and moved into this role.
 He works on LawPractice.ai, a platform used by plaintiff law firms in the
 United States. More than 300 law firms use it.
@@ -24,21 +30,14 @@ United States. More than 300 law firms use it.
 - Maintains OCR, document reading and document writing pipelines for different document types, including large medical records of more than 1000 pages, adds new ones when needed, and fixes issues clients report
   in production.
 - Tools used: OpenCV, Azure Document Intelligence, Azure AI Foundry, Azure AI Search, Azure SQL
-  Database, Azure Cosmos DB, RabbitMQ background workers.
-
-PREVIOUS WORK
-Software Engineer Intern at Kryptomind LLC, Lahore (19 Aug 2024 to 19 Nov 2024).
+  Database, Azure Cosmos DB, RabbitMQ background workers.`,
+  previousWork: `Software Engineer Intern at Kryptomind LLC, Lahore (19 Aug 2024 to 19 Nov 2024).
 - Built interfaces with animations and 3D models using GSAP and React Three Fiber, and used Lenis for smooth scrolling.
 - Connected Next.js, TypeScript and React frontends to REST APIs. Server-side rendering and code splitting took one project's Lighthouse score from 55 to 90.
-- Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts and wallet integration.
-
-EDUCATION
-BS in Software Engineering, FAST-NUCES, Lahore (2021 to 2025).
-Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).
-
-
-COURSES & PROFESSIONAL TRAINING
-- AI Engineer Agentic Track: The Complete Agent & MCP Course / Master AI Agents in 30 Days
+- Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts and wallet integration.`,
+  education: `BS in Software Engineering, FAST-NUCES, Lahore (2021 to 2025).
+Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).`,
+  courses: `- AI Engineer Agentic Track: The Complete Agent & MCP Course / Master AI Agents in 30 Days
   (Instructors: Ed Donner — repeat AI startup founder/CTO, ex-MD at JPMorgan Chase, Oxford MA in Physics; and Ligency Team):
   6-week deep dive into autonomous AI agents across OpenAI Agents SDK, CrewAI,
   LangGraph, AutoGen, and Model Context Protocol (MCP).
@@ -158,10 +157,8 @@ COURSES & PROFESSIONAL TRAINING
     - Chicken Disease Classification (Deep Learning & DVC): Transfer learning CNN image classification pipeline with DVC pipeline stages, evaluation metrics logging, Docker containerization, and automated cloud deployment.
     - Kidney Disease Classification: Deep learning classification pipeline using MLflow experiment tracking and cloud deployment with continuous retraining triggers.
     - Cell Segmentation with YOLOv8: Computer vision instance segmentation model fine-tuned on custom microscopic cell datasets, utilizing YOLOv8 and deployed with real-time inference.
-    - Production Deployment on AWS SageMaker: Custom model training, tuning, and real-time HTTPS inference endpoint deployment using AWS SageMaker SDK, S3 artifacts, and IAM policies.
-
-PROJECTS
-- ResQ CRM (Next.js, Tailwind, TypeScript, Firebase): led a frontend team of 3.
+    - Production Deployment on AWS SageMaker: Custom model training, tuning, and real-time HTTPS inference endpoint deployment using AWS SageMaker SDK, S3 artifacts, and IAM policies.`,
+  projects: `- ResQ CRM (Next.js, Tailwind, TypeScript, Firebase): led a frontend team of 3.
   Role-based login, lead dashboard, forms, chat module, advanced filters,
   Google Maps live rider locations. Used by about 25 staff in the United
   States. Moved to server-side rendering with caching, so the main dashboard
@@ -186,19 +183,19 @@ PROJECTS
 - Buxom Cosmetics (React, Node, Express, MySQL, Prisma, Redux Toolkit, Stripe
   test mode): online store with cart and admin panel.
 - POS Pharmacy (Java Swing, Hibernate, MySQL, JUnit, JasperReports): desktop
-  point-of-sale app with 16 JUnit test classes.
-
-SKILLS
-Languages: Python, JavaScript, TypeScript, Java, C#, C++, SQL.
-Web and backend: ASP.NET Core, FastAPI, Flask, Django, Node.js, Express, Next.js, React, Redux Toolkit, Tailwind CSS.
-AI and LLMs: LLMs, RAG, agentic AI, MCP, prompt engineering, Generative AI, Embeddings, Vector databases/stores (Pinecone, Chroma, Qdrant, FAISS), LangChain, LangGraph, OpenAI Agents SDK, CrewAI, AutoGen, Hugging Face, TensorFlow, Keras, scikit-learn, OpenCV.
-Cloud and DevOps: Azure, AWS, GCP, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Grafana, Prometheus, Loki.
-Databases: MS SQL Server, MySQL, MongoDB, Firebase, Supabase.
-
-LEADERSHIP AND VOLUNTEERING
-- Deputy Head of Marketing, SOFTEC 2023: helped lead a marketing team of about
+  point-of-sale app with 16 JUnit test classes.`,
+  skills: {
+    languages: "Python, JavaScript, TypeScript, Java, C#, C++, SQL.",
+    web: "ASP.NET Core, FastAPI, Flask, Django, Node.js, Express, Next.js, React, Redux Toolkit, Tailwind CSS.",
+    ai: "LLMs, RAG, agentic AI, MCP, prompt engineering, Generative AI, Embeddings, Vector databases/stores (Pinecone, Chroma, Qdrant, FAISS), LangChain, LangGraph, OpenAI Agents SDK, CrewAI, AutoGen, Hugging Face, TensorFlow, Keras, scikit-learn, OpenCV.",
+    cloud: "Azure, AWS, GCP, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Grafana, Prometheus, Loki.",
+    databases: "MS SQL Server, MySQL, MongoDB, Firebase, Supabase."
+  },
+  leadership: `- Deputy Head of Marketing, SOFTEC 2023: helped lead a marketing team of about
   40, worked with company executives to close three sponsorship deals and raised
   over PKR 1,000,000, which was 25% above the target.
 - Operations Volunteer, Future Fest 2023.
-- Volunteer in Marketing, Software House Enclosure and Infrastructure, SOFTEC 2022.
-`;
+- Volunteer in Marketing, Software House Enclosure and Infrastructure, SOFTEC 2022.`
+};
+
+export const PROFILE = buildProfileText(PROFILE_DATA);

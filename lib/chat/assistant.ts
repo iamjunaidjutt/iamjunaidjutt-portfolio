@@ -23,4 +23,18 @@ export const ASSISTANT = {
 		"What is his tech stack?",
 		"Is he open to new roles?",
 	],
+	contextSuggestions: {
+		byRoute: {
+			"/contact": ["How can I reach Junaid?", "What's the best way to get in touch?"],
+			"/": [],
+		},
+		bySection: {
+			about: ["What's his background?", "Where is he based?"],
+			experience: ["Tell me about his current role", "What has he built at Devsinc?"],
+			stack: ["What's his main tech stack?", "What tools does he use daily?"],
+			training: ["What courses has he taken?", "Tell me about his AI/ML training"],
+			projects: ["What's his most interesting project?", "Tell me about his GitHub repos"],
+			leadership: ["What leadership roles has he held?"],
+		}
+	}
 } as const;

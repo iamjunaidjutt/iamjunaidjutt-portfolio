@@ -7,6 +7,7 @@ import { Download, Menu } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
+import { SECTION_IDS } from "@/config/sections";
 import { Button } from "@/components/ui/button";
 import ModeToggle from "@/components/theme/toggle-theme";
 import {
