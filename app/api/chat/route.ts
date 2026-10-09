@@ -10,6 +10,8 @@ import { executeChatTool, getChatTools, getRepoIndex } from "@/lib/chat/tools";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Tool rounds can take a while; without this the platform default may cut the stream.
+export const maxDuration = 60;
 
 const MAX_HISTORY_REPLY_CHARS = 6000;
 
