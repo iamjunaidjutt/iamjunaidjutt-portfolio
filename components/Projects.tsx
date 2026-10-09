@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ArrowUpRight, Github } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { PROFILE_DATA } from "@/data/profile";
+
 const Projects = () => {
 	const projects = [
 		{

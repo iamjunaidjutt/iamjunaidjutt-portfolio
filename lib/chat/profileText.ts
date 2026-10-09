@@ -2,6 +2,14 @@ export interface Profile {
   identity: {
     name: string;
     description: string;
+    display?: {
+      category?: string;
+      bullets?: string[];
+      impact?: string;
+      image?: string;
+      link?: string;
+      githubUrl?: string;
+    };
   };
   contact: {
     email: string;
@@ -23,7 +31,11 @@ export interface Profile {
   previousWork: string;
   education: string;
   courses: string;
-  projects: string;
+  projects: {
+    name: string;
+    stack: string[];
+    description: string;
+  }[];
   skills: {
     languages: string;
     web: string;

@@ -158,32 +158,128 @@ Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).`,
     - Kidney Disease Classification: Deep learning classification pipeline using MLflow experiment tracking and cloud deployment with continuous retraining triggers.
     - Cell Segmentation with YOLOv8: Computer vision instance segmentation model fine-tuned on custom microscopic cell datasets, utilizing YOLOv8 and deployed with real-time inference.
     - Production Deployment on AWS SageMaker: Custom model training, tuning, and real-time HTTPS inference endpoint deployment using AWS SageMaker SDK, S3 artifacts, and IAM policies.`,
-  projects: `- ResQ CRM (Next.js, Tailwind, TypeScript, Firebase): led a frontend team of 3.
-  Role-based login, lead dashboard, forms, chat module, advanced filters,
-  Google Maps live rider locations. Used by about 25 staff in the United
-  States. Moved to server-side rendering with caching, so the main dashboard
-  loads in about 1.8 seconds instead of 3.5.
-- Mawaddah (Next.js, Node.js, Supabase, Tailwind, Vercel): marriage matchmaking
-  site built from requirements gathering to deployment. Token and Google login,
-  role-based access, matching by age, city and preferences, paid subscriptions.
-  The main matching query went from about 350 ms to 120 ms after indexing.
-  Lighthouse mobile performance score 86.
-- Gold Investment Estimations Assistant (Python, Gemini 2.0, OpenAI Whisper,
-  Gradio, MetalPriceAPI): chat assistant for gold investing questions that uses
-  the live gold price and supports voice input.
-- Promptopia: a site for finding and sharing AI prompts, with Google sign-in,
-  searchable tags and user profiles.
-- Fake News Detector (TensorFlow BiLSTM, NLTK, Flask): 96.2% accuracy and
-  ROC-AUC 0.993 on 14,308 test articles from the WELFake dataset.
-- Emotion Recognition in Image Content (CNN, TensorFlow, Keras, OpenCV): picks
-  one of 7 emotions from a face photo. 84% accuracy on 32 test photos
-  (144 photos of 18 people), up from 72% after adding flips and rotations.
-- Boston House Price Prediction (scikit-learn, Flask, Docker, GitHub Actions,
-  Heroku): linear regression, R2 of 0.73 on 167 test houses.
-- Buxom Cosmetics (React, Node, Express, MySQL, Prisma, Redux Toolkit, Stripe
-  test mode): online store with cart and admin panel.
-- POS Pharmacy (Java Swing, Hibernate, MySQL, JUnit, JasperReports): desktop
-  point-of-sale app with 16 JUnit test classes.`,
+  projects: [
+    {
+      name: "ResQ CRM",
+      stack: ["Next.js", "Tailwind", "TypeScript", "Firebase"],
+      description: " led a frontend team of 3.\n  Role-based login, lead dashboard, forms, chat module, advanced filters,\n  Google Maps live rider locations. Used by about 25 staff in the United\n  States. Moved to server-side rendering with caching, so the main dashboard\n  loads in about 1.8 seconds instead of 3.5.",
+      display: {
+        category: "Web app",
+        bullets: [
+          "Led a frontend team of three and built role-based login, lead dashboards, forms, popups, chat, and advanced filters for about 25 staff members in the United States.",
+          "Added Google Maps so staff can see riders' live locations, with Firebase Cloud Storage updating them every few seconds.",
+          "Moved the app from client-side to server-side rendering with caching. The main dashboard now loads in about 1.8 seconds instead of 3.5."
+        ],
+        impact: "Live rider tracking · 1.8s dashboard load",
+      }
+    },
+    {
+      name: "Mawaddah",
+      stack: ["Next.js", "Node.js", "Supabase", "Tailwind", "Vercel"],
+      description: " marriage matchmaking\n  site built from requirements gathering to deployment. Token and Google login,\n  role-based access, matching by age, city and preferences, paid subscriptions.\n  The main matching query went from about 350 ms to 120 ms after indexing.\n  Lighthouse mobile performance score 86.",
+      display: {
+        category: "Web app",
+        bullets: [
+          "Built login with tokens and Google, role-based access, multi-step forms, matching by age, city, and preferences, paid subscriptions, and dashboards with filters.",
+          "Designed the Supabase database and added indexes for matching and filtering. The main matching query went from about 350 ms to 120 ms on test data.",
+          "Lighthouse mobile performance score 86."
+        ],
+        impact: "120ms search · Vercel",
+      }
+    },
+    {
+      name: "Gold Investment Estimations Assistant",
+      stack: ["Python", "Gemini 2.0", "OpenAI Whisper", "Gradio", "MetalPriceAPI"],
+      description: " chat assistant for gold investing questions that uses\n  the live gold price and supports voice input.",
+      display: {
+        category: "AI app",
+        bullets: [
+          "Built a chat assistant that gives estimations on questions related to gold investment.",
+          "It uses live gold price and takes both audio and text as input."
+        ],
+        impact: "Gemini 2.0 · Live prices",
+      }
+    },
+    {
+      name: "Promptopia",
+      stack: [],
+      display: { stack: ["Next.js", "MongoDB", "Tailwind", "NextAuth"] } as any, // Not typed in Profile but injected below safely
+      description: " a site for finding and sharing AI prompts, with Google sign-in,\n  searchable tags and user profiles.",
+      display: {
+        category: "Web app",
+        bullets: [
+          "A full-stack site for finding and sharing AI prompts.",
+          "Added Google sign-in, searchable tags, and user profiles."
+        ],
+        impact: "Auth · Database",
+      }
+    },
+    {
+      name: "Fake News Detector",
+      stack: ["TensorFlow BiLSTM", "NLTK", "Flask"],
+      description: " 96.2% accuracy and\n  ROC-AUC 0.993 on 14,308 test articles from the WELFake dataset.",
+      display: {
+        category: "Machine learning",
+        bullets: [
+          "Built a BiLSTM model to classify fake news.",
+          "96.2% accuracy and ROC-AUC 0.993 on 14,308 test articles from the WELFake dataset."
+        ],
+        impact: "96.2% accuracy · 14k test size",
+      }
+    },
+    {
+      name: "Emotion Recognition in Image Content",
+      stack: ["CNN", "TensorFlow", "Keras", "OpenCV"],
+      description: " picks\n  one of 7 emotions from a face photo. 84% accuracy on 32 test photos\n  (144 photos of 18 people), up from 72% after adding flips and rotations.",
+      display: {
+        category: "Computer vision",
+        bullets: [
+          "Trained a CNN to detect 7 emotions from face photos.",
+          "Improved accuracy from 72% to 84% on a 32-photo test set (144 photos of 18 people) by adding flips and rotations."
+        ],
+        impact: "84% accuracy · Data augmentation",
+      }
+    },
+    {
+      name: "Boston House Price Prediction",
+      stack: ["scikit-learn", "Flask", "Docker", "GitHub Actions", "Heroku"],
+      description: " linear regression, R2 of 0.73 on 167 test houses.",
+      display: {
+        category: "Machine learning",
+        bullets: [
+          "Built a linear regression model to predict prices.",
+          "R2 score of 0.73 on 167 test houses."
+        ],
+        impact: "R2 0.73 · Docker · CI/CD",
+      }
+    },
+    {
+      name: "Buxom Cosmetics",
+      stack: ["React", "Node", "Express", "MySQL", "Prisma", "Redux Toolkit", "Stripe test mode"],
+      description: " online store with cart and admin panel.",
+      display: {
+        category: "Web app",
+        bullets: [
+          "Built a full-stack online cosmetics store.",
+          "Includes a shopping cart, Stripe integration, and admin panel."
+        ],
+        impact: "E-commerce · Postgres",
+      }
+    },
+    {
+      name: "POS Pharmacy",
+      stack: ["Java Swing", "Hibernate", "MySQL", "JUnit", "JasperReports"],
+      description: " desktop\n  point-of-sale app with 16 JUnit test classes.",
+      display: {
+        category: "Desktop app",
+        bullets: [
+          "Built a point-of-sale app for a pharmacy.",
+          "Wrote 16 JUnit test classes to verify logic."
+        ],
+        impact: "Testing · Local DB",
+      }
+    }
+  ],
   skills: {
     languages: "Python, JavaScript, TypeScript, Java, C#, C++, SQL.",
     web: "ASP.NET Core, FastAPI, Flask, Django, Node.js, Express, Next.js, React, Redux Toolkit, Tailwind CSS.",
