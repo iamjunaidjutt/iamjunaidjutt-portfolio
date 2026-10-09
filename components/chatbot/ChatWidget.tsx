@@ -260,8 +260,17 @@ export default function ChatWidget() {
 			});
 
 			if (!response.ok) {
-				const data = (await response.json()) as { error?: string };
-				throw new Error(data.error || "Something went wrong. Please try again.");
+				// The body is not always JSON (a platform timeout returns plain text or HTML).
+				const text = await response.text();
+				let message = "Something went wrong. Please try again.";
+				try {
+					message = (JSON.parse(text) as { error?: string }).error || message;
+				} catch {
+					if (response.status >= 502) {
+						message = "That took too long. Please try again.";
+					}
+				}
+				throw new Error(message);
 			}
 
 			if (!response.body) {
@@ -303,7 +312,7 @@ export default function ChatWidget() {
 
 			while (true) {
 				const { done, value } = await reader.read();
-				buffer += decoder.decode(value, { stream: !done });
+				buffer += decoder.decode(value, { stream: !done }).replace(/\r\n/g, "\n");
 				const events = buffer.split("\n\n");
 				buffer = events.pop() || "";
 
@@ -313,12 +322,12 @@ export default function ChatWidget() {
 						continue;
 					}
 
-					const data = JSON.parse(dataLine.slice(6)) as {
-						text?: string;
-						status?: string;
-						reset?: boolean;
-						error?: string;
-					};
+					let data: { text?: string; status?: string; reset?: boolean; error?: string };
+					try {
+						data = JSON.parse(dataLine.slice(6));
+					} catch {
+						continue; // skip a broken event instead of failing the whole chat
+					}
 					if (data.error) {
 						throw new Error(data.error);
 					}

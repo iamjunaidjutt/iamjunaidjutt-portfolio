@@ -1,7 +1,14 @@
 export const PROFILE = `
 NAME: Muhammad Junaid. Software engineer in Lahore, Pakistan.
-CONTACT: Email info.iamjunaidjutt@gmail.com. WEBSITE: iamjunaidjutt.vercel.app. WHATSAPP: +92 307 4254648
-GitHub and LinkedIn username: iamjunaidjutt.
+CONTACT
+- Email: info.iamjunaidjutt@gmail.com
+- Phone and WhatsApp: +92 307 4254648 (WhatsApp link: https://wa.me/923074254648)
+- Contact form: https://iamjunaidjutt.vercel.app/contact
+- Website: https://iamjunaidjutt.vercel.app
+SOCIAL MEDIA
+- LinkedIn: https://www.linkedin.com/in/iamjunaidjutt
+- GitHub: https://github.com/iamjunaidjutt
+- X: https://x.com/iamjunaidjutt_
 AVAILABILITY: Open to full-time roles, in Lahore or remote.
 LANGUAGES: Urdu and Punjabi (mother tongues), English B2, German A1.
 WORKING STYLE: Likes to understand what people need before writing code, and wants his work to still run after the demo is over.
@@ -194,9 +201,4 @@ LEADERSHIP AND VOLUNTEERING
   over PKR 1,000,000, which was 25% above the target.
 - Operations Volunteer, Future Fest 2023.
 - Volunteer in Marketing, Software House Enclosure and Infrastructure, SOFTEC 2022.
-
-THINGS YOU DON'T KNOW ABOUT
-Salary expectations, notice period, visa or relocation, personal life, references,
-and anything else you have no information about. For these, answer naturally
-that you don't know and offer to pass the question to Junaid.
 `;
