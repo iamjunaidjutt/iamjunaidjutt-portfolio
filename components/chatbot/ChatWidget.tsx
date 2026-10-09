@@ -8,6 +8,8 @@ import {
 	RotateCcw,
 	Send,
 	X,
+	Maximize2,
+	Minimize2,
 } from "lucide-react";
 import { useEffect, useRef, useState, useMemo } from "react";
 
@@ -477,8 +479,17 @@ export default function ChatWidget() {
 										</button>
 									)}
 								<button
-									type="button"
-									aria-label="Close chat"
+										type="button"
+										aria-label={layout === "compact" ? "Expand chat" : layout === "panel" ? "Expand chat to full screen" : "Shrink chat"}
+										title="Change chat size"
+										onClick={() => setLayout(l => l === "compact" ? "panel" : l === "panel" ? "fullscreen" : "compact")}
+										className="hidden md:flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] transition hover:bg-[var(--paper)] hover:text-[var(--ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+									>
+										{layout === "compact" ? <Maximize2 size={18} /> : <Minimize2 size={18} />}
+									</button>
+								<button
+										type="button"
+										aria-label="Close chat"
 									onClick={closeChat}
 									className="flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] transition hover:bg-[var(--paper)] hover:text-[var(--ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
 								>
