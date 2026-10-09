@@ -13,9 +13,9 @@ export const ASSISTANT = {
 		"Looking for his tech stack or availability? I can help.",
 	],
 	greetings: [
-		"Hi, I'm Juno, Junaid's AI assistant. Ask me about his work, projects or skills, and I'll tell you what I know.",
-		"Hey there, I'm Juno. I can tell you about Junaid's work, what he's built, and what he's looking for next.",
-		"Hello! I'm Juno, the AI assistant on Junaid's site. What would you like to know about him?",
+		"Hi, I'm Juno, Junaid's AI assistant. Ask me about his work, projects or skills.",
+		"Hey, I'm Juno. Ask me what Junaid does, what he's built, or what he's looking for next.",
+		"Hello, I'm Juno, an AI assistant on Junaid's site. What would you like to know about him?",
 	],
 	suggestions: [
 		"What is Junaid working on right now?",
