@@ -119,7 +119,7 @@ export default function ChatWidget() {
 	const [followUpChips, setFollowUpChips] = useState<string[]>([]);
 	const pathname = usePathname();
 	const activeSection = useActiveSection();
-	const currentSuggestions = useMemo(() => getStarterSuggestions({ pathname, section: activeSection }), [pathname, activeSection]);
+	const currentSuggestions = ASSISTANT.suggestions;
 	const layoutClasses = {
 		compact: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(560px,70vh)] md:w-[min(380px,calc(100vw-2rem))]",
 		panel: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(85vh,760px)] md:w-[min(620px,calc(100vw-2rem))]",
@@ -132,6 +132,7 @@ export default function ChatWidget() {
 
 	useEffect(() => {
 		if (!isOpen) {
+			if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent('lenis:start'));
 			return;
 		}
 
@@ -489,7 +490,7 @@ export default function ChatWidget() {
 						<div
 							
 							data-lenis-prevent
-							className="min-h-0 flex-1 touch-pan-y space-y-4 overflow-y-auto overscroll-contain px-4 py-4"
+							className="min-h-0 flex-1 touch-pan-y space-y-4 overflow-y-auto overflow-x-hidden overscroll-contain px-4 py-4"
 						>
 							{messages.map((message, index) => (
 									<MessageRow
@@ -631,7 +632,7 @@ export default function ChatWidget() {
 				aria-label={isOpen ? "Close chat" : `${ASSISTANT.launcherTitle} ${ASSISTANT.launcherSubtitle}`}
 				aria-hidden={isOpen}
 				tabIndex={isOpen ? -1 : 0}
-				onClick={() => setIsOpen((open) => !open)}
+				onClick={() => isOpen ? closeChat() : setIsOpen(true)}
 				className={`chat-launcher fixed bottom-5 right-6 z-[60] flex items-center gap-3 rounded-full bg-[var(--chat-launcher-bg)] py-2 pl-2 pr-5 text-white shadow-lg transition hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] ${isOpen ? layout !== "compact" ? "opacity-0 pointer-events-none" : "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : ""}`}
 			>
 				<span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-lg font-semibold leading-none">
