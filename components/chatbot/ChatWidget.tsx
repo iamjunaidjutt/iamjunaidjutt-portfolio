@@ -9,7 +9,7 @@ import {
 	Send,
 	X,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 
 import { ASSISTANT } from "@/lib/chat/assistant";
 import { usePathname } from "next/navigation";
@@ -37,7 +37,7 @@ const createWelcomeMessage = (): Message => ({
 const chatStorageKey = "junaid-portfolio-chat-history";
 const teaserStorageKey = "junaid-portfolio-chat-teaser-dismissed";
 const layoutStorageKey = "junaid-portfolio-chat-layout";
-const layoutStorageKey = "junaid-portfolio-chat-layout";
+
 // How the nudge repeats: first appearance, how long it stays, and the pause before it returns.
 const teaserFirstDelayMs = 3000;
 const teaserVisibleMs = 6000;
@@ -125,13 +125,7 @@ export default function ChatWidget() {
 		panel: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(85vh,760px)] md:w-[min(620px,calc(100vw-2rem))]",
 		fullscreen: "md:inset-3 md:h-auto md:w-auto",
 	} as const;
-	const layoutClasses = {
-		compact: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(560px,70vh)] md:w-[min(380px,calc(100vw-2rem))]",
-		panel: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(85vh,760px)] md:w-[min(620px,calc(100vw-2rem))]",
-		fullscreen: "md:inset-3 md:h-auto md:w-auto",
-	} as const;
 	const reducedMotion = useReducedMotion();
-	const [layout, setLayout] = useState<"compact" | "panel" | "fullscreen">("compact");
 	const [layout, setLayout] = useState<"compact" | "panel" | "fullscreen">("compact");
 
 	useFocusTrap(dialogRef, isOpen);

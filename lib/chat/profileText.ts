@@ -1,4 +1,8 @@
 export interface Profile {
+  meta: {
+    location: string;
+    workPreference: string;
+  };
   identity: {
     name: string;
     description: string;
@@ -10,6 +14,10 @@ export interface Profile {
       link?: string;
       githubUrl?: string;
     };
+  };
+  about: {
+    heading: string;
+    paragraphs: string[];
   };
   contact: {
     email: string;
@@ -29,12 +37,44 @@ export interface Profile {
   hobbies: string;
   currentRole: string;
   previousWork: string;
-  education: string;
+  experience: {
+    period: string;
+    title: string;
+    company: string;
+    bullets: string[];
+    stack: string[];
+    link: string;
+    linkLabel: string;
+  }[];
+  education: {
+    degree: {
+      title: string;
+      institution: string;
+      period: string;
+    };
+    description: string;
+  };
   courses: string;
+  coursesList: {
+    title: string;
+    instructor: string;
+    description: string;
+    bullets: string[];
+    tags: string[];
+    link: string;
+  }[];
   projects: {
     name: string;
     stack: string[];
     description: string;
+    display?: {
+      category?: string;
+      bullets?: string[];
+      impact?: string;
+      image?: string;
+      link?: string;
+      githubUrl?: string;
+    };
   }[];
   skills: {
     languages: string;
@@ -42,8 +82,29 @@ export interface Profile {
     ai: string;
     cloud: string;
     databases: string;
+    frontend: string[];
+    backend: string[];
+    platforms: string[];
   };
-  leadership: string;
+  leadershipText: string;
+  leadership: {
+    period: string;
+    title: string;
+    org: string;
+    bullets: string[];
+    tags: string[];
+    link: string;
+    linkLabel: string;
+  }[];
+  volunteering: {
+    period: string;
+    title: string;
+    org: string;
+    bullets: string[];
+    tags: string[];
+    link: string;
+    linkLabel: string;
+  }[];
 }
 
 export function buildProfileText(p: Profile): string {
@@ -70,7 +131,7 @@ PREVIOUS WORK
 \${p.previousWork}
 
 EDUCATION
-\${p.education}
+\${p.education.description}
 
 COURSES & PROFESSIONAL TRAINING
 \${p.courses}
@@ -86,6 +147,6 @@ Cloud and DevOps: \${p.skills.cloud}
 Databases: \${p.skills.databases}
 
 LEADERSHIP AND VOLUNTEERING
-\${p.leadership}
+\${p.leadershipText}
 `;
 }

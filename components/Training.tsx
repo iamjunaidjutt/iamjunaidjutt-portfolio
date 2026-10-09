@@ -3,77 +3,7 @@
 import { ArrowUpRight, BookOpen, Cloud, Network } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const training = [
-	{
-		icon: BookOpen,
-		title: "AI Engineer · Agentic Track",
-		provider: "Udemy",
-		bullets: [
-			"Built eight AI agent projects using OpenAI Agents SDK, CrewAI, LangGraph, AutoGen, and MCP.",
-			"The final project was a simulated trading floor where four agents work together, make trades on their own, and use tools through MCP servers.",
-		],
-		tags: ["Agents", "MCP", "CrewAI", "LangGraph", "AutoGen"],
-		certificate:
-			"https://www.udemy.com/certificate/UC-834f64a1-cba5-401e-b922-f5e48c950421/",
-	},
-	{
-		icon: BookOpen,
-		title: "AI Engineer · Core Track",
-		provider: "Udemy",
-		bullets: [
-			"Built eight LLM apps in eight weeks, using Hugging Face, LangChain, RAG with vector search, and QLoRA fine-tuning.",
-			"Also built multi-agent systems and compared open-source and commercial models on coding and business tasks.",
-		],
-		tags: ["LLM engineering", "RAG", "QLoRA", "Fine-tuning", "HuggingFace"],
-		certificate:
-			"https://www.udemy.com/certificate/UC-84a36fb6-5a17-4d21-8b97-e570d737727e/",
-	},
-	{
-		icon: Cloud,
-		title: "Decoding DevOps",
-		provider: "Udemy",
-		bullets: [
-			"Learned DevOps through hands-on projects with AWS, Linux, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Helm, and ArgoCD.",
-			"Also covered monitoring, and used GitHub Copilot and Amazon Q to help write scripts and automate things.",
-		],
-		tags: [
-			"AWS",
-			"GCP",
-			"Docker",
-			"Kubernetes",
-			"Terraform",
-			"GitOps",
-			"Observability",
-		],
-		certificate:
-			"https://www.udemy.com/certificate/UC-b9e48ed9-3b33-41ec-8576-ebf33cdcc014/",
-	},
-	{
-		icon: Network,
-		title: "Supervised Machine Learning",
-		provider: "DeepLearning.AI · Coursera",
-		bullets: [
-			"Learned to build and train regression and classification models in Python with NumPy and scikit-learn.",
-			"Covered linear and logistic regression, models with several input features, and regularization.",
-		],
-		tags: ["Machine learning", "Regression", "Classification", "Python"],
-		certificate:
-			"https://www.coursera.org/account/accomplishments/verify/EZ65K9HN6F86",
-	},
-	{
-		icon: BookOpen,
-		title: "React · The Complete Guide",
-		provider: "Udemy",
-		bullets: [
-			"Learned React components, hooks, forms, routing, Context API, and Redux Toolkit.",
-			"Also covered an intro to Next.js and how to deploy React apps.",
-		],
-		tags: ["React", "Next.js", "Redux", "Frontend"],
-		certificate:
-			"https://www.udemy.com/certificate/UC-9f0a3caf-cfcf-4a6e-8f7f-2d9ef8c35286/",
-	},
-];
+import { PROFILE_DATA } from "@/data/profile";
 
 const Training = () => (
 	<section className="section-band training-band" id="training">
@@ -97,21 +27,12 @@ const Training = () => (
 				</p>
 			</motion.div>
 			<div className="training-grid">
-				{training.map(
-					(
-						{
-							icon: Icon,
-							title,
-							provider,
-									bullets,
-							tags,
-							certificate,
-						},
-						index,
-					) => (
+				{PROFILE_DATA.coursesList.map((item, index) => {
+					const Icon = item.description === 'Cloud' ? Cloud : item.description === 'Network' ? Network : BookOpen;
+					return (
 						<motion.article
 							className="training-card"
-							key={title}
+							key={item.title}
 							initial={{ opacity: 0, y: 24 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true, margin: "-60px" }}
@@ -122,22 +43,22 @@ const Training = () => (
 							}}
 						>
 							<Icon className="training-icon" />
-							<p className="training-provider">{provider}</p>
-							<h3>{title}</h3>
+							<p className="training-provider">{item.instructor}</p>
+							<h3>{item.title}</h3>
 							<ul className="training-description training-list">
-								{bullets.map((bullet) => (
+								{item.bullets.map((bullet) => (
 									<li key={bullet}>{bullet}</li>
 								))}
 							</ul>
 							<div className="tag-row">
-								{tags.map((tag) => (
+								{item.tags.map((tag) => (
 									<span className="soft-tag" key={tag}>
 										{tag}
 									</span>
 								))}
 							</div>
 							<Link
-								href={certificate}
+								href={item.link}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="training-certificate"
@@ -146,8 +67,8 @@ const Training = () => (
 								<ArrowUpRight className="h-4 w-4" />
 							</Link>
 						</motion.article>
-					),
-				)}
+						);
+					})}
 			</div>
 			<motion.div
 				className="training-note"

@@ -3,58 +3,7 @@
 import { ArrowUpRight, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const roles = [
-	{
-		period: "Dec 2025 — Present",
-		title: "Associate Software Engineer",
-		company: "Devsinc · Lahore, Pakistan",
-		bullets: [
-			"Built backend features for LawPractice.ai using ASP.NET Core, LLMs, RAG, and MCP. My work on processing legal demands and case summaries helped cut document preparation time by 70% and made demand letters about 7x faster to turn around.",
-			"Helped build the APIs, AI agents, custom tools, and RAG pipelines that read, extract, process, and generate documents, and improved their prompts. Together these helped cut documentation errors by about 90%.",
-			"Kept the OCR, document reading, and document writing pipelines running across different document types, including large medical records of more than 1000 pages, added new ones when needed, and fixed issues clients reported in production. The platform is now used by 300+ law firms.",
-			"Day to day: OpenCV, Azure Document Intelligence, AI Foundry, and AI Search, Azure SQL and Cosmos DB, and RabbitMQ background workers.",
-		],
-		tags: [
-			"ASP.NET Core",
-			"Microsoft Azure",
-			"Azure OpenAI",
-			"Vector Databases/Stores",
-			"LLMs",
-			"RAG",
-			"Agentic AI",
-			"MCP",
-			"RabbitMQ",
-		],
-		link: "https://drive.google.com/file/d/155bk8op7Qvs3U1AmrA6ELnfrDXBdWmhB/view?usp=sharing",
-		linkLabel: "View offer letter",
-	},
-	{
-		period: "Oct 2025 — Dec 2025",
-		title: "Software Engineer Intern",
-		company: "Devsinc · Lahore, Pakistan",
-		bullets: [
-			"Worked on backend development, bug fixes, and AI features for LawPractice.ai.",
-			"That work led to my current full-time role.",
-		],
-		tags: ["Backend", "AI/ML", "Client collaboration"],
-		link: "https://drive.google.com/file/d/1kbY3Bnu1EXWsCYwJMx6Knzlx5xFwLyaX/view?usp=sharing",
-		linkLabel: "View offer letter",
-	},
-	{
-		period: "Aug 2024 — Nov 2024",
-		title: "Software Engineer Intern",
-		company: "Kryptomind LLC · Lahore, Pakistan",
-		bullets: [
-			"Built interfaces with animations and 3D models using GSAP and React Three Fiber across several projects, and used Lenis for smooth scrolling.",
-			"Connected Next.js, TypeScript, and React frontends to REST APIs. Server-side rendering and code splitting took one project's Lighthouse score from 55 to 90.",
-			"Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts, and wallet integration.",
-		],
-		tags: ["Next.js", "TypeScript", "React", "GSAP", "Lenis", "Firebase", "Web3"],
-		link: "https://drive.google.com/file/d/1V97WzynXJDH4v_e7pidoIxPf9BKlb3Dk/view?usp=sharing",
-		linkLabel: "View experience letter",
-	},
-];
+import { PROFILE_DATA } from "@/data/profile";
 
 const Experience = () => (
 	<section className="section-band" id="experience">
@@ -78,7 +27,7 @@ const Experience = () => (
 				</p>
 			</motion.div>
 			<div className="timeline">
-				{roles.map((role, index) => (
+				{PROFILE_DATA.experience.map((role, index) => (
 					<motion.article
 						className="timeline-item"
 						key={`${role.company}-${role.title}`}
@@ -104,7 +53,7 @@ const Experience = () => (
 								))}
 							</ul>
 							<div className="tag-row">
-								{role.tags.map((tag) => (
+								{role.stack.map((tag) => (
 									<span className="soft-tag" key={tag}>
 										{tag}
 									</span>
@@ -132,8 +81,8 @@ const Experience = () => (
 			>
 				<div>
 					<p className="eyebrow">Education</p>
-					<h3>BS Software Engineering</h3>
-					<p>FAST-NUCES · 2021 — 2025</p>
+					<h3>{PROFILE_DATA.education.degree.title}</h3>
+					<p>{PROFILE_DATA.education.degree.institution} · {PROFILE_DATA.education.degree.period}</p>
 				</div>
 				<div>
 					<p className="eyebrow">Learning</p>

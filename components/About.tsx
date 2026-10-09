@@ -5,6 +5,7 @@ import { ArrowUpRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { PROFILE_DATA } from "@/data/profile";
 
 const About = () => {
 	return (
@@ -18,27 +19,12 @@ const About = () => {
 			>
 				<div>
 					<p className="eyebrow">01 / About</p>
-					<h2>
-						I mostly build backend systems, and lately that means working
-						with LLMs.
-					</h2>
+					<h2>{PROFILE_DATA.about.heading}</h2>
 				</div>
 				<div className="about-copy">
-					<p>
-						I&apos;m a software engineer at Devsinc in Lahore. I work on LawPractice.ai, a tool that law firms in the United States use. More than 300 firms use it now.
-					</p>
-					<p>
-						Most of my work is backend. Law firms send us messy files. Our system reads them, finds the important details, and writes new documents, like demand letters. I help build and fix these parts. I also work on the prompts we give the AI. Better prompts helped cut mistakes in the documents by about 90%.
-					</p>
-					<p>
-						I started with frontend work. At Kryptomind I built web pages with Next.js and made one project load much faster. Later I led a team of three on a CRM called ResQ. I also built projects on my own, like Mawaddah, a matchmaking website.
-					</p>
-					<p>
-						I studied software engineering at FAST-NUCES. I also helped lead the marketing team at SOFTEC, where we raised more than PKR 1,000,000 from sponsors.
-					</p>
-					<p>
-						I like to understand what people need before I write any code. I want my work to still run after the demo is over.
-					</p>
+					{PROFILE_DATA.about.paragraphs.map((p, i) => (
+						<p key={i}>{p}</p>
+					))}
 					<Button
 						asChild
 						variant="outline"
@@ -64,11 +50,11 @@ const About = () => {
 			>
 				<div>
 					<MapPin className="h-5 w-5 text-coral" />
-					<span>Lahore, Pakistan · Remote is fine</span>
+					<span>{PROFILE_DATA.meta.location} · {PROFILE_DATA.meta.workPreference}</span>
 				</div>
 				<div>
 					<GraduationCap className="h-5 w-5 text-coral" />
-					<span>BS Software Engineering · FAST-NUCES</span>
+					<span>{PROFILE_DATA.education.degree.title} · {PROFILE_DATA.education.degree.institution}</span>
 				</div>
 				<div>
 					<Sparkles className="h-5 w-5 text-coral" />

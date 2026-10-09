@@ -23,6 +23,7 @@ import Meeting from "@/components/Meeting";
 import PageWrapper from "@/components/PageWrapper";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { PROFILE_DATA } from "@/data/profile";
 
 const formSchema = z.object({
 	name: z.string().min(3).max(50),
@@ -89,13 +90,13 @@ export default function ContactPage() {
 									/>
 
 									<p>
-										Lahore, Pakistan
+										{PROFILE_DATA.meta.location}
 									</p>
 								</div>
 
 								{/* WhatsApp */}
 								<Link
-									href="https://api.whatsapp.com/send?phone=923074254648"
+									href={PROFILE_DATA.contact.whatsappLink}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-link flex w-fit items-center gap-3 break-words"
@@ -105,12 +106,12 @@ export default function ContactPage() {
 										strokeWidth={1.8}
 										className="shrink-0"
 									/>
-									+92-307-4254648
+									{PROFILE_DATA.contact.phone}
 								</Link>
 
 								{/* Email */}
 								<Link
-									href="mailto:info.iamjunaidjutt@gmail.com"
+									href={`mailto:${PROFILE_DATA.contact.email}`}
 									className="text-link flex w-fit items-center gap-3 break-words"
 								>
 									<Mail
@@ -120,7 +121,7 @@ export default function ContactPage() {
 									/>
 
 									<span>
-										info.iamjunaidjutt@gmail.com
+										{PROFILE_DATA.contact.email}
 									</span>
 								</Link>
 							</div>

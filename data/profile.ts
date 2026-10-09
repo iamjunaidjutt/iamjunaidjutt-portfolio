@@ -1,9 +1,23 @@
 import { Profile, buildProfileText } from "@/lib/chat/profileText";
 
 export const PROFILE_DATA: Profile = {
+  meta: {
+    location: "Lahore, Pakistan",
+    workPreference: "Remote is fine"
+  },
   identity: {
     name: "Muhammad Junaid",
     description: "Software engineer in Lahore, Pakistan."
+  },
+  about: {
+    heading: "I mostly build backend systems, and lately that means working\n\t\t\t\t\t\twith LLMs.",
+    paragraphs: [
+      "I'm a software engineer at Devsinc in Lahore. I work on LawPractice.ai, a tool that law firms in the United States use. More than 300 firms use it now.",
+      "Most of my work is backend. Law firms send us messy files. Our system reads them, finds the important details, and writes new documents, like demand letters. I help build and fix these parts. I also work on the prompts we give the AI. Better prompts helped cut mistakes in the documents by about 90%.",
+      "I started with frontend work. At Kryptomind I built web pages with Next.js and made one project load much faster. Later I led a team of three on a CRM called ResQ. I also built projects on my own, like Mawaddah, a matchmaking website.",
+      "I studied software engineering at FAST-NUCES. I also helped lead the marketing team at SOFTEC, where we raised more than PKR 1,000,000 from sponsors.",
+      "I like to understand what people need before I write any code. I want my work to still run after the demo is over."
+    ]
   },
   contact: {
     email: "info.iamjunaidjutt@gmail.com",
@@ -35,8 +49,184 @@ United States. More than 300 law firms use it.
 - Built interfaces with animations and 3D models using GSAP and React Three Fiber, and used Lenis for smooth scrolling.
 - Connected Next.js, TypeScript and React frontends to REST APIs. Server-side rendering and code splitting took one project's Lighthouse score from 55 to 90.
 - Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts and wallet integration.`,
-  education: `BS in Software Engineering, FAST-NUCES, Lahore (2021 to 2025).
-Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).`,
+  education: {
+    degree: {
+      title: "BS Software Engineering",
+      institution: "FAST-NUCES",
+      period: "2021 — 2025"
+    },
+    description: `BS in Software Engineering, FAST-NUCES, Lahore (2021 to 2025).\nAspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).`
+  },
+  experience: [
+    {
+      period: "Dec 2025 — Present",
+      title: "Associate Software Engineer",
+      company: "Devsinc · Lahore, Pakistan",
+      bullets: [
+        "Built backend features for LawPractice.ai using ASP.NET Core, LLMs, RAG, and MCP. My work on processing legal demands and case summaries helped cut document preparation time by 70% and made demand letters about 7x faster to turn around.",
+        "Helped build the APIs, AI agents, custom tools, and RAG pipelines that read, extract, process, and generate documents, and improved their prompts. Together these helped cut documentation errors by about 90%.",
+        "Kept the OCR, document reading, and document writing pipelines running across different document types, including large medical records of more than 1000 pages, added new ones when needed, and fixed issues clients reported in production. The platform is now used by 300+ law firms.",
+        "Day to day: OpenCV, Azure Document Intelligence, AI Foundry, and AI Search, Azure SQL and Cosmos DB, and RabbitMQ background workers.",
+      ],
+      stack: [
+        "ASP.NET Core",
+        "Microsoft Azure",
+        "Azure OpenAI",
+        "Vector Databases/Stores",
+        "LLMs",
+        "RAG",
+        "Agentic AI",
+        "MCP",
+        "RabbitMQ",
+      ],
+      link: "https://drive.google.com/file/d/155bk8op7Qvs3U1AmrA6ELnfrDXBdWmhB/view?usp=sharing",
+      linkLabel: "View offer letter",
+    },
+    {
+      period: "Oct 2025 — Dec 2025",
+      title: "Software Engineer Intern",
+      company: "Devsinc · Lahore, Pakistan",
+      bullets: [
+        "Worked on backend development, bug fixes, and AI features for LawPractice.ai.",
+        "That work led to my current full-time role.",
+      ],
+      stack: ["Backend", "AI/ML", "Client collaboration"],
+      link: "https://drive.google.com/file/d/1kbY3Bnu1EXWsCYwJMx6Knzlx5xFwLyaX/view?usp=sharing",
+      linkLabel: "View offer letter",
+    },
+    {
+      period: "Aug 2024 — Nov 2024",
+      title: "Software Engineer Intern",
+      company: "Kryptomind LLC · Lahore, Pakistan",
+      bullets: [
+        "Built interfaces with animations and 3D models using GSAP and React Three Fiber across several projects, and used Lenis for smooth scrolling.",
+        "Connected Next.js, TypeScript, and React frontends to REST APIs. Server-side rendering and code splitting took one project's Lighthouse score from 55 to 90.",
+        "Worked on an NFT marketplace and learned Web3 basics: blockchain, smart contracts, and wallet integration.",
+      ],
+      stack: ["Next.js", "TypeScript", "React", "GSAP", "Lenis", "Firebase", "Web3"],
+      link: "https://drive.google.com/file/d/1V97WzynXJDH4v_e7pidoIxPf9BKlb3Dk/view?usp=sharing",
+      linkLabel: "View experience letter",
+    },
+  ],
+  coursesList: [
+    {
+      title: "AI Engineer · Agentic Track",
+      instructor: "Udemy",
+      description: "BookOpen", // icon mapping
+      bullets: [
+        "Built eight AI agent projects using OpenAI Agents SDK, CrewAI, LangGraph, AutoGen, and MCP.",
+        "The final project was a simulated trading floor where four agents work together, make trades on their own, and use tools through MCP servers.",
+      ],
+      tags: ["Agents", "MCP", "CrewAI", "LangGraph", "AutoGen"],
+      link: "https://www.udemy.com/certificate/UC-834f64a1-cba5-401e-b922-f5e48c950421/",
+    },
+    {
+      title: "AI Engineer · Core Track",
+      instructor: "Udemy",
+      description: "BookOpen",
+      bullets: [
+        "Built eight LLM apps in eight weeks, using Hugging Face, LangChain, RAG with vector search, and QLoRA fine-tuning.",
+        "Also built multi-agent systems and compared open-source and commercial models on coding and business tasks.",
+      ],
+      tags: ["LLM engineering", "RAG", "QLoRA", "Fine-tuning", "HuggingFace"],
+      link: "https://www.udemy.com/certificate/UC-84a36fb6-5a17-4d21-8b97-e570d737727e/",
+    },
+    {
+      title: "Decoding DevOps",
+      instructor: "Udemy",
+      description: "Cloud",
+      bullets: [
+        "Learned DevOps through hands-on projects with AWS, Linux, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Helm, and ArgoCD.",
+        "Also covered monitoring, and used GitHub Copilot and Amazon Q to help write scripts and automate things.",
+      ],
+      tags: [
+        "AWS",
+        "GCP",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitOps",
+        "Observability",
+      ],
+      link: "https://www.udemy.com/certificate/UC-b9e48ed9-3b33-41ec-8576-ebf33cdcc014/",
+    },
+    {
+      title: "Supervised Machine Learning",
+      instructor: "DeepLearning.AI · Coursera",
+      description: "Network",
+      bullets: [
+        "Learned to build and train regression and classification models in Python with NumPy and scikit-learn.",
+        "Covered linear and logistic regression, models with several input features, and regularization.",
+      ],
+      tags: ["Machine learning", "Regression", "Classification", "Python"],
+      link: "https://www.coursera.org/account/accomplishments/verify/EZ65K9HN6F86",
+    },
+    {
+      title: "React · The Complete Guide",
+      instructor: "Udemy",
+      description: "BookOpen",
+      bullets: [
+        "Learned React components, hooks, forms, routing, Context API, and Redux Toolkit.",
+        "Also covered an intro to Next.js and how to deploy React apps.",
+      ],
+      tags: ["React", "Next.js", "Redux", "Frontend"],
+      link: "https://www.udemy.com/certificate/UC-9f0a3caf-cfcf-4a6e-8f7f-2d9ef8c35286/",
+    }
+  ],
+  leadership: [
+    {
+      period: "Dec 2023 — Mar 2024",
+      title: "Aspire Leaders Program",
+      org: "Aspire Institute · Remote",
+      bullets: [
+        "Completed 30 hours of coursework, including three full modules and a culminating project.",
+        "Final project: \"Empowering Minds - Education Outreach for Needy Children in Pakistan\", a plan to help children in need get a better education.",
+      ],
+      tags: ["Leadership", "Community work", "Education outreach", "Teamwork"],
+      link: "https://drive.google.com/file/d/13RdRi2w56hCt0Dt1Wxnzlk1aQKRu6aPO/view?usp=sharing",
+      linkLabel: "View certificate",
+    },
+    {
+      period: "Aug 2022 — May 2023",
+      title: "Deputy Head of Marketing",
+      org: "SOFTEC'23 · FAST-NUCES, Lahore, Pakistan",
+      bullets: [
+        "Helped lead a marketing team of about 40 people, before and during the event.",
+        "Worked with company executives to close three sponsorship deals. We raised over PKR 1,000,000, which was 25% above the target.",
+      ],
+      tags: ["Team leadership", "Sponsorships", "Partnerships", "Marketing"],
+      link: "https://drive.google.com/file/d/1gPtFvc7lbRl_uWWfl82TZ6HQd14IWLCz/view?usp=sharing",
+      linkLabel: "View certificate",
+    },
+  ],
+  volunteering: [
+    {
+      period: "Nov 2022 — Jan 2023",
+      title: "Volunteer · Operations",
+      org: "Future Fest'23 · Lahore, Pakistan",
+      bullets: [
+        "Checked billboards, banners, and other promotional materials.",
+        "Looked after security at the auditorium and VIP areas while working with senior police officers, including the District Police Officer.",
+        "Helped set up and pack up the event, and stayed in touch with teams and vendors.",
+      ],
+      tags: ["Event operations", "Logistics", "Security"],
+      link: "https://drive.google.com/file/d/1EFlcRZoIpfwwjiB9TjlKzMBtu00niuLk/view?usp=sharing",
+      linkLabel: "View certificate",
+    },
+    {
+      period: "Oct 2021 — Aug 2022",
+      title: "Volunteer · Marketing, Software House Enclosure & Infrastructure",
+      org: "SOFTEC'22 · FAST-NUCES, Lahore, Pakistan",
+      bullets: [
+        "Called HR managers and CEOs to set up sponsorship meetings, and joined those meetings with the marketing head.",
+        "Worked with the setup team to run the Software House Enclosure.",
+        "Looked after company exhibits and talked with visitors to keep things running smoothly.",
+      ],
+      tags: ["Marketing", "Sponsorships", "Sponsor outreach", "Event management"],
+      link: "https://drive.google.com/file/d/1m5YY44z8DmlIh-26BHSFRG47CkuriCpd/view?usp=sharing",
+      linkLabel: "View certificate",
+    },
+  ],
   courses: `- AI Engineer Agentic Track: The Complete Agent & MCP Course / Master AI Agents in 30 Days
   (Instructors: Ed Donner — repeat AI startup founder/CTO, ex-MD at JPMorgan Chase, Oxford MA in Physics; and Ligency Team):
   6-week deep dive into autonomous AI agents across OpenAI Agents SDK, CrewAI,
@@ -203,7 +393,6 @@ Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).`,
     {
       name: "Promptopia",
       stack: [],
-      display: { stack: ["Next.js", "MongoDB", "Tailwind", "NextAuth"] } as any, // Not typed in Profile but injected below safely
       description: " a site for finding and sharing AI prompts, with Google sign-in,\n  searchable tags and user profiles.",
       display: {
         category: "Web app",
@@ -281,13 +470,27 @@ Aspire Leaders Program, Aspire Institute (Dec 2023 to Mar 2024).`,
     }
   ],
   skills: {
+    frontend: [
+        "Next.js", "React", "Tailwind CSS", "Redux / Redux Toolkit",
+        "React Native", "GSAP", "Lenis", "Framer Motion", "HTML", "CSS", "Android Studio"
+    ],
+    backend: [
+        "FastAPI", "Django / Django REST Framework", "Flask", "Node.js", "Express",
+        "ASP.NET Core", "REST APIs"
+    ],
+    platforms: [
+        "AWS", "AWS ECS", "AWS EKS", "AWS S3", "AWS Lambda", "AWS API Gateway", "AWS Serverless",
+        "Microsoft Azure", "Google Cloud Platform", "Vercel", "Linux", "Docker", "Kubernetes",
+        "Terraform", "Grafana", "Prometheus", "Loki", "PostgreSQL", "MySQL", "MS SQL Server",
+        "MongoDB", "NoSQL", "Firebase", "Supabase"
+    ],
     languages: "Python, JavaScript, TypeScript, Java, C#, C++, SQL.",
     web: "ASP.NET Core, FastAPI, Flask, Django, Node.js, Express, Next.js, React, Redux Toolkit, Tailwind CSS.",
     ai: "LLMs, RAG, agentic AI, MCP, prompt engineering, Generative AI, Embeddings, Vector databases/stores (Pinecone, Chroma, Qdrant, FAISS), LangChain, LangGraph, OpenAI Agents SDK, CrewAI, AutoGen, Hugging Face, TensorFlow, Keras, scikit-learn, OpenCV.",
     cloud: "Azure, AWS, GCP, Docker, Kubernetes, Terraform, Ansible, Jenkins, GitHub Actions, GitLab CI, Grafana, Prometheus, Loki.",
     databases: "MS SQL Server, MySQL, MongoDB, Firebase, Supabase."
   },
-  leadership: `- Deputy Head of Marketing, SOFTEC 2023: helped lead a marketing team of about
+  leadershipText: `- Deputy Head of Marketing, SOFTEC 2023: helped lead a marketing team of about
   40, worked with company executives to close three sponsorship deals and raised
   over PKR 1,000,000, which was 25% above the target.
 - Operations Volunteer, Future Fest 2023.
