@@ -157,7 +157,7 @@ export default function ChatWidget() {
 
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-	}, [messages, isLoading, error]);
+	}, [messages, isLoading, error, isOpen]);
 
 	useEffect(() => {
 		setMessages(getStoredMessages());
