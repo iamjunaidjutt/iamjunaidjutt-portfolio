@@ -58,7 +58,7 @@ const About = () => {
 				</div>
 				<div>
 					<Sparkles className="h-5 w-5 text-coral" />
-					<span>AI/ML · Full-stack · Platform engineering</span>
+					<span>AI/ML · Full-Stack · Platform Engineering</span>
 				</div>
 			</motion.div>
 		</section>

@@ -1,14 +1,48 @@
-// One place for the assistant's identity. The system prompt (server) and the chat
-// widget (browser) both read from here, so the name and wording never drift apart.
+// One place for the assistant's identity and user-facing copy. The system prompt (server)
+// and the chat widget (browser) both read from here, so wording never drifts apart.
+
+export type SectionId =
+	| "about"
+	| "experience"
+	| "stack"
+	| "training"
+	| "projects"
+	| "leadership";
+
+type AssistantConfig = {
+	name: string;
+	tagline: string;
+	launcherTitle: string;
+	launcherSubtitle: string;
+	contactEmail: string;
+	placeholder: string;
+	disclaimer: string;
+	errorMessage: string;
+	teasers: readonly string[];
+	returningTeasers: readonly string[];
+	greetings: readonly string[];
+	suggestions: readonly string[];
+	contextSuggestions: {
+		byRoute: Record<string, readonly string[]>;
+		bySection: Record<SectionId, readonly string[]>;
+	};
+};
+
 export const ASSISTANT = {
 	name: "Juno",
 	tagline: "Junaid's AI assistant",
 	launcherTitle: "Ask Juno",
 	launcherSubtitle: "about Junaid's work",
+	contactEmail: "info.iamjunaidjutt@gmail.com",
+	placeholder: "Ask about Junaid's work...",
+	disclaimer:
+		"AI can make mistakes. For anything important, email Junaid directly.",
+	errorMessage:
+		"Something went wrong on my side. Please try again, or email Junaid directly.",
 	// Shown one at a time, in this order, each time the nudge comes back. Keep the first one
 	// as the main line; use a single entry if you do not want the wording to change.
 	teasers: [
-		"Curious what Junaid has built? Ask me anything.",
+		"Curious what Junaid has built? Ask me about his work.",
 		"Want a quick tour of his projects? Just ask.",
 		"Looking for his tech stack or availability? I can help.",
 		"Wondering if he's open to new roles? I can answer that.",
@@ -16,11 +50,11 @@ export const ASSISTANT = {
 	],
 	// Shown when the visitor has already chatted (messages.length > 1)
 	returningTeasers: [
-		"Welcome back — anything else you'd like to know?",
-		"Still here? Happy to answer more questions.",
-		"Want to know about a specific project or skill?",
-		"Ask me anything — I know his work pretty well.",
-		"Curious about his availability or tech stack? Ask away.",
+		"Anything else you'd like to know about his work?",
+		"Want details on a specific project or skill?",
+		"Curious about his availability or tech stack?",
+		"Happy to go deeper on any project.",
+		"Ask me about his projects, stack or availability.",
 	],
 	greetings: [
 		"Hi, I'm Juno, Junaid's AI assistant. Ask me about his work, projects or skills.",
@@ -35,16 +69,39 @@ export const ASSISTANT = {
 	],
 	contextSuggestions: {
 		byRoute: {
-			"/contact": ["How can I reach Junaid?", "What's the best way to get in touch?"],
-			"/": [],
+			"/contact": [
+				"How can I reach Junaid?",
+				"What's the best way to get in touch?",
+			],
+			"/": [
+				"What does Junaid do?",
+				"What is he working on right now?",
+				"Is he open to new roles?",
+			],
 		},
 		bySection: {
 			about: ["What's his background?", "Where is he based?"],
-			experience: ["Tell me about his current role", "What has he built at Devsinc?"],
-			stack: ["What's his main tech stack?", "What tools does he use daily?"],
-			training: ["What courses has he taken?", "Tell me about his AI/ML training"],
-			projects: ["What's his most interesting project?", "Tell me about his GitHub repos"],
-			leadership: ["What leadership roles has he held?"],
-		}
-	}
-} as const;
+			experience: [
+				"Tell me about his current role",
+				"What has he built at Devsinc?",
+			],
+			stack: [
+				"What's his main tech stack?",
+				"What tools does he use daily?",
+			],
+			training: [
+				"What courses has he taken?",
+				"Tell me about his AI/ML training",
+			],
+			projects: [
+				"What's his most interesting project?",
+				"Tell me about his GitHub repos",
+			],
+			leadership: [
+				"What leadership roles has he held?",
+				"Tell me about his work at SOFTEC",
+				"What did he do in the Aspire Leaders Program?",
+			],
+		},
+	},
+} as const satisfies AssistantConfig;

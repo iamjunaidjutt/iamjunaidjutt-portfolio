@@ -121,7 +121,8 @@ export default function ChatWidget() {
 	const [followUpChips, setFollowUpChips] = useState<string[]>([]);
 	const pathname = usePathname();
 	const activeSection = useActiveSection();
-	const currentSuggestions = ASSISTANT.suggestions;
+	const [usedChips, setUsedChips] = useState<Set<string>>(new Set());
+		const currentSuggestions = useMemo(() => getStarterSuggestions({ pathname, section: activeSection as any }), [pathname, activeSection]).filter(chip => !usedChips.has(chip));
 	const layoutClasses = {
 		compact: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(560px,70vh)] md:w-[min(380px,calc(100vw-2rem))]",
 		panel: "md:inset-x-auto md:bottom-24 md:right-6 md:top-auto md:h-[min(85vh,760px)] md:w-[min(620px,calc(100vw-2rem))]",
@@ -259,6 +260,8 @@ export default function ChatWidget() {
 			return;
 		}
 
+		setUsedChips((prev) => new Set(prev).add(trimmedContent));
+
 		abortRef.current = new AbortController();
 		abortedRef.current = false;
 
@@ -288,7 +291,7 @@ export default function ChatWidget() {
 			if (!response.ok) {
 				// The body is not always JSON (a platform timeout returns plain text or HTML).
 				const text = await response.text();
-				let message = "Something went wrong. Please try again.";
+				let message: string = ASSISTANT.errorMessage;
 				try {
 					message = (JSON.parse(text) as { error?: string }).error || message;
 				} catch {
@@ -568,9 +571,9 @@ export default function ChatWidget() {
 								</div>
 							)}
 							
-{followUpChips.length > 0 && messages.length > 1 && !isLoading && !error && (
+{followUpChips.filter(c => !usedChips.has(c)).length > 0 && messages.length > 1 && !isLoading && !error && (
 									<div className="flex flex-wrap gap-2 pt-1 pb-2">
-										{followUpChips.map((chip) => (
+										{followUpChips.filter(c => !usedChips.has(c)).map((chip) => (
 											<button
 												key={chip}
 												type="button"
@@ -605,7 +608,7 @@ export default function ChatWidget() {
 											handleSubmit();
 										}
 									}}
-									placeholder="Ask a question..."
+									placeholder={ASSISTANT.placeholder}
 									aria-label="Your question"
 									rows={2}
 									className="max-h-28 min-h-[42px] flex-1 resize-none bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted-ink)]"
@@ -619,7 +622,7 @@ export default function ChatWidget() {
 									<Send size={17} />
 								</button>
 							</div>
-							<p className="mt-1 text-right text-[10px] text-[var(--muted-ink)]">{input.length}/2000</p>
+							<div className="mt-1 flex justify-between items-start text-[10px] text-[var(--muted-ink)]"><p className="max-w-[80%] leading-snug">{ASSISTANT.disclaimer}</p><p className="shrink-0 text-right">{input.length}/2000</p></div>
 						</form>
 					</motion.section>
 				)}

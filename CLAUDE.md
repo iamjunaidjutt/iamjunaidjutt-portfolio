@@ -47,8 +47,10 @@ pnpm lint
 - **`lib/`** — Utilities and business logic
   - `lib/chat/` — Chatbot implementation
     - `agent.ts` — Agentic loop (streaming, tool calling, Gemini 3 thought signature handling)
-    - `assistant.ts` — Assistant identity (name, greetings, suggestions, teaser lines)
-    - `systemPrompt.ts` — System prompt builder (profile + repo list + tool instructions)
+    - `assistant.ts` — Assistant identity (name, greetings, suggestions, teaser lines, error/disclaimer copy)
+    - `profileText.ts` — Profile TypeScript interface, `plain()` character sanitizer, and `buildProfileText` string serializer
+    - `systemPrompt.ts` — System prompt builder (profile + repo list + tool instructions + precision rules)
+    - `suggestions.ts` — Starter and follow-up suggestion generators by route and section
     - `tools.ts` — Tool definitions and execution (GitHub repo tools, web search, email follow-up)
     - `rateLimit.ts` — Upstash Redis rate limiting (per-IP, per-minute and per-day)
   - `lib/utils.ts` — cn utility for Tailwind class merging
@@ -147,20 +149,30 @@ CHAT_EMAIL_LIMIT_PER_DAY=3
 ### Keeping Chatbot Answers Accurate
 
 The chatbot answers **only** from:
-1. `data/profile.ts` — **Update this file whenever the CV changes**
+1. `data/profile.ts` — **Update this file whenever the CV changes**. Structured via `Profile` in `lib/chat/profileText.ts` with:
+   - `coreStack` & `skillsByEvidence` (`atWork`, `builtProjects`, `studied`) to avoid dumping dozens of ungrounded skills
+   - `featuredProjects` with origin (`work`, `original`, `tutorial`, `academic`) and priority ranking
+   - `repoNotes` overriding repository inferences and marking tutorial/academic origins
+   - `lookingFor` detailing role and target preferences
 2. Live GitHub repository list (fetched from GitHub API, cached on failure)
 3. Tool results (repo files, web search, etc.)
 
 The assistant **cannot** answer from memory or training data. If the answer isn't in `data/profile.ts` or tool results, it defers to the fallback: "Junaid would be the best person to ask."
 
+#### System Prompt Precision Rules (`lib/chat/systemPrompt.ts`)
+- Metric hedges: always keep hedges like "helped cut" or "about" attached directly to the specific work (e.g. 70% preparation time vs 7x turnaround kept distinct).
+- Plain keyboard characters: sanitized through `plain()` in `lib/chat/profileText.ts` (removes em/en dashes, middots, arrows, curly quotes).
+- Natural presentation: course materials are described naturally without adding explicit "Please note these are course projects" disclaimers.
+
 ### Chatbot Identity and Wording
 
-All chatbot identity strings live in **`lib/chat/assistant.ts`**:
+All chatbot identity strings and UX copy live in **`lib/chat/assistant.ts`**:
 - Name: "Juno"
 - Greetings (rotated randomly)
-- Starter suggestions
-- Launcher button text
-- Teaser lines (rotated each time the launcher appears)
+- Starter suggestions & context-aware suggestions by route/section
+- Launcher button and header copy
+- Teaser lines: `teasers` for initial visitors and `returningTeasers` for visitors with prior messages
+- UX copy: `placeholder`, `disclaimer`, `errorMessage`
 
 Change them there so the system prompt and frontend stay in sync.
 

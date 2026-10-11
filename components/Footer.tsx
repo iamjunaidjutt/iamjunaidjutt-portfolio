@@ -18,7 +18,7 @@ const Footer = () => (
 			<div className="footer-intro">
 				<p className="footer-brand">{PROFILE_DATA.identity.name}</p>
 				<p>
-					{PROFILE_DATA.identity.description}
+					{PROFILE_DATA.identity.footerDescription}
 				</p>
 				<a
 					className="footer-email"
@@ -71,7 +71,7 @@ const Footer = () => (
 		</div>
 		<div className="page-width footer-bottom">
 			<span>© {new Date().getFullYear()} {PROFILE_DATA.identity.name}</span>
-			<span>AI/ML · Full-stack · Platform engineering</span>
+			<span>AI/ML · Full-Stack · Platform Engineering</span>
 		</div>
 	</footer>
 );
